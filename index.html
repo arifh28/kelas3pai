@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Sirah Nabawiyah</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --biru-muda: #00B4D8;
+            --ungu: #7209B7;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, var(--biru-muda) 0%, var(--ungu) 100%);
+            color: white;
+        }
+        .text-ungu { color: var(--ungu); }
+        .btn-custom {
+            background: var(--ungu);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-custom:hover {
+            background: #5a0792;
+            color: white;
+        }
+        .btn-custom:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* SPA Steps Control */
+        .step-section { display: none; animation: fadeIn 0.5s ease; }
+        .step-active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Video Container Anti-Skip */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+        
+        .card-custom {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-custom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-book-quran me-2"></i>PAI Edu</a>
+            <span class="text-white" id="user-display"></span>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        
+        <div id="step-login" class="step-section step-active">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card card-custom p-4">
+                        <div class="text-center mb-4">
+                            <i class="fa-solid fa-graduation-cap fa-3x text-ungu mb-3"></i>
+                            <h4 class="fw-bold">Mulai Belajar</h4>
+                            <p class="text-muted small">Silakan isi identitas untuk menyimpan progress.</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nama Lengkap</label>
+                            <input type="text" id="namaSiswa" class="form-control" placeholder="Masukkan nama...">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Kelas</label>
+                            <select id="kelasSiswa" class="form-select">
+                                <option value="">Pilih Kelas...</option>
+                                <option value="3A">Kelas 3A</option>
+                                <option value="3B">Kelas 3B</option>
+                                <option value="3C">Kelas 3C</option>
+                                <option value="3D">Kelas 3D</option>
+                            </select>
+                        </div>
+                        <button onclick="mulaiBelajar()" class="btn btn-custom w-100" id="btn-mulai">Mulai Pembelajaran <i class="fa-solid fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-video1" class="step-section">
+            <div class="card card-custom p-4 text-center">
+                <h4 class="fw-bold text-ungu mb-3">Video 1: Kelahiran Rasul Terakhir</h4>
+                <p class="text-muted">Tonton video hingga selesai. Tombol Lanjut akan otomatis aktif.</p>
+                <div class="video-container mb-4">
+                    <div id="player1"></div>
+                </div>
+                <button onclick="lanjutKe('step-video2', 'video1_selesai')" class="btn btn-custom" id="btn-next1" disabled>
+                    Lanjut ke Video 2 <i class="fa-solid fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="step-video2" class="step-section">
+            <div class="card card-custom p-4 text-center">
+                <h4 class="fw-bold text-ungu mb-3">Video 2: Diangkat Menjadi Rasul</h4>
+                <p class="text-muted">Tonton video hingga selesai untuk membuka materi.</p>
+                <div class="video-container mb-4">
+                    <div id="player2"></div>
+                </div>
+                <button onclick="lanjutKe('step-materi', 'video2_selesai')" class="btn btn-custom" id="btn-next2" disabled>
+                    Lanjut ke Materi <i class="fa-solid fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="step-materi" class="step-section">
+            <div class="card card-custom p-5">
+                <h3 class="fw-bold text-ungu text-center mb-4"><i class="fa-solid fa-book-open me-2"></i>Ringkasan Materi</h3>
+                <div class="materi-content" style="line-height: 1.8;">
+                    <p><strong>1. Kelahiran Nabi Muhammad SAW</strong></p>
+                    <p>Nabi Muhammad SAW lahir di Makkah pada Tahun Gajah (12 Rabiul Awal). Dinamakan Tahun Gajah karena saat itu terjadi penyerangan Ka'bah oleh Raja Abrahah dari Yaman menggunakan pasukan bergajah, yang digagalkan oleh Allah SWT melalui burung Ababil. Beliau lahir dalam keadaan yatim, ayah beliau Abdullah wafat saat beliau masih dalam kandungan Siti Aminah. Setelah lahir, beliau disusui oleh Halimah As-Sa'diyah.</p>
+                    <hr>
+                    <p><strong>2. Diangkat Menjadi Rasul</strong></p>
+                    <p>Saat mendekati usia 40 tahun, beliau sering bertahanuts (menyendiri) di Gua Hira karena resah melihat akhlak kaum Quraisy. Pada tanggal 17 Ramadan, Malaikat Jibril turun membawa wahyu pertama, yaitu Surah Al-Alaq ayat 1-5 dengan perintah pertama "Iqra" (Bacalah). Peristiwa ini menandai diangkatnya beliau menjadi Rasul utusan Allah untuk menyampaikan ajaran Islam.</p>
+                </div>
+                <div class="text-center mt-5">
+                    <button onclick="mulaiKuis()" class="btn btn-custom px-5">Mulai Evaluasi <i class="fa-solid fa-pencil ms-2"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-kuis" class="step-section">
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                    <h4 class="fw-bold text-ungu mb-0"><i class="fa-solid fa-list-check me-2"></i>Evaluasi</h4>
+                    <span class="badge bg-gradient-custom p-2" id="kuis-progress">Soal 1 dari 4</span>
+                </div>
+                
+                <h5 id="teks-soal" class="mb-4 fw-semibold lh-base"></h5>
+                <div id="opsi-jawaban" class="d-grid gap-3">
+                    </div>
+            </div>
+        </div>
+
+        <div id="step-hasil" class="step-section">
+            <div class="card card-custom p-5 text-center">
+                <i class="fa-solid fa-medal fa-4x text-warning mb-3"></i>
+                <h2 class="fw-bold text-ungu">Selesai!</h2>
+                <p class="text-muted">Terima kasih telah menyelesaikan pembelajaran.</p>
+                <div class="display-1 fw-bold text-success my-3" id="nilai-akhir">100</div>
+                <p class="fw-semibold">Nilai telah berhasil disimpan ke sistem sekolah.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        // Kofigurasi Supabase
+        const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        let recordId = null;
+        
+        // Data Soal (Berdasarkan Video)
+        const bankSoal = [
+            {
+                tanya: "Pasukan apa yang dipimpin Raja Abrahah saat berniat menghancurkan Ka'bah bertepatan dengan tahun kelahiran Nabi?",
+                opsi: ["Pasukan Berkuda", "Pasukan Bergajah", "Pasukan Pemanah", "Pasukan Unta"],
+                jawabanBenar: 1 // Index dari opsi
+            },
+            {
+                tanya: "Siapakah nama ibu susuan Nabi Muhammad SAW yang berasal dari Bani Sa'ad?",
+                opsi: ["Aminah binti Wahab", "Khadijah binti Khuwailid", "Halimah As-Sa'diyah", "Ummu Aiman"],
+                jawabanBenar: 2
+            },
+            {
+                tanya: "Di manakah Nabi Muhammad SAW menerima wahyu yang pertama kali dari Malaikat Jibril?",
+                opsi: ["Gua Tsur", "Gua Hira", "Masjidil Haram", "Padang Arafah"],
+                jawabanBenar: 1
+            },
+            {
+                tanya: "Surah apakah yang pertama kali diturunkan kepada Nabi Muhammad SAW saat berusia 40 tahun?",
+                opsi: ["Al-Fatihah ayat 1-7", "Al-Baqarah ayat 1-5", "Al-Mudassir ayat 1-3", "Al-Alaq ayat 1-5"],
+                jawabanBenar: 3
+            }
+        ];
+
+        let indexSoalAktif = 0;
+        let skorSiswa = 0;
+
+        // 1. Fungsi Ganti Halaman (SPA Logic)
+        function gantiHalaman(idHalaman) {
+            document.querySelectorAll('.step-section').forEach(el => el.classList.remove('step-active'));
+            document.getElementById(idHalaman).classList.add('step-active');
+        }
+
+        // 2. Mulai Belajar & Simpan ke Supabase
+        async function mulaiBelajar() {
+            const nama = document.getElementById('namaSiswa').value;
+            const kelas = document.getElementById('kelasSiswa').value;
+
+            if (!nama || !kelas) {
+                alert("Harap isi Nama dan Kelas terlebih dahulu!");
+                return;
+            }
+
+            document.getElementById('btn-mulai').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+            document.getElementById('btn-mulai').disabled = true;
+
+            // Simpan awal ke Supabase
+            const { data, error } = await supabaseClient
+                .from('progress_belajar')
+                .insert([{ nama: nama, kelas: kelas, progress: 'mulai', nilai: 0 }])
+                .select();
+
+            if (error) {
+                alert("Gagal koneksi ke database. Periksa URL/Key Supabase.");
+                console.error(error);
+                return;
+            }
+
+            if (data) {
+                recordId = data[0].id;
+                document.getElementById('user-display').innerHTML = `<i class="fa-regular fa-user me-1"></i> ${nama} (Kelas ${kelas})`;
+                gantiHalaman('step-video1');
+                
+                // Jika YouTube API sudah siap, play otomatis jika memungkinkan (browser policy)
+                if (player1 && typeof player1.playVideo === 'function') {
+                    // player1.playVideo(); 
+                }
+            }
+        }
+
+        // 3. Update Progress Database
+        async function updateProgress(status, nilaiBaru = 0) {
+            if (!recordId) return;
+            await supabaseClient
+                .from('progress_belajar')
+                .update({ progress: status, nilai: nilaiBaru })
+                .eq('id', recordId);
+        }
+
+        function lanjutKe(idHalaman, status) {
+            updateProgress(status);
+            gantiHalaman(idHalaman);
+        }
+
+        // 4. Setup YouTube Iframe API (Anti Skip)
+        let player1, player2;
+        function onYouTubeIframeAPIReady() {
+            // playerVars: controls=0 (hilangkan progress bar), disablekb=1 (matikan keyboard skip), rel=0 (hilangkan video terkait)
+            player1 = new YT.Player('player1', {
+                videoId: 'j5AwiRHX5BE',
+                playerVars: { 'controls': 0, 'disablekb': 1, 'rel': 0, 'modestbranding': 1, 'fs': 0 },
+                events: { 'onStateChange': (event) => {
+                    if (event.data == YT.PlayerState.ENDED) {
+                        document.getElementById('btn-next1').disabled = false;
+                        document.getElementById('btn-next1').classList.remove('btn-secondary');
+                    }
+                }}
+            });
+
+            player2 = new YT.Player('player2', {
+                videoId: 'Ps496nANIBc',
+                playerVars: { 'controls': 0, 'disablekb': 1, 'rel': 0, 'modestbranding': 1, 'fs': 0 },
+                events: { 'onStateChange': (event) => {
+                    if (event.data == YT.PlayerState.ENDED) {
+                        document.getElementById('btn-next2').disabled = false;
+                    }
+                }}
+            });
+        }
+
+        // 5. Logika Kuis
+        function mulaiKuis() {
+            updateProgress('materi_selesai');
+            indexSoalAktif = 0;
+            skorSiswa = 0;
+            gantiHalaman('step-kuis');
+            tampilkanSoal();
+        }
+
+        function tampilkanSoal() {
+            const soal = bankSoal[indexSoalAktif];
+            document.getElementById('kuis-progress').innerText = `Soal ${indexSoalAktif + 1} dari ${bankSoal.length}`;
+            document.getElementById('teks-soal').innerText = soal.tanya;
+            
+            const divOpsi = document.getElementById('opsi-jawaban');
+            divOpsi.innerHTML = "";
+            
+            soal.opsi.forEach((teks, index) => {
+                const btn = document.createElement('button');
+                btn.className = "btn btn-outline-secondary text-start p-3 fw-medium";
+                btn.innerHTML = teks;
+                btn.onclick = () => cekJawaban(index);
+                divOpsi.appendChild(btn);
+            });
+        }
+
+        function cekJawaban(indexDipilih) {
+            const benar = bankSoal[indexSoalAktif].jawabanBenar;
+            if (indexDipilih === benar) {
+                skorSiswa += (100 / bankSoal.length);
+            }
+            
+            indexSoalAktif++;
+            if (indexSoalAktif < bankSoal.length) {
+                tampilkanSoal();
+            } else {
+                selesaiKuis();
+            }
+        }
+
+        async function selesaiKuis() {
+            const nilaiBulat = Math.round(skorSiswa);
+            document.getElementById('nilai-akhir').innerText = nilaiBulat;
+            
+            // Ubah warna teks hasil berdasarkan nilai
+            const nilaiEl = document.getElementById('nilai-akhir');
+            if(nilaiBulat < 70) {
+                nilaiEl.className = "display-1 fw-bold text-danger my-3";
+            } else {
+                nilaiEl.className = "display-1 fw-bold text-success my-3";
+            }
+
+            gantiHalaman('step-hasil');
+            await updateProgress('kuis_selesai', nilaiBulat);
+        }
+    </script>
+</body>
+</html>
