@@ -116,8 +116,11 @@
             <div class="card card-custom p-4 text-center">
                 <h4 class="fw-bold text-ungu mb-3">Video 1: Kelahiran Rasul Terakhir</h4>
                 <p class="text-muted">Tonton video hingga selesai. Tombol Lanjut akan otomatis aktif.</p>
-                <div class="video-container mb-4">
+                <div class="video-container mb-4" id="wadah-video1">
                     <div id="player1"></div>
+                    <button onclick="toggleFullScreen('wadah-video1')" class="btn btn-dark btn-sm position-absolute bottom-0 end-0 m-3 z-3 shadow" style="opacity: 0.8;">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
                 </div>
                 <button onclick="lanjutKe('step-video2', 'video1_selesai')" class="btn btn-custom" id="btn-next1" disabled>
                     Lanjut ke Video 2 <i class="fa-solid fa-arrow-right ms-2"></i>
@@ -129,8 +132,11 @@
             <div class="card card-custom p-4 text-center">
                 <h4 class="fw-bold text-ungu mb-3">Video 2: Diangkat Menjadi Rasul</h4>
                 <p class="text-muted">Tonton video hingga selesai untuk membuka materi.</p>
-                <div class="video-container mb-4">
+                <div class="video-container mb-4" id="wadah-video2">
                     <div id="player2"></div>
+                    <button onclick="toggleFullScreen('wadah-video2')" class="btn btn-dark btn-sm position-absolute bottom-0 end-0 m-3 z-3 shadow" style="opacity: 0.8;">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
                 </div>
                 <button onclick="lanjutKe('step-materi', 'video2_selesai')" class="btn btn-custom" id="btn-next2" disabled>
                     Lanjut ke Materi <i class="fa-solid fa-arrow-right ms-2"></i>
@@ -192,24 +198,104 @@
         // Data Soal (Berdasarkan Video)
         const bankSoal = [
             {
-                tanya: "Pasukan apa yang dipimpin Raja Abrahah saat berniat menghancurkan Ka'bah bertepatan dengan tahun kelahiran Nabi?",
-                opsi: ["Pasukan Berkuda", "Pasukan Bergajah", "Pasukan Pemanah", "Pasukan Unta"],
-                jawabanBenar: 1 // Index dari opsi
+                tanya: "Siapakah nama ayah Nabi Muhammad SAW yang wafat saat dalam perjalanan pulang berdagang dari Syam?",
+                opsi: ["Abdul Muthalib", "Abu Thalib", "Abdullah", "Abu Lahab"],
+                jawabanBenar: 2 // Index untuk Abdullah
             },
             {
-                tanya: "Siapakah nama ibu susuan Nabi Muhammad SAW yang berasal dari Bani Sa'ad?",
-                opsi: ["Aminah binti Wahab", "Khadijah binti Khuwailid", "Halimah As-Sa'diyah", "Ummu Aiman"],
+                tanya: "Pada tanggal berapakah Nabi Muhammad SAW dilahirkan ke dunia bertepatan dengan Tahun Gajah?",
+                opsi: ["1 Muharram", "12 Rabiul Awal", "27 Rajab", "17 Ramadhan"],
+                jawabanBenar: 1 // Index untuk 12 Rabiul Awal
+            },
+            {
+                tanya: "Siapakah nama kakek yang menggendong dan membawa Nabi Muhammad SAW berkeliling Ka'bah saat baru lahir?",
+                opsi: ["Abu Thalib", "Abu Jahal", "Abdul Muthalib", "Hamzah"],
+                jawabanBenar: 2 // Index untuk Abdul Muthalib
+            },
+            {
+                tanya: "Siapakah nama ibu susu yang merawat Nabi Muhammad SAW di masa kecilnya dan mendapatkan banyak keberkahan?",
+                opsi: ["Siti Aminah", "Khadijah", "Ummu Aiman", "Halimah As-Sa'diyah"],
+                jawabanBenar: 3 // Index untuk Halimah As-Sa'diyah
+            },
+            {
+                tanya: "Peristiwa besar apakah yang dialami oleh Nabi Muhammad SAW ketika beliau baru berusia 4 tahun?",
+                opsi: ["Ditinggal wafat ibunya", "Pembelahan dada oleh malaikat", "Ikut berdagang ke Syam", "Menggembala kambing"],
+                jawabanBenar: 1 // Index untuk Pembelahan dada oleh malaikat
+            },
+            {
+                tanya: "Pada usia berapakah Nabi Muhammad SAW menjadi yatim piatu karena ibundanya wafat sepulang berziarah dari Madinah?",
+                opsi: ["4 tahun", "6 tahun", "8 tahun", "12 tahun"],
+                jawabanBenar: 1 // Index untuk 6 tahun
+            },
+            {
+                tanya: "Setelah kakeknya wafat, siapakah paman yang dengan ikhlas dan penuh kasih sayang merawat Nabi Muhammad SAW?",
+                opsi: ["Abu Thalib", "Abu Lahab", "Abbas", "Hamzah"],
+                jawabanBenar: 0 // Index untuk Abu Thalib
+            },
+            {
+                tanya: "Benda apakah yang selalu memayungi Nabi Muhammad SAW dari panasnya gurun pasir saat beliau ikut pamannya berdagang ke Syam?",
+                opsi: ["Pohon kurma", "Burung-burung", "Awan teduh", "Malaikat bersayap"],
+                jawabanBenar: 2 // Index untuk Awan teduh
+            },
+            {
+                tanya: "Siapakah yang melihat mukjizat awan memayungi Nabi Muhammad SAW dan meyakini bahwa ia adalah nabi terakhir?",
+                opsi: ["Raja Yaman", "Pemimpin Quraisy", "Saudagar Mekkah", "Pendeta Yahudi"],
+                jawabanBenar: 3 // Index untuk Pendeta Yahudi
+            },
+            {
+                tanya: "Berapakah usia Nabi Muhammad SAW ketika melangsungkan pernikahan dengan Siti Khadijah?",
+                opsi: ["20 tahun", "25 tahun", "30 tahun", "40 tahun"],
+                jawabanBenar: 1 // Index untuk 25 tahun
+            },
+            {
+                tanya: "Salah satu sifat mulia Nabi Muhammad SAW adalah Fathonah, yang memiliki arti...",
+                opsi: ["Jujur", "Dapat dipercaya", "Pandai atau cerdas", "Menyampaikan"],
                 jawabanBenar: 2
             },
             {
-                tanya: "Di manakah Nabi Muhammad SAW menerima wahyu yang pertama kali dari Malaikat Jibril?",
-                opsi: ["Gua Tsur", "Gua Hira", "Masjidil Haram", "Padang Arafah"],
+                tanya: "Nabi Muhammad SAW menikah dengan Siti Khadijah, seorang wanita mulia dan pedagang kaya, saat beliau berusia...",
+                opsi: ["20 tahun", "25 tahun", "30 tahun", "40 tahun"],
                 jawabanBenar: 1
             },
             {
-                tanya: "Surah apakah yang pertama kali diturunkan kepada Nabi Muhammad SAW saat berusia 40 tahun?",
-                opsi: ["Al-Fatihah ayat 1-7", "Al-Baqarah ayat 1-5", "Al-Mudassir ayat 1-3", "Al-Alaq ayat 1-5"],
+                tanya: "Ketika terjadi perselisihan tentang siapa yang berhak meletakkan Hajar Aswad setelah renovasi Ka'bah, siapakah yang akhirnya dipilih karena dipercaya kejujurannya?",
+                opsi: ["Abu Jahal", "Abu Lahab", "Nabi Muhammad SAW", "Abu Thalib"],
+                jawabanBenar: 2
+            },
+            {
+                tanya: "Julukan apakah yang diberikan kaum Quraisy kepada Nabi Muhammad SAW karena kejujuran dan sifatnya yang dapat dipercaya?",
+                opsi: ["As-Siddiq", "Al-Amin", "Al-Faruq", "Al-Fatah"],
+                jawabanBenar: 1
+            },
+            {
+                tanya: "Ke manakah Nabi Muhammad SAW sering pergi menyendiri untuk mencari ketenangan karena resah melihat akhlak buruk kaumnya?",
+                opsi: ["Gua Tsur", "Padang Arafah", "Gua Hira", "Bukit Shafa"],
+                jawabanBenar: 2
+            },
+            {
+                tanya: "Pada usia berapakah Nabi Muhammad SAW pertama kali menerima wahyu dari Allah melalui Malaikat Jibril?",
+                opsi: ["25 tahun", "30 tahun", "40 tahun", "50 tahun"],
+                jawabanBenar: 2
+            },
+            {
+                tanya: "Wahyu pertama yang diturunkan kepada Nabi Muhammad SAW dan diawali dengan perintah 'Iqra' (Bacalah) adalah surah...",
+                opsi: ["Al-Fatihah", "Al-Alaq ayat 1-5", "Al-Mudassir", "Al-Baqarah"],
+                jawabanBenar: 1
+            },
+            {
+                tanya: "Siapakah pendeta yang mengerti Injil dan Taurat, yang ditemui Khadijah dan Nabi Muhammad untuk menanyakan tentang peristiwa turunnya wahyu?",
+                opsi: ["Buhaira", "Waraqah bin Naufal", "Abu Thalib", "Umar bin Khattab"],
+                jawabanBenar: 1
+            },
+            {
+                tanya: "Siapakah orang pertama yang mempercayai kenabian Muhammad dan memeluk agama Islam (Assabiqunal Awwalun)?",
+                opsi: ["Ali bin Abi Thalib", "Abu Bakar", "Zaid bin Haritsah", "Siti Khadijah"],
                 jawabanBenar: 3
+            },
+            {
+                tanya: "Siapakah paman Nabi Muhammad SAW beserta istrinya yang paling keras menentang dan menolak dakwah ajaran Islam?",
+                opsi: ["Abu Thalib", "Abu Lahab dan Ummu Jamil", "Hamzah", "Abbas"],
+                jawabanBenar: 1
             }
         ];
 
@@ -279,7 +365,7 @@
             // playerVars: controls=0 (hilangkan progress bar), disablekb=1 (matikan keyboard skip), rel=0 (hilangkan video terkait)
             player1 = new YT.Player('player1', {
                 videoId: 'j5AwiRHX5BE',
-                playerVars: { 'controls': 0, 'disablekb': 1, 'rel': 0, 'modestbranding': 1, 'fs': 0 },
+                playerVars: { 'controls': 0, 'disablekb': 1, 'rel': 0, 'modestbranding': 1 },
                 events: { 'onStateChange': (event) => {
                     if (event.data == YT.PlayerState.ENDED) {
                         document.getElementById('btn-next1').disabled = false;
@@ -290,7 +376,7 @@
 
             player2 = new YT.Player('player2', {
                 videoId: 'Ps496nANIBc',
-                playerVars: { 'controls': 0, 'disablekb': 1, 'rel': 0, 'modestbranding': 1, 'fs': 0 },
+                playerVars: { 'controls': 0, 'disablekb': 1, 'rel': 0, 'modestbranding': 1 },
                 events: { 'onStateChange': (event) => {
                     if (event.data == YT.PlayerState.ENDED) {
                         document.getElementById('btn-next2').disabled = false;
@@ -353,6 +439,37 @@
 
             gantiHalaman('step-hasil');
             await updateProgress('kuis_selesai', nilaiBulat);
+        }
+        // 6. Fungsi Fullscreen Custom
+        function toggleFullScreen(elementId) {
+            var elem = document.getElementById(elementId);
+            
+            // Periksa apakah layar sudah fullscreen atau belum
+            if (!document.fullscreenElement && !document.mozFullScreenElement &&
+                !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                
+                // Masuk ke mode Fullscreen
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                // Keluar dari mode Fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
         }
     </script>
 </body>
