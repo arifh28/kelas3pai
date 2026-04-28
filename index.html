@@ -306,6 +306,11 @@
         function gantiHalaman(idHalaman) {
             document.querySelectorAll('.step-section').forEach(el => el.classList.remove('step-active'));
             document.getElementById(idHalaman).classList.add('step-active');
+
+            // Simpan posisi halaman terakhir ke localStorage (Kecuali jika kembali ke login)
+            if (idHalaman !== 'step-login') {
+                localStorage.setItem('pai_edu_progress', idHalaman);
+            }
         }
 
         // 2. Mulai Belajar & Simpan ke Supabase
@@ -335,12 +340,18 @@
 
             if (data) {
                 recordId = data[0].id;
+                
+                // SIMPAN IDENTITAS KE LOCAL STORAGE
+                localStorage.setItem('pai_edu_nama', nama);
+                localStorage.setItem('pai_edu_kelas', kelas);
+                localStorage.setItem('pai_edu_recordId', recordId);
+                
                 document.getElementById('user-display').innerHTML = `<i class="fa-regular fa-user me-1"></i> ${nama} (Kelas ${kelas})`;
                 gantiHalaman('step-video1');
                 
                 // Jika YouTube API sudah siap, play otomatis jika memungkinkan (browser policy)
                 if (player1 && typeof player1.playVideo === 'function') {
-                    // player1.playVideo(); 
+                    player1.playVideo(); 
                 }
             }
         }
@@ -427,6 +438,10 @@
 
         async function selesaiKuis() {
             const nilaiBulat = Math.round(skorSiswa);
+            
+            // Simpan nilai ke localStorage
+            localStorage.setItem('pai_edu_nilai', nilaiBulat); 
+            
             document.getElementById('nilai-akhir').innerText = nilaiBulat;
             
             // Ubah warna teks hasil berdasarkan nilai
@@ -440,7 +455,7 @@
             gantiHalaman('step-hasil');
             await updateProgress('kuis_selesai', nilaiBulat);
         }
-        // 6. Fungsi Fullscreen Custom
+
         function toggleFullScreen(elementId) {
             var elem = document.getElementById(elementId);
             
@@ -471,6 +486,42 @@
                 }
             }
         }
+
+        function cekSesiAktif() {
+            const savedNama = localStorage.getItem('pai_edu_nama');
+            const savedKelas = localStorage.getItem('pai_edu_kelas');
+            const savedRecordId = localStorage.getItem('pai_edu_recordId');
+            const savedProgress = localStorage.getItem('pai_edu_progress');
+
+            // Jika ada data sesi yang tersimpan
+            if (savedNama && savedRecordId && savedProgress) {
+                // Pulihkan ID database agar update progress selanjutnya tetap masuk ke baris yang sama
+                recordId = savedRecordId;
+
+                // Tampilkan nama di navbar kembali
+                document.getElementById('user-display').innerHTML = `<i class="fa-regular fa-user me-1"></i> ${savedNama} (Kelas ${savedKelas})`;
+
+                // Jika halaman terakhir adalah halaman hasil, pulihkan juga nilai akhirnya
+                if (savedProgress === 'step-hasil') {
+                    const savedNilai = localStorage.getItem('pai_edu_nilai') || 0;
+                    document.getElementById('nilai-akhir').innerText = savedNilai;
+                    
+                    const nilaiEl = document.getElementById('nilai-akhir');
+                    if(parseInt(savedNilai) < 70) {
+                        nilaiEl.className = "display-1 fw-bold text-danger my-3";
+                    } else {
+                        nilaiEl.className = "display-1 fw-bold text-success my-3";
+                    }
+                }
+
+                // Lompat ke halaman terakhir siswa berada
+                gantiHalaman(savedProgress);
+            }
+        }
+
+        // Jalankan fungsi cekSesiAktif segera setelah halaman web selesai dimuat
+        window.onload = cekSesiAktif;
+
     </script>
 </body>
 </html>
