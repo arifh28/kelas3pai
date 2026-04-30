@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 2 - Dakwah dan Mukjizat Nabi</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --biru-muda: #00B4D8;
+            --ungu: #7209B7;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fa; }
+        .bg-gradient-custom { background: linear-gradient(135deg, var(--biru-muda) 0%, var(--ungu) 100%); color: white; }
+        .text-ungu { color: var(--ungu); }
+        .btn-custom { background: var(--ungu); color: white; border: none; border-radius: 8px; padding: 10px 24px; font-weight: 600; transition: 0.3s; }
+        .btn-custom:hover { background: #5a0792; color: white; }
+        .btn-custom:disabled { background: #ccc; cursor: not-allowed; }
+        .step-section { display: none; animation: fadeIn 0.5s ease; }
+        .step-active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card-custom { border: none; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-custom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-book-quran me-2"></i>PAIBP - Materi 2</a>
+            <span class="text-white" id="user-display"></span>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        
+        <div id="step-login" class="step-section step-active">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card card-custom p-4">
+                        <div class="text-center mb-4">
+                            <i class="fa-solid fa-graduation-cap fa-3x text-ungu mb-3"></i>
+                            <h4 class="fw-bold">Mulai Belajar</h4>
+                            <p class="text-muted small">Silakan isi identitas untuk menyimpan progress.</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nama Lengkap</label>
+                            <input type="text" id="namaSiswa" class="form-control" placeholder="Masukkan nama...">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Kelas</label>
+                            <select id="kelasSiswa" class="form-select">
+                                <option value="">Pilih Kelas...</option>
+                                <option value="3A">Kelas 3A</option>
+                                <option value="3B">Kelas 3B</option>
+                                <option value="3C">Kelas 3C</option>
+                                <option value="3D">Kelas 3D</option>
+                            </select>
+                        </div>
+                        <button onclick="mulaiBelajar()" class="btn btn-custom w-100" id="btn-mulai">Mulai Pembelajaran <i class="fa-solid fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-materi" class="step-section">
+            <div class="card card-custom p-4 p-md-5">
+                <h3 class="fw-bold text-ungu text-center mb-4"><i class="fa-solid fa-book-open me-2"></i>Ringkasan Materi</h3>
+                
+                <div class="alert alert-info small text-center mb-4">
+                    <i class="fa-solid fa-circle-info me-1"></i> Silakan baca dan <strong>gulir (scroll)</strong> materi sampai ke paling bawah untuk membuka tombol evaluasi.
+                </div>
+
+                <div id="materi-scroll-container" style="max-height: 55vh; overflow-y: auto; padding-right: 10px;">
+                    
+                    <div class="card border-0 bg-light mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">1. Dakwah Secara Sembunyi-Sembunyi</h5>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div>Setelah <strong>wahyu turun</strong> (sebagai isyarat kerasulan), Allah memerintahkan Nabi Muhammad saw. untuk berdakwah. Karena kaumnya lama menyembah berhala, dakwah diawali kepada orang terdekat secara <strong>sembunyi-sembunyi</strong>.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div>Orang pertama yang masuk Islam adalah istrinya, <strong>Khadijah</strong>.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div>Kemudian diikuti para sahabat: <strong>Abu Bakar As-Siddiq, Ali bin Abi Thalib, Zaid bin Tsabit, Usman bin Affan</strong>, dan lain-lain.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 bg-light mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">2. Dakwah Secara Terang-terangan</h5>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div>Dakwah ini diawali kepada <strong>kerabatnya (Bani Muthalib)</strong>. Namun tidak ada yang menerima kecuali <strong>Ali bin Abi Thalib</strong>.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div>Nabi kemudian berdakwah dengan percaya diri di depan <strong>Kaum Quraisy</strong>. Walaupun mendapat penolakan, ejekan, dan hinaan, beliau tidak menyerah.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div>Perlahan penduduk Makkah masuk Islam dan <strong>meninggalkan berhala</strong> karena terpesona dengan <strong>kelembutan dan kebaikan akhlak</strong> Nabi Muhammad saw.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 bg-light mb-2 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">3. Mukjizat Nabi Muhammad saw.</h5>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div><strong>Pengertian:</strong> Perkara luar biasa dari Allah melalui nabi/rasul sebagai bukti kebenaran dakwah dan kenabiannya.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div><strong>Macam-macam Mukjizat Beliau:</strong>
+                                        <ol class="mt-2 ps-3">
+                                            <li>Kitab Suci <strong>Al-Qur'an</strong>.</li>
+                                            <li>Peristiwa <strong>Isra' dan Mi'raj</strong>.</li>
+                                            <li>Membelah <strong>bulan</strong> menjadi dua bagian.</li>
+                                            <li>Dengan doa, makanan dapat menjadi banyak.</li>
+                                            <li>Menyembuhkan mata <strong>Ali dan Qatadah</strong> akibat perang.</li>
+                                            <li><strong>Air mengalir</strong> dari jari-jarinya.</li>
+                                        </ol>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div> 
+                
+                <div class="text-center mt-4 border-top pt-4">
+                    <button id="btn-mulai-kuis" onclick="mulaiKuis()" class="btn btn-secondary px-5" disabled>
+                        <i class="fa-solid fa-lock me-2" id="icon-kuis"></i> Mulai Evaluasi
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-kuis" class="step-section">
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                    <h4 class="fw-bold text-ungu mb-0"><i class="fa-solid fa-list-check me-2"></i>Evaluasi</h4>
+                    <span class="badge bg-gradient-custom p-2" id="kuis-progress">Soal 1 dari 20</span>
+                </div>
+                <h5 id="teks-soal" class="mb-4 fw-semibold lh-base"></h5>
+                <div id="opsi-jawaban" class="d-grid gap-3"></div>
+            </div>
+        </div>
+
+        <div id="step-hasil" class="step-section">
+            <div class="card card-custom p-5 text-center">
+                <i class="fa-solid fa-medal fa-4x text-warning mb-3"></i>
+                <h2 class="fw-bold text-ungu">Selesai!</h2>
+                <p class="text-muted">Terima kasih telah menyelesaikan pembelajaran Materi 2.</p>
+                <div class="display-1 fw-bold text-success my-3" id="nilai-akhir">0</div>
+                <p class="fw-semibold">Nilai telah berhasil disimpan ke database guru.</p>
+                <button onclick="location.reload()" class="btn btn-outline-secondary mt-3">Kembali ke Awal</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Konfigurasi Supabase
+        const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+        
+        let recordId = null;
+        let bankSoal = [];
+        let indexSoalAktif = 0;
+        let skorSiswa = 0;
+
+        // Ambil data soal dari soal.json saat halaman dimuat
+        async function muatSoal() {
+            try {
+                const response = await fetch('soal.json');
+                if (!response.ok) throw new Error("Gagal mengambil file JSON");
+                bankSoal = await response.json();
+            } catch (error) {
+                console.error("Error muat soal:", error);
+                alert("Gagal memuat soal. Pastikan file dibuka melalui server (seperti Vercel) dan bukan file:// lokal.");
+            }
+        }
+        
+        // Panggil fungsi muat soal
+        muatSoal();
+
+        function gantiHalaman(idHalaman) {
+            document.querySelectorAll('.step-section').forEach(el => el.classList.remove('step-active'));
+            document.getElementById(idHalaman).classList.add('step-active');
+
+            if (idHalaman === 'step-materi') {
+                materiScroll.scrollTop = 0; 
+                if (materiScroll.scrollHeight <= materiScroll.clientHeight) {
+                    bukaTombolKuis(); 
+                }
+            }
+        }
+
+        async function mulaiBelajar() {
+            const nama = document.getElementById('namaSiswa').value;
+            const kelas = document.getElementById('kelasSiswa').value;
+
+            if (!nama || !kelas) {
+                alert("Harap isi Nama dan Kelas terlebih dahulu!");
+                return;
+            }
+            if (bankSoal.length === 0) {
+                alert("Soal sedang dimuat atau gagal dimuat. Harap tunggu.");
+                return;
+            }
+
+            document.getElementById('btn-mulai').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+            document.getElementById('btn-mulai').disabled = true;
+
+            const { data, error } = await supabaseClient
+                .from('progress_materi2') // <--- UBAH KE SINI
+                .insert([{ nama: nama, kelas: kelas, progress: 'materi2_baca', nilai: 0 }])
+                .select();
+
+            if (error) {
+                alert("Gagal menyimpan data ke database.");
+                console.error(error);
+                return;
+            }
+
+            if (data) {
+                recordId = data[0].id;
+                document.getElementById('user-display').innerHTML = `<i class="fa-regular fa-user me-1"></i> ${nama} (Kelas ${kelas})`;
+                gantiHalaman('step-materi');
+            }
+        }
+
+        // UBAH MENJADI:
+        async function updateProgress(status, nilaiBaru = 0) {
+            if (!recordId) return;
+            await supabaseClient
+                .from('progress_materi2') // <--- UBAH KE SINI
+                .update({ progress: status, nilai: nilaiBaru })
+                .eq('id', recordId);
+        }
+
+        function mulaiKuis() {
+            indexSoalAktif = 0;
+            skorSiswa = 0;
+            gantiHalaman('step-kuis');
+            tampilkanSoal();
+        }
+
+        function tampilkanSoal() {
+            const soal = bankSoal[indexSoalAktif];
+            document.getElementById('kuis-progress').innerText = `Soal ${indexSoalAktif + 1} dari ${bankSoal.length}`;
+            document.getElementById('teks-soal').innerText = soal.tanya;
+            
+            const divOpsi = document.getElementById('opsi-jawaban');
+            divOpsi.innerHTML = "";
+            
+            soal.opsi.forEach((teks, index) => {
+                const btn = document.createElement('button');
+                btn.className = "btn btn-outline-secondary text-start p-3 fw-medium";
+                btn.innerHTML = teks;
+                btn.onclick = () => cekJawaban(index);
+                divOpsi.appendChild(btn);
+            });
+        }
+
+        function cekJawaban(indexDipilih) {
+            const benar = bankSoal[indexSoalAktif].jawabanBenar;
+            if (indexDipilih === benar) {
+                skorSiswa += (100 / bankSoal.length);
+            }
+            
+            indexSoalAktif++;
+            if (indexSoalAktif < bankSoal.length) {
+                tampilkanSoal();
+            } else {
+                selesaiKuis();
+            }
+        }
+
+        async function selesaiKuis() {
+            const nilaiBulat = Math.round(skorSiswa);
+            
+            document.getElementById('nilai-akhir').innerText = nilaiBulat;
+            const nilaiEl = document.getElementById('nilai-akhir');
+            if(nilaiBulat < 70) {
+                nilaiEl.className = "display-1 fw-bold text-danger my-3";
+            } else {
+                nilaiEl.className = "display-1 fw-bold text-success my-3";
+            }
+
+            gantiHalaman('step-hasil');
+            await updateProgress('materi2_selesai', nilaiBulat);
+        }
+
+        const materiScroll = document.getElementById('materi-scroll-container');
+        function bukaTombolKuis() {
+            const btnKuis = document.getElementById('btn-mulai-kuis');
+            const iconKuis = document.getElementById('icon-kuis');
+            
+            if (btnKuis.disabled) {
+                btnKuis.disabled = false;
+                btnKuis.classList.remove('btn-secondary');
+                btnKuis.classList.add('btn-custom');
+                iconKuis.classList.remove('fa-lock');
+                iconKuis.classList.add('fa-pencil');
+            }
+        }
+
+        materiScroll.addEventListener('scroll', function() {
+            if (materiScroll.scrollTop + materiScroll.clientHeight >= materiScroll.scrollHeight - 5) {
+                bukaTombolKuis();
+            }
+        });
+    </script>
+</body>
+</html>

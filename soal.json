@@ -1,0 +1,102 @@
+[
+    {
+        "tanya": "Apakah isyarat yang menandakan Nabi Muhammad saw. resmi diangkat menjadi rasul?",
+        "opsi": ["Diperintahkannya salat lima waktu", "Turunnya wahyu", "Terjadinya Isra' Mi'raj", "Kelahiran beliau di Makkah"],
+        "jawabanBenar": 1
+    },
+    {
+        "tanya": "Ada berapa cara Nabi Muhammad saw. melakukan dakwah di awal kerasulannya?",
+        "opsi": ["Satu cara", "Dua cara", "Tiga cara", "Empat cara"],
+        "jawabanBenar": 1
+    },
+    {
+        "tanya": "Apa sajakah dua cara dakwah yang dilakukan oleh Nabi Muhammad saw.?",
+        "opsi": ["Sembunyi-sembunyi dan perang", "Terang-terangan dan berhijrah", "Sembunyi-sembunyi dan terang-terangan", "Berpidato dan menulis surat"],
+        "jawabanBenar": 2
+    },
+    {
+        "tanya": "Mengapa pada awalnya Nabi Muhammad saw. berdakwah secara sembunyi-sembunyi?",
+        "opsi": ["Karena takut kepada Raja Abrahah", "Karena kaumnya telah lama menyembah berhala", "Karena belum memiliki mukjizat", "Karena belum diperintahkan Allah"],
+        "jawabanBenar": 1
+    },
+    {
+        "tanya": "Siapakah orang yang pertama kali masuk Islam dari kalangan perempuan sekaligus istri nabi?",
+        "opsi": ["Siti Aminah", "Siti Aisyah", "Siti Khadijah", "Fatimah"],
+        "jawabanBenar": 2
+    },
+    {
+        "tanya": "Berikut ini adalah sahabat-sahabat yang masuk Islam di awal masa dakwah, kecuali...",
+        "opsi": ["Abu Bakar As-Siddiq", "Ali bin Abi Thalib", "Abu Jahal", "Usman bin Affan"],
+        "jawabanBenar": 2
+    },
+    {
+        "tanya": "Setelah berdakwah secara sembunyi-sembunyi, Allah Swt. memerintahkan Nabi Muhammad saw. untuk berdakwah secara...",
+        "opsi": ["Menulis surat ke raja", "Terang-terangan", "Hijrah ke Madinah", "Membangun masjid"],
+        "jawabanBenar": 1
+    },
+    {
+        "tanya": "Kepada siapakah dakwah terang-terangan pertama kali diawali oleh Nabi Muhammad saw.?",
+        "opsi": ["Penduduk Makkah secara umum", "Penduduk Madinah", "Kerabatnya dari Bani Muthalib", "Raja-raja Arab"],
+        "jawabanBenar": 2
+    },
+    {
+        "tanya": "Siapakah satu-satunya kerabat dari Bani Muthalib yang menerima ajaran Islam di awal dakwah terang-terangan?",
+        "opsi": ["Abu Thalib", "Abbas", "Ali bin Abi Thalib", "Hamzah"],
+        "jawabanBenar": 2
+    },
+    {
+        "tanya": "Di manakah Nabi Muhammad saw. menyampaikan kebenaran Islam secara terang-terangan dengan percaya diri?",
+        "opsi": ["Di depan Kaum Quraisy", "Di dalam Gua Hira", "Di Kota Madinah", "Di negara Syam"],
+        "jawabanBenar": 0
+    },
+    {
+        "tanya": "Bagaimana respon atau tanggapan Kaum Quraisy saat nabi berdakwah terang-terangan?",
+        "opsi": ["Menerima dengan senang hati", "Menolak, mengejek, dan menghina", "Membantu menyebarkan dakwah", "Pindah dari Makkah"],
+        "jawabanBenar": 1
+    },
+    {
+        "tanya": "Meskipun dihalangi pemuka Quraisy, banyak penduduk Makkah perlahan masuk Islam. Apa alasan utama mereka?",
+        "opsi": ["Diberi harta yang banyak", "Takut kepada pasukan nabi", "Terpesona kelembutan dan kebaikan akhlak nabi", "Ingin menjadi pemimpin Makkah"],
+        "jawabanBenar": 2
+    },
+    {
+        "tanya": "Setelah beriman kepada Allah Swt., kebiasaan apa yang ditinggalkan oleh para pengikut Nabi Muhammad saw.?",
+        "opsi": ["Berdagang", "Menggembala domba", "Menyembah berhala", "Membaca puisi"],
+        "jawabanBenar": 2
+    },
+    {
+        "tanya": "Perkara luar biasa yang dilakukan oleh Allah Swt. melalui nabi dan rasul-Nya disebut...",
+        "opsi": ["Sihir", "Mukjizat", "Karomah", "Wahyu"],
+        "jawabanBenar": 1
+    },
+    {
+        "tanya": "Apakah tujuan Allah Swt. mengaruniakan mukjizat kepada Nabi Muhammad saw.?",
+        "opsi": ["Untuk menakut-nakuti kaum Quraisy", "Sebagai bukti kebenaran dakwah dan kenabiannya", "Agar menjadi raja di Makkah", "Untuk mengalahkan musuh dalam perang"],
+        "jawabanBenar": 1
+    },
+    {
+        "tanya": "Mukjizat terbesar Nabi Muhammad saw. yang berupa kitab suci adalah...",
+        "opsi": ["Taurat", "Zabur", "Injil", "Al-Qur'an"],
+        "jawabanBenar": 3
+    },
+    {
+        "tanya": "Perjalanan luar biasa Nabi Muhammad saw. di malam hari hingga naik ke langit disebut peristiwa...",
+        "opsi": ["Hijrah", "Isra' dan Mi'raj", "Fathu Makkah", "Nuzulul Qur'an"],
+        "jawabanBenar": 1
+    },
+    {
+        "tanya": "Salah satu mukjizat Nabi Muhammad saw. yang berhubungan dengan benda langit adalah...",
+        "opsi": ["Membelah bulan menjadi dua bagian", "Menurunkan bintang ke bumi", "Menghentikan perputaran matahari", "Membuat awan menjadi jembatan"],
+        "jawabanBenar": 0
+    },
+    {
+        "tanya": "Siapakah nama sahabat yang disembuhkan matanya oleh Nabi Muhammad saw. seperti sediakala akibat peperangan?",
+        "opsi": ["Abu Bakar dan Umar", "Usman dan Zaid", "Ali dan Qatadah", "Bilal dan Ammar"],
+        "jawabanBenar": 2
+    },
+    {
+        "tanya": "Mukjizat luar biasa apakah yang terjadi pada jari-jari Nabi Muhammad saw.?",
+        "opsi": ["Mengeluarkan cahaya terang", "Air mengalir dari jari-jarinya", "Bisa menghancurkan batu", "Menyembuhkan segala penyakit kulit"],
+        "jawabanBenar": 1
+    }
+]
