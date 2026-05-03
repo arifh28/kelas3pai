@@ -4,44 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asesmen Sumatif - Salat Rawatib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f7f6; color: #333; }
-        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .hidden { display: none; }
-        .question { margin-bottom: 20px; padding: 15px; border: 1px solid #e1e1e1; border-radius: 8px; background: #fafafa; }
-        .question p { margin-top: 0; font-size: 16px; }
-        .btn { background: #4CAF50; color: white; padding: 12px 24px; border: none; cursor: pointer; border-radius: 5px; font-size: 16px; font-weight: bold; width: 100%; transition: 0.3s; }
-        .btn:hover { background: #45a049; }
-        input[type="text"] { padding: 12px; width: 100%; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
-        .input-login { margin-bottom: 15px; margin-top: 0; }
-        label { font-weight: bold; margin-bottom: 5px; display: block; }
-        .radio-label { display: block; padding: 8px 0; cursor: pointer; font-weight: normal; }
-        .radio-label input { margin-right: 10px; }
-        .header-info { display: flex; justify-content: space-between; background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f0f8ff; 
+            color: #334155;
+        }
+        .bg-light-blue { background-color: #e3f2fd; }
+        .text-blue { color: #0288d1; }
+        .card { 
+            border: none; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.1); 
+        }
+        .btn-primary { 
+            background-color: #0288d1; 
+            border: none; 
+            border-radius: 10px; 
+            padding: 12px;
+            font-weight: 600;
+        }
+        .btn-primary:hover { background-color: #0277bd; }
+        .question-box {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .question-box:hover { border-color: #0288d1; }
+        .form-check-input:checked { background-color: #0288d1; border-color: #0288d1; }
+        .header-sticky {
+            position: sticky;
+            top: 10px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
 
-<div id="login-section" class="card">
-    <h2 style="text-align: center; color: #2E7D32;">Asesmen Sumatif Akhir<br>Materi Salat Rawatib</h2>
-    <p style="text-align: center;">Silakan isi identitas diri sebelum memulai.</p>
-    <label>Nama Lengkap:</label>
-    <input type="text" id="nama" class="input-login" placeholder="Contoh: Ahmad Budi">
-    <label>Kelas:</label>
-    <input type="text" id="kelas" class="input-login" placeholder="Contoh: 4A">
-    <button class="btn" onclick="mulaiUjian()">Mulai Ujian</button>
-</div>
-
-<div id="quiz-section" class="card hidden">
-    <h2 style="text-align: center; color: #2E7D32;">Soal Ujian</h2>
-    <div class="header-info">
-        <span>Nama: <span id="display-nama" style="color: #4CAF50;"></span></span>
-        <span>Kelas: <span id="display-kelas" style="color: #4CAF50;"></span></span>
+<div class="container py-5">
+    <div id="login-section" class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 text-center">
+                <div class="mb-3">
+                    <span class="material-icons text-blue" style="font-size: 64px;">auto_stories</span>
+                </div>
+                <h3 class="fw-bold mb-1">Asesmen Sumatif Akhir</h3>
+                <p class="text-muted mb-4">Materi: Salat Rawatib</p>
+                
+                <div class="text-start">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Nama Lengkap</label>
+                        <input type="text" id="nama" class="form-control form-control-lg" placeholder="Masukkan nama Anda">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Kelas</label>
+                        <input type="text" id="kelas" class="form-control form-control-lg" placeholder="Contoh: 3D">
+                    </div>
+                    <button class="btn btn-primary w-100 btn-lg" onclick="mulaiUjian()">
+                        Mulai Ujian Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div id="soal-container"></div>
-    <br>
-    <button class="btn" onclick="selesaiUjian()">Selesai & Kirim Jawaban</button>
+
+    <div id="quiz-section" class="row justify-content-center hidden d-none">
+        <div class="col-lg-8">
+            <div class="card p-3 mb-4 header-sticky bg-light-blue border-0 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <small class="text-muted d-block">Nama Siswa:</small>
+                        <span id="display-nama" class="fw-bold text-blue"></span>
+                    </div>
+                    <div class="text-end">
+                        <small class="text-muted d-block">Kelas:</small>
+                        <span id="display-kelas" class="fw-bold text-blue"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="soal-container"></div>
+            
+            <button class="btn btn-primary btn-lg w-100 mt-4 shadow" onclick="selesaiUjian()">
+                <span class="material-icons align-middle me-2">send</span> Selesai & Kirim Jawaban
+            </button>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -52,7 +106,7 @@
             const response = await fetch('soal.json');
             soalData = await response.json();
         } catch (e) {
-            alert('Gagal mengambil data soal. Pastikan dijalankan melalui server lokal (localhost).');
+            alert('Gagal mengambil data soal.');
             return;
         }
 
@@ -63,12 +117,10 @@
         if (savedNama && savedKelas && isStarted === 'true') {
             document.getElementById('nama').value = savedNama;
             document.getElementById('kelas').value = savedKelas;
-            if(confirm('Ditemukan sesi ujian yang belum selesai. Lanjutkan?')) {
+            if(confirm('Lanjutkan sesi ujian sebelumnya?')) {
                 mulaiUjian(true);
             } else {
                 localStorage.clear();
-                document.getElementById('nama').value = '';
-                document.getElementById('kelas').value = '';
             }
         }
     };
@@ -78,7 +130,7 @@
         const kelas = document.getElementById('kelas').value.trim();
 
         if (!nama || !kelas) {
-            alert('Nama dan Kelas harus diisi terlebih dahulu!');
+            alert('Mohon lengkapi Nama dan Kelas!');
             return;
         }
 
@@ -86,40 +138,46 @@
         localStorage.setItem('kelas_siswa', kelas);
         localStorage.setItem('ujianStarted', 'true');
 
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('quiz-section').classList.remove('hidden');
+        document.getElementById('login-section').classList.add('d-none');
+        document.getElementById('quiz-section').classList.remove('d-none');
         document.getElementById('display-nama').textContent = nama;
         document.getElementById('display-kelas').textContent = kelas;
 
         renderSoal();
-        
-        if (isResume) {
-            restoreAnswers();
-        }
+        if (isResume) restoreAnswers();
     }
 
     function renderSoal() {
         const container = document.getElementById('soal-container');
-        container.innerHTML = '<h3 style="border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">A. Pilihan Ganda</h3><p style="font-size:14px; color:#666;">Pilih salah satu jawaban yang paling tepat.</p>';
+        let html = `<h4 class="fw-bold mb-4 d-flex align-items-center">
+            <span class="material-icons me-2 text-blue">fact_check</span> Bagian A: Pilihan Ganda
+        </h4>`;
 
         soalData.pilihanGanda.forEach((q, index) => {
-            let html = `<div class="question" id="pg-${q.id}">
-                <p><b>${index + 1}. ${q.soal}</b></p>`;
+            html += `<div class="question-box shadow-sm">
+                <p class="fw-bold mb-3">${index + 1}. ${q.soal}</p>`;
             for (const [key, value] of Object.entries(q.opsi)) {
-                html += `<label class="radio-label"><input type="radio" name="pg_${q.id}" value="${key}" onchange="saveProgress()"> <b>${key}.</b> ${value}</label>`;
+                html += `
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="pg_${q.id}" id="pg_${q.id}_${key}" value="${key}" onchange="saveProgress()">
+                    <label class="form-check-label" for="pg_${q.id}_${key}"><b>${key}.</b> ${value}</label>
+                </div>`;
             }
             html += `</div>`;
-            container.innerHTML += html;
         });
 
-        container.innerHTML += '<br><h3 style="border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">B. Jawaban Singkat</h3><p style="font-size:14px; color:#666;">Jawablah pertanyaan di bawah ini dengan satu atau dua kata saja.</p>';
+        html += `<h4 class="fw-bold mb-4 mt-5 d-flex align-items-center">
+            <span class="material-icons me-2 text-blue">edit_note</span> Bagian B: Jawaban Singkat
+        </h4>`;
+        
         soalData.jawabanSingkat.forEach((q, index) => {
-            let html = `<div class="question" id="short-${q.id}">
-                <p><b>${index + 1}. ${q.soal}</b></p>
-                <input type="text" name="short_${q.id}" oninput="saveProgress()" placeholder="Ketik jawaban singkat...">
+            html += `<div class="question-box shadow-sm">
+                <p class="fw-bold mb-3">${index + 1}. ${q.soal}</p>
+                <input type="text" class="form-control" name="short_${q.id}" oninput="saveProgress()" placeholder="Ketik jawaban Anda...">
             </div>`;
-            container.innerHTML += html;
         });
+
+        container.innerHTML = html;
     }
 
     function saveProgress() {
@@ -151,7 +209,7 @@
     }
 
     function selesaiUjian() {
-        if(confirm('Apakah Anda yakin semua soal sudah terjawab dengan benar?')) {
+        if(confirm('Kirim semua jawaban sekarang?')) {
             saveProgress();
             window.location.href = 'hasil.html';
         }
