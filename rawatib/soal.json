@@ -1,0 +1,131 @@
+{
+  "pilihanGanda": [
+    {
+      "id": 1,
+      "soal": "Apa yang dimaksud dengan salat sunah rawatib?",
+      "opsi": {
+        "A": "Salat sunah yang mengiringi salat fardu",
+        "B": "Salat sunah yang dikerjakan di sepertiga malam",
+        "C": "Salat sunah untuk meminta hujan"
+      },
+      "jawaban": "A"
+    },
+    {
+      "id": 2,
+      "soal": "Kapan waktu pelaksanaan salat sunah rawatib?",
+      "opsi": {
+        "A": "Sebelum dan sesudah salat fardu",
+        "B": "Hanya pada hari Jumat",
+        "C": "Di antara waktu Magrib dan Isya saja"
+      },
+      "jawaban": "A"
+    },
+    {
+      "id": 3,
+      "soal": "Salat sunah rawatib yang dikerjakan sebelum salat fardu disebut salat...",
+      "opsi": {
+        "A": "Ba'diyah",
+        "B": "Qabliyah",
+        "C": "Tahiyatul Masjid"
+      },
+      "jawaban": "B"
+    },
+    {
+      "id": 4,
+      "soal": "Berdasarkan Hadis Riwayat Tirmidzi, apakah balasan bagi orang yang menjaga 12 rakaat salat sunah rawatib dalam sehari semalam?",
+      "opsi": {
+        "A": "Akan dibangunkan baginya rumah di surga",
+        "B": "Akan diluaskan rezekinya di dunia",
+        "C": "Akan diampuni seluruh dosanya yang telah lalu"
+      },
+      "jawaban": "A"
+    },
+    {
+      "id": 5,
+      "soal": "Hukum mengerjakan salat sunah rawatib terbagi menjadi dua, yaitu...",
+      "opsi": {
+        "A": "Wajib dan sunah",
+        "B": "Sunah muakkad dan sunah ghairu muakkad",
+        "C": "Fardu ain dan fardu kifayah"
+      },
+      "jawaban": "B"
+    },
+    {
+      "id": 6,
+      "soal": "Sama seperti salat lainnya, letak niat saat hendak mengerjakan salat rawatib berada di dalam...",
+      "opsi": {
+        "A": "Hati",
+        "B": "Lisan",
+        "C": "Pikiran"
+      },
+      "jawaban": "A"
+    },
+    {
+      "id": 7,
+      "soal": "Berikut ini yang termasuk ke dalam salat rawatib muakkad (sangat dianjurkan) adalah...",
+      "opsi": {
+        "A": "4 rakaat sebelum Asar",
+        "B": "2 rakaat sebelum Subuh",
+        "C": "2 rakaat sebelum Magrib"
+      },
+      "jawaban": "B"
+    },
+    {
+      "id": 8,
+      "soal": "Salat fardu yang tidak memiliki salat sunah rawatib ba'diyah adalah...",
+      "opsi": {
+        "A": "Zuhur dan Asar",
+        "B": "Magrib dan Isya",
+        "C": "Subuh dan Asar"
+      },
+      "jawaban": "C"
+    },
+    {
+      "id": 9,
+      "soal": "Bagaimana tata cara salam yang dianjurkan jika mengerjakan salat sunah rawatib 4 rakaat?",
+      "opsi": {
+        "A": "Dikerjakan dengan 2 kali salam (setiap 2 rakaat)",
+        "B": "Dikerjakan langsung 4 rakaat dengan 1 kali salam",
+        "C": "Dikerjakan dengan 4 kali salam"
+      },
+      "jawaban": "A"
+    },
+    {
+      "id": 10,
+      "soal": "Salah satu hikmah mengerjakan salat sunah rawatib untuk kehidupan di akhirat kelak adalah...",
+      "opsi": {
+        "A": "Membebaskan dari kewajiban berzakat",
+        "B": "Menyempurnakan atau menutupi kekurangan pada salat fardu",
+        "C": "Mendapatkan kedudukan yang tinggi di dunia"
+      },
+      "jawaban": "B"
+    }
+  ],
+  "jawabanSingkat": [
+    {
+      "id": 11,
+      "soal": "Salat sunah rawatib yang dikerjakan sebelum salat fardu disebut salat...",
+      "kunci": ["qabliyah", "qobliyah"]
+    },
+    {
+      "id": 12,
+      "soal": "Salat sunah rawatib yang dikerjakan setelah salat fardu disebut salat...",
+      "kunci": ["ba'diyah", "badiyah", "ba diyah"]
+    },
+    {
+      "id": 13,
+      "soal": "Menurut HR. Tirmidzi, orang yang menjaga 12 rakaat salat rawatib akan dibangunkan ... di surga.",
+      "kunci": ["rumah", "istana"]
+    },
+    {
+      "id": 14,
+      "soal": "Hukum mengerjakan salat sunah rawatib yang ditekankan/sangat dianjurkan disebut sunah...",
+      "kunci": ["muakkad", "muakad"]
+    },
+    {
+      "id": 15,
+      "soal": "Salat fardu yang tidak memiliki salat rawatib ba'diyah adalah salat Subuh dan...",
+      "kunci": ["asar", "ashar"]
+    }
+  ]
+}

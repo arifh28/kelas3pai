@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asesmen Sumatif - Salat Rawatib</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f7f6; color: #333; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .hidden { display: none; }
+        .question { margin-bottom: 20px; padding: 15px; border: 1px solid #e1e1e1; border-radius: 8px; background: #fafafa; }
+        .question p { margin-top: 0; font-size: 16px; }
+        .btn { background: #4CAF50; color: white; padding: 12px 24px; border: none; cursor: pointer; border-radius: 5px; font-size: 16px; font-weight: bold; width: 100%; transition: 0.3s; }
+        .btn:hover { background: #45a049; }
+        input[type="text"] { padding: 12px; width: 100%; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+        .input-login { margin-bottom: 15px; margin-top: 0; }
+        label { font-weight: bold; margin-bottom: 5px; display: block; }
+        .radio-label { display: block; padding: 8px 0; cursor: pointer; font-weight: normal; }
+        .radio-label input { margin-right: 10px; }
+        .header-info { display: flex; justify-content: space-between; background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="login-section" class="card">
+    <h2 style="text-align: center; color: #2E7D32;">Asesmen Sumatif Akhir<br>Materi Salat Rawatib</h2>
+    <p style="text-align: center;">Silakan isi identitas diri sebelum memulai.</p>
+    <label>Nama Lengkap:</label>
+    <input type="text" id="nama" class="input-login" placeholder="Contoh: Ahmad Budi">
+    <label>Kelas:</label>
+    <input type="text" id="kelas" class="input-login" placeholder="Contoh: 4A">
+    <button class="btn" onclick="mulaiUjian()">Mulai Ujian</button>
+</div>
+
+<div id="quiz-section" class="card hidden">
+    <h2 style="text-align: center; color: #2E7D32;">Soal Ujian</h2>
+    <div class="header-info">
+        <span>Nama: <span id="display-nama" style="color: #4CAF50;"></span></span>
+        <span>Kelas: <span id="display-kelas" style="color: #4CAF50;"></span></span>
+    </div>
+    
+    <div id="soal-container"></div>
+    <br>
+    <button class="btn" onclick="selesaiUjian()">Selesai & Kirim Jawaban</button>
+</div>
+
+<script>
+    let soalData = null;
+
+    window.onload = async () => {
+        try {
+            const response = await fetch('soal.json');
+            soalData = await response.json();
+        } catch (e) {
+            alert('Gagal mengambil data soal. Pastikan dijalankan melalui server lokal (localhost).');
+            return;
+        }
+
+        const savedNama = localStorage.getItem('nama_siswa');
+        const savedKelas = localStorage.getItem('kelas_siswa');
+        const isStarted = localStorage.getItem('ujianStarted');
+
+        if (savedNama && savedKelas && isStarted === 'true') {
+            document.getElementById('nama').value = savedNama;
+            document.getElementById('kelas').value = savedKelas;
+            if(confirm('Ditemukan sesi ujian yang belum selesai. Lanjutkan?')) {
+                mulaiUjian(true);
+            } else {
+                localStorage.clear();
+                document.getElementById('nama').value = '';
+                document.getElementById('kelas').value = '';
+            }
+        }
+    };
+
+    function mulaiUjian(isResume = false) {
+        const nama = document.getElementById('nama').value.trim();
+        const kelas = document.getElementById('kelas').value.trim();
+
+        if (!nama || !kelas) {
+            alert('Nama dan Kelas harus diisi terlebih dahulu!');
+            return;
+        }
+
+        localStorage.setItem('nama_siswa', nama);
+        localStorage.setItem('kelas_siswa', kelas);
+        localStorage.setItem('ujianStarted', 'true');
+
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('quiz-section').classList.remove('hidden');
+        document.getElementById('display-nama').textContent = nama;
+        document.getElementById('display-kelas').textContent = kelas;
+
+        renderSoal();
+        
+        if (isResume) {
+            restoreAnswers();
+        }
+    }
+
+    function renderSoal() {
+        const container = document.getElementById('soal-container');
+        container.innerHTML = '<h3 style="border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">A. Pilihan Ganda</h3><p style="font-size:14px; color:#666;">Pilih salah satu jawaban yang paling tepat.</p>';
+
+        soalData.pilihanGanda.forEach((q, index) => {
+            let html = `<div class="question" id="pg-${q.id}">
+                <p><b>${index + 1}. ${q.soal}</b></p>`;
+            for (const [key, value] of Object.entries(q.opsi)) {
+                html += `<label class="radio-label"><input type="radio" name="pg_${q.id}" value="${key}" onchange="saveProgress()"> <b>${key}.</b> ${value}</label>`;
+            }
+            html += `</div>`;
+            container.innerHTML += html;
+        });
+
+        container.innerHTML += '<br><h3 style="border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">B. Jawaban Singkat</h3><p style="font-size:14px; color:#666;">Jawablah pertanyaan di bawah ini dengan satu atau dua kata saja.</p>';
+        soalData.jawabanSingkat.forEach((q, index) => {
+            let html = `<div class="question" id="short-${q.id}">
+                <p><b>${index + 1}. ${q.soal}</b></p>
+                <input type="text" name="short_${q.id}" oninput="saveProgress()" placeholder="Ketik jawaban singkat...">
+            </div>`;
+            container.innerHTML += html;
+        });
+    }
+
+    function saveProgress() {
+        const answers = { pg: {}, short: {} };
+        soalData.pilihanGanda.forEach(q => {
+            const checked = document.querySelector(`input[name="pg_${q.id}"]:checked`);
+            if (checked) answers.pg[q.id] = checked.value;
+        });
+        soalData.jawabanSingkat.forEach(q => {
+            const text = document.querySelector(`input[name="short_${q.id}"]`);
+            if (text) answers.short[q.id] = text.value;
+        });
+        localStorage.setItem('jawabanUjian', JSON.stringify(answers));
+    }
+
+    function restoreAnswers() {
+        const saved = localStorage.getItem('jawabanUjian');
+        if (saved) {
+            const answers = JSON.parse(saved);
+            for (const [id, val] of Object.entries(answers.pg || {})) {
+                const r = document.querySelector(`input[name="pg_${id}"][value="${val}"]`);
+                if(r) r.checked = true;
+            }
+            for (const [id, val] of Object.entries(answers.short || {})) {
+                const t = document.querySelector(`input[name="short_${id}"]`);
+                if(t) t.value = val;
+            }
+        }
+    }
+
+    function selesaiUjian() {
+        if(confirm('Apakah Anda yakin semua soal sudah terjawab dengan benar?')) {
+            saveProgress();
+            window.location.href = 'hasil.html';
+        }
+    }
+</script>
+</body>
+</html>

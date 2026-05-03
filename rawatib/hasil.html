@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Asesmen</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; text-align: center; background-color: #f4f7f6; }
+        .card { padding: 40px; border-radius: 10px; background: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .btn { background: #25D366; color: white; padding: 12px 24px; border: none; cursor: pointer; border-radius: 5px; margin: 10px; text-decoration: none; display: inline-block; font-size: 16px; font-weight: bold;}
+        .btn:hover { background: #128C7E; }
+        .btn-reset { background: #f44336; }
+        .btn-reset:hover { background: #d32f2f; }
+        .score { font-size: 64px; font-weight: bold; color: #4CAF50; margin: 10px 0; }
+        .info-box { background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 18px; }
+        .text-muted { color: #777; font-size: 14px; }
+        .detail-box { text-align: left; background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 5px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 style="color: #2E7D32;">Rekapitulasi Hasil Ujian</h2>
+    
+    <div class="info-box">
+        <b>Nama:</b> <span id="res-nama"></span> <br>
+        <b>Kelas:</b> <span id="res-kelas"></span>
+    </div>
+    
+    <h3>Nilai Akhir</h3>
+    <div class="score" id="res-score">0</div>
+    
+    <div class="detail-box">
+        <p><b>Nilai Pilihan Ganda:</b> <span id="skor-pg">0</span></p>
+        <p><b>Nilai Jawaban Singkat:</b> <span id="skor-short">0</span></p>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <button class="btn" onclick="kirimWA()">Kirim Hasil ke WhatsApp</button>
+        <button class="btn btn-reset" onclick="kerjakanLagi()">Kerjakan Lagi</button>
+    </div>
+</div>
+
+<script>
+    let finalScore = 0;
+    let waText = "";
+    
+    window.onload = async () => {
+        const nama = localStorage.getItem('nama_siswa');
+        const kelas = localStorage.getItem('kelas_siswa');
+        const answersStr = localStorage.getItem('jawabanUjian');
+        
+        if(!nama || !answersStr) {
+            alert('Data ujian tidak ditemukan atau Anda belum mengerjakan!');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        document.getElementById('res-nama').textContent = nama;
+        document.getElementById('res-kelas').textContent = kelas;
+
+        try {
+            const response = await fetch('soal.json');
+            const soalData = await response.json();
+            const answers = JSON.parse(answersStr);
+
+            // Koreksi Pilihan Ganda
+            let benarPG = 0;
+            soalData.pilihanGanda.forEach(q => {
+                if(answers.pg && answers.pg[q.id] === q.jawaban) benarPG++;
+            });
+
+            // Koreksi Jawaban Singkat
+            let benarShort = 0;
+            let shortDetails = [];
+            soalData.jawabanSingkat.forEach(q => {
+                let ans = answers.short && answers.short[q.id] ? answers.short[q.id].trim() : '';
+                let isCorrect = q.kunci.includes(ans.toLowerCase());
+                
+                if(isCorrect) benarShort++;
+                
+                shortDetails.push({
+                    jawabanSiswa: ans || '-',
+                    status: isCorrect ? 'Benar' : 'Salah'
+                });
+            });
+
+            // Perhitungan Nilai (Masing-masing max 100, lalu dirata-rata)
+            let skorPG = (benarPG / soalData.pilihanGanda.length) * 100;
+            let skorShort = (benarShort / soalData.jawabanSingkat.length) * 100;
+            finalScore = (skorPG + skorShort) / 2;
+
+            document.getElementById('res-score').textContent = finalScore;
+            document.getElementById('skor-pg').textContent = skorPG;
+            document.getElementById('skor-short').textContent = skorShort;
+
+            // Generate WA Text (URL Encoded format)
+            waText = `*Hasil Asesmen Sumatif Akhir - Salat Rawatib*%0A%0A`;
+            waText += `*Nama:* ${nama}%0A*Kelas:* ${kelas}%0A`;
+            waText += `*Nilai Akhir:* ${finalScore}%0A%0A`;
+            waText += `*Detail Nilai:*%0A`;
+            waText += `- Pilihan Ganda: ${skorPG}%0A`;
+            waText += `- Jawaban Singkat: ${skorShort}%0A%0A`;
+            
+            waText += `*Rincian Jawaban Singkat:*%0A`;
+            shortDetails.forEach((d, idx) => {
+                waText += `*${idx+1}.* ${d.jawabanSiswa} (${d.status})%0A`;
+            });
+
+        } catch (e) {
+            alert('Gagal menghitung nilai. Pastikan dijalankan melalui server lokal (localhost).');
+        }
+    };
+
+    function kirimWA() {
+        const noWA = "6285161338173"; // Format sudah dengan kode negara
+        window.open(`https://wa.me/${noWA}?text=${waText}`, '_blank');
+    }
+
+    function kerjakanLagi() {
+        if(confirm('Apakah Anda yakin ingin mengulang? Semua nilai dan jawaban saat ini akan dihapus.')) {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    }
+</script>
+</body>
+</html>
