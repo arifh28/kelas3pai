@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasil Asesmen</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f0f8ff; color: #334155; }
         .card { border: none; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
@@ -33,7 +38,7 @@
     <div class="row justify-content-center text-center">
         <div class="col-md-7">
             <div class="card p-5">
-                <span class="material-icons text-success" style="font-size: 80px;">check_circle</span>
+                <i class="fa-solid fa-circle-check text-success" style="font-size: 80px;"></i>
                 <h2 class="fw-bold mt-3">Alhamdulillah, Selesai!</h2>
                 
                 <div class="d-flex justify-content-center gap-3 my-4">
@@ -57,10 +62,10 @@
 
                 <div class="d-grid gap-2 mt-5">
                     <button class="btn btn-wa btn-lg d-flex align-items-center justify-content-center" onclick="kirimWA()">
-                        <span class="material-icons me-2">whatsapp</span> Kirim Hasil ke WhatsApp
+                        <i class="fa-brands fa-whatsapp me-2 fa-lg"></i> Kirim Hasil ke WhatsApp
                     </button>
                     <button class="btn btn-outline-danger btn-reset mt-2" onclick="kerjakanLagi()">
-                        <span class="material-icons align-middle me-1">restart_alt</span> Kerjakan Lagi dari Awal
+                        <i class="fa-solid fa-rotate-right me-2"></i> Kerjakan Lagi dari Awal
                     </button>
                 </div>
             </div>
@@ -78,7 +83,14 @@
         const answersStr = localStorage.getItem('jawabanUjian');
         
         if(!nama || !answersStr) {
-            window.location.href = 'index.html';
+            Swal.fire({
+                icon: 'warning',
+                title: 'Data Tidak Ditemukan',
+                text: 'Anda belum mengerjakan ujian atau sesi telah berakhir.',
+                confirmButtonColor: '#0288d1'
+            }).then(() => {
+                window.location.href = 'index.html';
+            });
             return;
         }
 
@@ -123,7 +135,12 @@
             waText += `*Jawaban Isian:*%0A${shortSummary.join('%0A')}`;
 
         } catch (e) {
-            alert('Gagal menghitung skor.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error Server',
+                text: 'Gagal menghitung skor. Pastikan aplikasi berjalan di Local Server.',
+                confirmButtonColor: '#0288d1'
+            });
         }
     };
 
@@ -133,10 +150,21 @@
     }
 
     function kerjakanLagi() {
-        if(confirm('Ulangi dari awal?')) {
-            localStorage.clear();
-            window.location.href = 'index.html';
-        }
+        Swal.fire({
+            title: 'Ulangi Ujian?',
+            text: "Semua data jawaban dan nilai saat ini akan dihapus permanen.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, Ulangi',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.clear();
+                window.location.href = 'index.html';
+            }
+        });
     }
 </script>
 </body>

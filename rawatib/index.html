@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asesmen Sumatif - Salat Rawatib</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -48,11 +53,12 @@
 <body>
 
 <div class="container py-5">
+    <!-- Login Section -->
     <div id="login-section" class="row justify-content-center">
         <div class="col-md-6">
             <div class="card p-4 text-center">
                 <div class="mb-3">
-                    <span class="material-icons text-blue" style="font-size: 64px;">auto_stories</span>
+                    <i class="fa-solid fa-book-open text-blue" style="font-size: 64px;"></i>
                 </div>
                 <h3 class="fw-bold mb-1">Asesmen Sumatif Akhir</h3>
                 <p class="text-muted mb-4">Materi: Salat Rawatib</p>
@@ -64,7 +70,7 @@
                     </div>
                     <div class="mb-4">
                         <label class="form-label fw-semibold">Kelas</label>
-                        <input type="text" id="kelas" class="form-control form-control-lg" placeholder="Contoh: 3D">
+                        <input type="text" id="kelas" class="form-control form-control-lg" placeholder="Contoh: 4A">
                     </div>
                     <button class="btn btn-primary w-100 btn-lg" onclick="mulaiUjian()">
                         Mulai Ujian Sekarang
@@ -74,6 +80,7 @@
         </div>
     </div>
 
+    <!-- Quiz Section -->
     <div id="quiz-section" class="row justify-content-center hidden d-none">
         <div class="col-lg-8">
             <div class="card p-3 mb-4 header-sticky bg-light-blue border-0 shadow-sm">
@@ -92,7 +99,7 @@
             <div id="soal-container"></div>
             
             <button class="btn btn-primary btn-lg w-100 mt-4 shadow" onclick="selesaiUjian()">
-                <span class="material-icons align-middle me-2">send</span> Selesai & Kirim Jawaban
+                <i class="fa-solid fa-paper-plane me-2"></i> Selesai & Kirim Jawaban
             </button>
         </div>
     </div>
@@ -106,7 +113,12 @@
             const response = await fetch('soal.json');
             soalData = await response.json();
         } catch (e) {
-            alert('Gagal mengambil data soal.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Koneksi Gagal',
+                text: 'Gagal mengambil data soal. Pastikan menggunakan Local Server.',
+                confirmButtonColor: '#0288d1'
+            });
             return;
         }
 
@@ -117,11 +129,25 @@
         if (savedNama && savedKelas && isStarted === 'true') {
             document.getElementById('nama').value = savedNama;
             document.getElementById('kelas').value = savedKelas;
-            if(confirm('Lanjutkan sesi ujian sebelumnya?')) {
-                mulaiUjian(true);
-            } else {
-                localStorage.clear();
-            }
+            
+            Swal.fire({
+                title: 'Lanjutkan Ujian?',
+                text: "Ditemukan sesi ujian sebelumnya yang belum selesai.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#0288d1',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Lanjutkan',
+                cancelButtonText: 'Mulai Ulang'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mulaiUjian(true);
+                } else {
+                    localStorage.clear();
+                    document.getElementById('nama').value = '';
+                    document.getElementById('kelas').value = '';
+                }
+            });
         }
     };
 
@@ -130,7 +156,12 @@
         const kelas = document.getElementById('kelas').value.trim();
 
         if (!nama || !kelas) {
-            alert('Mohon lengkapi Nama dan Kelas!');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Data Belum Lengkap',
+                text: 'Mohon lengkapi Nama dan Kelas terlebih dahulu!',
+                confirmButtonColor: '#0288d1'
+            });
             return;
         }
 
@@ -150,7 +181,7 @@
     function renderSoal() {
         const container = document.getElementById('soal-container');
         let html = `<h4 class="fw-bold mb-4 d-flex align-items-center">
-            <span class="material-icons me-2 text-blue">fact_check</span> Bagian A: Pilihan Ganda
+            <i class="fa-solid fa-list-check text-blue me-2"></i> Bagian A: Pilihan Ganda
         </h4>`;
 
         soalData.pilihanGanda.forEach((q, index) => {
@@ -167,7 +198,7 @@
         });
 
         html += `<h4 class="fw-bold mb-4 mt-5 d-flex align-items-center">
-            <span class="material-icons me-2 text-blue">edit_note</span> Bagian B: Jawaban Singkat
+            <i class="fa-solid fa-pen-to-square text-blue me-2"></i> Bagian B: Jawaban Singkat
         </h4>`;
         
         soalData.jawabanSingkat.forEach((q, index) => {
@@ -209,10 +240,21 @@
     }
 
     function selesaiUjian() {
-        if(confirm('Kirim semua jawaban sekarang?')) {
-            saveProgress();
-            window.location.href = 'hasil.html';
-        }
+        Swal.fire({
+            title: 'Kirim Semua Jawaban?',
+            text: "Pastikan Anda sudah mengecek ulang jawaban.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#0288d1',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Ya, Kirim!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                saveProgress();
+                window.location.href = 'hasil.html';
+            }
+        });
     }
 </script>
 </body>

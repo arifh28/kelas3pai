@@ -99,31 +99,131 @@
         "C": "Mendapatkan kedudukan yang tinggi di dunia"
       },
       "jawaban": "B"
-    }
+    },
+    {
+    "id": 11,
+    "soal": "Salat sunah yang pelaksanaannya selalu berdampingan (mengiringi) salat fardu dinamakan salat...",
+    "opsi": {
+      "A": "Rawatib",
+      "B": "Tahajud",
+      "C": "Dhuha"
+    },
+    "jawaban": "A"
+  },
+  {
+    "id": 12,
+    "soal": "Jika kita ingin mengerjakan salat sunah rawatib Asar, maka waktu pelaksanaannya adalah...",
+    "opsi": {
+      "A": "Sebelum salat Asar",
+      "B": "Sesudah salat Asar",
+      "C": "Sebelum dan sesudah salat Asar"
+    },
+    "jawaban": "A"
+  },
+  {
+    "id": 13,
+    "soal": "Ahmad mengerjakan salat sunah dua rakaat setelah selesai melaksanakan salat Magrib. Salat sunah yang dikerjakan Ahmad disebut rawatib...",
+    "opsi": {
+      "A": "Qabliyah",
+      "B": "Ba'diyah",
+      "C": "Witir"
+    },
+    "jawaban": "B"
+  },
+  {
+    "id": 14,
+    "soal": "Rasulullah saw. bersabda bahwa Allah akan membangunkan rumah di surga bagi umatnya yang rutin mengerjakan salat sunah rawatib sebanyak... dalam sehari semalam.",
+    "opsi": {
+      "A": "10 rakaat",
+      "B": "12 rakaat",
+      "C": "15 rakaat"
+    },
+    "jawaban": "B"
+  },
+  {
+    "id": 15,
+    "soal": "Hukum mengerjakan salat sunah rawatib 2 rakaat sebelum Subuh adalah sunah muakkad, yang artinya...",
+    "opsi": {
+      "A": "Sangat dianjurkan",
+      "B": "Wajib dilakukan",
+      "C": "Boleh ditinggalkan kapan saja"
+    },
+    "jawaban": "A"
+  },
+  {
+    "id": 16,
+    "soal": "Hal paling utama yang harus kita hadirkan di dalam hati sebelum takbiratul ihram saat hendak mengerjakan salat rawatib adalah...",
+    "opsi": {
+      "A": "Niat",
+      "B": "Pakaian yang bagus",
+      "C": "Hafalan surah panjang"
+    },
+    "jawaban": "A"
+  },
+  {
+    "id": 17,
+    "soal": "Berikut ini yang merupakan contoh salat rawatib ghairu muakkad (sunah yang kurang ditekankan) adalah...",
+    "opsi": {
+      "A": "2 rakaat sebelum Subuh",
+      "B": "2 rakaat sesudah Zuhur",
+      "C": "4 rakaat sebelum Asar"
+    },
+    "jawaban": "C"
+  },
+  {
+    "id": 18,
+    "soal": "Cara mengerjakan gerakan salat sunah rawatib pada dasarnya sama dengan salat fardu. Perbedaan utamanya hanya terletak pada...",
+    "opsi": {
+      "A": "Niatnya",
+      "B": "Arah kiblatnya",
+      "C": "Cara sujudnya"
+    },
+    "jawaban": "A"
+  },
+  {
+    "id": 19,
+    "soal": "Berbeda dengan salat fardu yang lebih diutamakan berjamaah, salat sunah rawatib lebih utama jika dikerjakan secara...",
+    "opsi": {
+      "A": "Munfarid (sendiri-sendiri)",
+      "B": "Bersama-sama di lapangan",
+      "C": "Bergantian dengan teman"
+    },
+    "jawaban": "A"
+  },
+  {
+    "id": 20,
+    "soal": "Salah satu hikmah rajin mengerjakan salat rawatib bagi kehidupan kita di dunia adalah...",
+    "opsi": {
+      "A": "Dipuji oleh teman-teman dan guru",
+      "B": "Menjadikan hati lebih tenang dan selalu dekat dengan Allah",
+      "C": "Mendapatkan nilai yang bagus tanpa belajar"
+    },
+    "jawaban": "B"
+  }
   ],
   "jawabanSingkat": [
     {
-      "id": 11,
+      "id": 21,
       "soal": "Salat sunah rawatib yang dikerjakan sebelum salat fardu disebut salat...",
       "kunci": ["qabliyah", "qobliyah"]
     },
     {
-      "id": 12,
+      "id": 22,
       "soal": "Salat sunah rawatib yang dikerjakan setelah salat fardu disebut salat...",
       "kunci": ["ba'diyah", "badiyah", "ba diyah"]
     },
     {
-      "id": 13,
+      "id": 23,
       "soal": "Menurut HR. Tirmidzi, orang yang menjaga 12 rakaat salat rawatib akan dibangunkan ... di surga.",
       "kunci": ["rumah", "istana"]
     },
     {
-      "id": 14,
+      "id": 24,
       "soal": "Hukum mengerjakan salat sunah rawatib yang ditekankan/sangat dianjurkan disebut sunah...",
       "kunci": ["muakkad", "muakad"]
     },
     {
-      "id": 15,
+      "id": 25,
       "soal": "Salat fardu yang tidak memiliki salat rawatib ba'diyah adalah salat Subuh dan...",
       "kunci": ["asar", "ashar"]
     }
