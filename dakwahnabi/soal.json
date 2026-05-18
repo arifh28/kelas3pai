@@ -1,0 +1,181 @@
+{
+  "pilihanGanda": [
+    {
+      "id": 1,
+      "soal": "Berapa lamakah Nabi Muhammad saw. melaksanakan dakwah secara sembunyi-sembunyi di tahap awal?",
+      "opsi": ["1 tahun", "3 tahun", "5 tahun", "10 tahun"],
+      "jawaban": 1
+    },
+    {
+      "id": 2,
+      "soal": "Siapakah istri Nabi Muhammad saw. yang menjadi orang pertama memeluk agama Islam?",
+      "opsi": ["Aisyah", "Saudah", "Khadijah", "Fatimah"],
+      "jawaban": 2
+    },
+    {
+      "id": 3,
+      "soal": "Golongan orang-orang yang pertama kali memeluk agama Islam disebut...",
+      "opsi": ["Muhajirin", "Anshar", "Assabiqunal Awwalun", "Khulafaur Rasyidin"],
+      "jawaban": 2
+    },
+    {
+      "id": 4,
+      "soal": "Alasan utama Nabi Muhammad saw. berdakwah secara sembunyi-sembunyi pada awalnya adalah...",
+      "opsi": [
+        "Jumlah umat Islam masih sedikit dan lemah",
+        "Malu kepada para pemimpin Quraisy",
+        "Belum mendapat perintah dari Allah",
+        "Menunggu datangnya bantuan dari Madinah"
+      ],
+      "jawaban": 0
+    },
+    {
+      "id": 5,
+      "soal": "Salah satu sahabat Nabi yang langsung ikut berdakwah dan berhasil mengajak tokoh-tokoh besar masuk Islam adalah...",
+      "opsi": ["Ali bin Abi Thalib", "Abu Bakar as-Siddiq", "Umar bin Khattab", "Bilal bin Rabah"],
+      "jawaban": 1
+    },
+    {
+      "id": 6,
+      "soal": "Sepupu Nabi Muhammad saw. yang memeluk Islam saat masih berusia belia/anak-anak adalah...",
+      "opsi": ["Zaid bin Haritsah", "Utsman bin Affan", "Abdurrahman bin Auf", "Ali bin Abi Thalib"],
+      "jawaban": 3
+    },
+    {
+      "id": 7,
+      "soal": "Ibadah wajib yang pertama kali dikerjakan oleh kaum muslimin pada masa dakwah sembunyi-sembunyi sebelum turunnya perintah salat 5 waktu adalah...",
+      "opsi": [
+        "Puasa di bulan Ramadan",
+        "Membayar zakat fitrah",
+        "Salat dua rakaat pagi dan petang",
+        "Melaksanakan ibadah haji"
+      ],
+      "jawaban": 2
+    },
+    {
+      "id": 8,
+      "soal": "Perintah untuk mulai berdakwah secara terang-terangan kepada kerabat terdekat terdapat di dalam Al-Qur'an surah...",
+      "opsi": ["Asy-Syu'ara ayat 214", "Al-Mudatsir ayat 1-5", "Al-Alaq ayat 1-5", "Al-Fatihah ayat 1-7"],
+      "jawaban": 0
+    },
+    {
+      "id": 9,
+      "soal": "Di manakah Nabi Muhammad saw. mengumpulkan seluruh suku Quraisy saat memulai dakwah secara terang-terangan kepada masyarakat luas?",
+      "opsi": ["Di dalam Ka'bah", "Di bukit Shafa", "Di padang Arafah", "Di bukit Marwah"],
+      "jawaban": 1
+    },
+    {
+      "id": 10,
+      "soal": "Paman Nabi Muhammad saw. yang secara kasar menentang, mencaci, dan menolak dakwah beliau di bukit Shafa adalah...",
+      "opsi": ["Abu Thalib", "Hamzah", "Abbas", "Abu Lahab"],
+      "jawaban": 3
+    },
+    {
+      "id": 11,
+      "soal": "Meskipun tidak masuk Islam, paman Nabi Muhammad saw. ini berjanji akan selalu melindungi dan membela Nabi dari gangguan kaum Quraisy. Paman tersebut adalah...",
+      "opsi": ["Abu Lahab", "Abu Thalib", "Abu Jahal", "Abu Sufyan"],
+      "jawaban": 1
+    },
+    {
+      "id": 12,
+      "soal": "Apa yang diucapkan oleh Abu Lahab saat menolak dakwah Nabi Muhammad saw. di bukit Shafa?",
+      "opsi": ["Celakalah engkau!", "Bagus sekali ajakanmu!", "Aku akan mengikutimu!", "Mari kita berdamai!"],
+      "jawaban": 0
+    },
+    {
+      "id": 13,
+      "soal": "Surah di dalam Al-Qur'an yang diturunkan Allah Swt. sebagai balasan atas kesombongan dan hinaan Abu Lahab adalah surah...",
+      "opsi": ["Al-Ikhlas", "Al-Lahab", "Al-Kafirun", "An-Nasr"],
+      "jawaban": 1
+    },
+    {
+      "id": 14,
+      "soal": "Alasan utama kaum kafir Quraisy menolak ajaran Nabi Muhammad saw. adalah...",
+      "opsi": [
+        "Mereka sudah memiliki kitab suci sendiri",
+        "Mereka tidak mau meninggalkan agama dan tradisi nenek moyang",
+        "Ajaran Islam mengharuskan mereka membayar mahal",
+        "Nabi Muhammad bukan dari suku Quraisy"
+      ],
+      "jawaban": 1
+    },
+    {
+      "id": 15,
+      "soal": "Dalam dakwahnya, Nabi Muhammad saw. selalu mengingatkan bahwa berhala yang disembah oleh kaum Quraisy itu...",
+      "opsi": [
+        "Bisa mendatangkan hujan",
+        "Memiliki kekuatan sihir",
+        "Tidak bisa memberi manfaat dan mudarat",
+        "Hanya boleh disembah pada hari tertentu"
+      ],
+      "jawaban": 2
+    },
+    {
+      "id": 16,
+      "soal": "Kemampuan atau kejadian luar biasa yang diberikan oleh Allah Swt. kepada nabi dan rasul untuk membuktikan kerasulannya disebut...",
+      "opsi": ["Karamah", "Sihir", "Mukjizat", "Ilham"],
+      "jawaban": 2
+    },
+    {
+      "id": 17,
+      "soal": "Mukjizat terbesar yang diberikan oleh Allah Swt. kepada Nabi Muhammad saw. dan berlaku hingga akhir zaman adalah...",
+      "opsi": ["Membelah bulan", "Kitab suci Al-Qur'an", "Air memancar dari sela jari", "Isra dan Mikraj"],
+      "jawaban": 1
+    },
+    {
+      "id": 18,
+      "soal": "Perjalanan luar biasa yang dilakukan Nabi Muhammad saw. pada malam hari dari Masjidilharam ke Masjidil Aqsa hingga naik ke Sidratul Muntaha disebut peristiwa...",
+      "opsi": ["Hijrah", "Fathu Makkah", "Nuzulul Qur'an", "Isra dan Mikraj"],
+      "jawaban": 3
+    },
+    {
+      "id": 19,
+      "soal": "Salah satu mukjizat Nabi Muhammad saw. saat ditantang oleh kaum kafir Quraisy untuk membuktikan kenabiannya adalah beliau mampu...",
+      "opsi": [
+        "Berbicara dengan hewan",
+        "Menyembuhkan orang buta sejak lahir",
+        "Membelah bulan menjadi dua bagian",
+        "Mengubah tongkat menjadi ular"
+      ],
+      "jawaban": 2
+    },
+    {
+      "id": 20,
+      "soal": "Ketika para sahabat kehabisan air saat peperangan, mukjizat Nabi Muhammad saw. yang terjadi adalah...",
+      "opsi": [
+        "Hujan turun dengan lebat",
+        "Air sungai tiba-tiba meluap",
+        "Air memancar dari sela-sela jari tangan beliau",
+        "Batu berubah menjadi mata air"
+      ],
+      "jawaban": 2
+    }
+  ],
+  "jawabanSingkat": [
+    {
+      "id": 21,
+      "soal": "Orang-orang yang paling pertama masuk Islam dari kalangan keluarga dan sahabat dekat disebut dengan istilah...",
+      "kunci": ["assabiqunal awwalun", "as sabiqunal awwalun", "assabiqunal awalun", "as-sabiqunal awwalun", "as sabiqunal awalun"]
+    },
+    {
+      "id": 22,
+      "soal": "Istri Nabi Muhammad saw. yang sangat mendukung dakwah beliau dan menjadi wanita pertama yang masuk Islam adalah...",
+      "kunci": ["khadijah", "siti khadijah", "khadijah binti khuwailid"]
+    },
+    {
+      "id": 23,
+      "soal": "Nama bukit tempat Nabi Muhammad saw. mengumpulkan seluruh penduduk Makkah untuk berdakwah secara terang-terangan adalah bukit...",
+      "kunci": ["shafa", "safa", "bukit shafa", "bukit safa"]
+    },
+    {
+      "id": 24,
+      "soal": "Paman Nabi Muhammad saw. yang mencaci maki beliau di atas bukit Shafa bernama...",
+      "kunci": ["abu lahab"]
+    },
+    {
+      "id": 25,
+      "soal": "Kejadian luar biasa dari Allah yang diberikan kepada Nabi dan Rasul-Nya untuk membuktikan kebenaran dakwahnya dinamakan...",
+      "kunci": ["mukjizat", "mu'jizat"]
+    }
+  ]
+}
