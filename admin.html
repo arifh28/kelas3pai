@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         :root {
@@ -83,11 +84,12 @@
                             <th class="py-3 text-center">Kelas</th>
                             <th class="py-3">Progress Saat Ini</th>
                             <th class="py-3 text-center">Nilai</th>
+                            <th class="py-3 text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="tabel-body">
                         <tr>
-                            <td colspan="7" class="text-center py-5 text-muted">
+                            <td colspan="8" class="text-center py-5 text-muted">
                                 <i class="fa-solid fa-circle-notch fa-spin fa-2x mb-2"></i><br>
                                 Mengambil data...
                             </td>
@@ -113,7 +115,7 @@
             });
         }
 
-        // Status progress diupdate sesuai penamaan yang ada di kode aplikasi sebelumnya
+        // Status progress diupdate sesuai penamaan
         function terjemahkanProgress(status) {
             switch(status) {
                 case 'materi_video1': return '<span class="badge bg-secondary">Menonton Video 1</span>';
@@ -131,21 +133,17 @@
             const kelasDipilih = document.getElementById('filterKelas').value;
             const materiDipilih = document.getElementById('filterMateri').value;
             
-            tabelBody.innerHTML = `<tr><td colspan="7" class="text-center py-5 text-muted"><i class="fa-solid fa-circle-notch fa-spin fa-2x mb-2"></i><br>Mengambil data...</td></tr>`;
+            tabelBody.innerHTML = `<tr><td colspan="8" class="text-center py-5 text-muted"><i class="fa-solid fa-circle-notch fa-spin fa-2x mb-2"></i><br>Mengambil data...</td></tr>`;
 
             try {
-                // Mengambil dari tabel progress_materi2
                 let query = supabaseClient
                     .from('progress_materi2')
                     .select('*')
                     .order('created_at', { ascending: false });
 
-                // Terapkan filter Kelas
                 if (kelasDipilih !== 'semua') {
                     query = query.eq('kelas', kelasDipilih);
                 }
-                
-                // Terapkan filter Materi
                 if (materiDipilih !== 'semua') {
                     query = query.eq('materinya', materiDipilih);
                 }
@@ -155,7 +153,7 @@
                 if (error) throw error;
 
                 if (data.length === 0) {
-                    tabelBody.innerHTML = `<tr><td colspan="7" class="text-center py-5 text-muted"><i class="fa-solid fa-folder-open fa-2x mb-2 text-light"></i><br>Belum ada data siswa untuk filter ini.</td></tr>`;
+                    tabelBody.innerHTML = `<tr><td colspan="8" class="text-center py-5 text-muted"><i class="fa-solid fa-folder-open fa-2x mb-2 text-light"></i><br>Belum ada data siswa untuk filter ini.</td></tr>`;
                     return;
                 }
 
@@ -164,7 +162,6 @@
                     let kelasNilai = 'fw-bold';
                     let nilaiDitampilkan = '-';
 
-                    // Cek jika siswa sudah berada di status selesai
                     if (siswa.progress === 'materi_selesai') {
                         nilaiDitampilkan = siswa.nilai;
                         kelasNilai += siswa.nilai < 70 ? ' text-danger' : ' text-success';
@@ -179,6 +176,11 @@
                             <td class="text-center"><span class="badge border border-secondary text-secondary bg-transparent">${siswa.kelas}</span></td>
                             <td>${terjemahkanProgress(siswa.progress)}</td>
                             <td class="text-center fs-5 ${kelasNilai}">${nilaiDitampilkan}</td>
+                            <td class="text-center">
+                                <button onclick="hapusData('${siswa.id}', '${siswa.nama}')" class="btn btn-sm btn-outline-danger" title="Hapus Data">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                     `;
                 });
@@ -187,8 +189,49 @@
 
             } catch (error) {
                 console.error('Error:', error);
-                tabelBody.innerHTML = `<tr><td colspan="7" class="text-center py-5 text-danger"><i class="fa-solid fa-triangle-exclamation fa-2x mb-2"></i><br>Gagal mengambil data. Periksa koneksi internet atau Supabase.</td></tr>`;
+                tabelBody.innerHTML = `<tr><td colspan="8" class="text-center py-5 text-danger"><i class="fa-solid fa-triangle-exclamation fa-2x mb-2"></i><br>Gagal mengambil data. Periksa koneksi internet atau Supabase.</td></tr>`;
             }
+        }
+
+        // Fungsi Hapus Data
+        function hapusData(idSiswa, namaSiswa) {
+            Swal.fire({
+                title: 'Hapus Data?',
+                text: `Apakah Anda yakin ingin menghapus data milik ${namaSiswa}? Tindakan ini tidak dapat dibatalkan.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const { error } = await supabaseClient
+                            .from('progress_materi2')
+                            .delete()
+                            .eq('id', idSiswa);
+
+                        if (error) throw error;
+
+                        Swal.fire(
+                            'Terhapus!',
+                            `Data ${namaSiswa} berhasil dihapus.`,
+                            'success'
+                        );
+                        
+                        // Refresh data di tabel
+                        ambilData();
+                    } catch (error) {
+                        console.error('Error delete:', error);
+                        Swal.fire(
+                            'Gagal!',
+                            'Terjadi kesalahan saat menghapus data.',
+                            'error'
+                        );
+                    }
+                }
+            });
         }
 
         window.onload = ambilData;
