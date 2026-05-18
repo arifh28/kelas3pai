@@ -38,7 +38,6 @@
         .question-box:hover { border-color: var(--ungu); }
         .form-check-input:checked { background-color: var(--ungu); border-color: var(--ungu); }
         
-        /* Disable interaction wrapper on youtube player */
         .yt-wrapper {
             position: relative;
             width: 100%;
@@ -49,7 +48,6 @@
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: 10;
             background: transparent;
-            /* Membiarkan klik diteruskan ke IFrame agar bisa play/pause tetapi kontrol disembunyikan oleh API */
             pointer-events: none; 
         }
     </style>
@@ -139,7 +137,6 @@
                 </div>
 
                 <div id="materi-scroll-container" style="max-height: 55vh; overflow-y: auto; padding-right: 10px;">
-                    
                     <div class="card border-0 bg-light mb-4 shadow-sm">
                         <div class="card-body">
                             <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">1. Dakwah Secara Sembunyi-Sembunyi (Sirriyah)</h5>
@@ -230,7 +227,6 @@
                             </ul>
                         </div>
                     </div>
-
                 </div> 
                 
                 <div class="text-center mt-4 border-top pt-4">
@@ -258,30 +254,6 @@
             </div>
         </div>
 
-        <div id="step-hasil" class="step-section">
-            <div class="card card-custom p-5 text-center">
-                <i class="fa-solid fa-medal fa-4x text-warning mb-3"></i>
-                <h2 class="fw-bold text-ungu">Alhamdulillah, Selesai!</h2>
-                <p class="text-muted">Terima kasih telah menyelesaikan seluruh tahapan pembelajaran.</p>
-                <div class="row text-start mt-4 bg-light p-3 rounded-4 w-75 mx-auto">
-                    <div class="col-6 text-center border-end">
-                        <small class="text-muted">Skor Pilihan Ganda</small>
-                        <h4 class="fw-bold text-primary" id="skor-pg">0</h4>
-                    </div>
-                    <div class="col-6 text-center">
-                        <small class="text-muted">Skor Isian Singkat</small>
-                        <h4 class="fw-bold text-primary" id="skor-jasing">0</h4>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <small class="text-muted">NILAI AKHIR RATA-RATA</small>
-                    <div class="display-1 fw-bold text-success my-2" id="nilai-akhir">0</div>
-                </div>
-                <p class="fw-semibold text-muted mt-3"><i class="fa-solid fa-cloud-arrow-up text-primary me-1"></i> Nilai dan progress Anda telah tersimpan otomatis ke database guru.</p>
-                <button onclick="kerjakanLagi()" class="btn btn-outline-danger mt-3"><i class="fa-solid fa-rotate-right me-1"></i> Mulai Ulang dari Awal</button>
-            </div>
-        </div>
-
     </div>
 
     <script>
@@ -294,7 +266,6 @@
         let bankSoal = null;
         let player1, player2;
 
-        // Load Soal JSON
         async function muatSoal() {
             try {
                 const response = await fetch('soal.json');
@@ -306,12 +277,17 @@
         }
         muatSoal();
 
-        // Cek LocalStorage
         window.onload = () => {
             const savedNama = localStorage.getItem('dakwah_nama');
             const savedKelas = localStorage.getItem('dakwah_kelas');
             const savedStep = localStorage.getItem('dakwah_step');
             recordId = localStorage.getItem('dakwah_recordId');
+            
+            // Jika status sudah selesai kuis (berada di hasil.html) tapi siswa malah reload index.html, arahkan lagi ke hasil.html
+            if (savedStep === 'step-hasil') {
+                window.location.href = 'hasil.html';
+                return;
+            }
 
             if (savedNama && savedKelas && savedStep) {
                 document.getElementById('namaSiswa').value = savedNama;
@@ -342,7 +318,6 @@
             }
         };
 
-        // YouTube IFrame API Ready Callback
         function onYouTubeIframeAPIReady() {
             player1 = new YT.Player('player1', {
                 videoId: 'mTxMVP9dqNA',
@@ -384,7 +359,6 @@
             localStorage.setItem('dakwah_step', idHalaman);
             window.scrollTo(0,0);
 
-            // Handle Video Pause if navigating away
             if(idHalaman !== 'step-video1' && player1 && typeof player1.pauseVideo === 'function') player1.pauseVideo();
             if(idHalaman !== 'step-video2' && player2 && typeof player2.pauseVideo === 'function') player2.pauseVideo();
         }
@@ -409,7 +383,6 @@
             localStorage.setItem('dakwah_kelas', kelas);
             document.getElementById('user-display').innerHTML = `<i class="fa-regular fa-user me-1"></i> ${nama} (${kelas})`;
 
-            // Insert to Supabase table progress_materi2
             if(!recordId) {
                 const { data, error } = await supabaseClient
                     .from('progress_materi2')
@@ -436,12 +409,16 @@
 
         async function keTahap(idHalaman, statusProgress) {
             gantiHalaman(idHalaman);
+            
+            // Simpan posisi step saat ini ke localStorage
+            localStorage.setItem('dakwah_step', idHalaman);
+
+            // Perbarui status progress di database Supabase
             if(recordId) {
                 await supabaseClient.from('progress_materi2').update({ progress: statusProgress }).eq('id', recordId);
             }
         }
 
-        // SCROLL MATERI LOGIC
         const materiScroll = document.getElementById('materi-scroll-container');
         function bukaTombolKuis() {
             const btnKuis = document.getElementById('btn-mulai-kuis');
@@ -456,20 +433,18 @@
         }
 
         materiScroll.addEventListener('scroll', function() {
-            // Berikan toleransi pixel (5px) untuk layar HP
             if (materiScroll.scrollTop + materiScroll.clientHeight >= materiScroll.scrollHeight - 5) {
                 bukaTombolKuis();
             }
         });
 
-        // RENDER SOAL KUIS
         function tampilkanSoal(isResume = false) {
             const container = document.getElementById('soal-container');
             let html = `<h5 class="fw-bold text-ungu mb-3 mt-2"><i class="fa-regular fa-circle-dot me-2"></i>Bagian A: Pilihan Ganda</h5>`;
             
             bankSoal.pilihanGanda.forEach((q, index) => {
                 html += `<div class="question-box p-4 mb-4 shadow-sm">
-                    <p class="fw-semibold mb-3">${index + 1}. ${q.soal}</p>`;
+                    <p class="fw-semibold mb-3">${q.id}. ${q.soal}</p>`;
                 q.opsi.forEach((opt, idx) => {
                     html += `
                     <div class="form-check mb-2">
@@ -484,7 +459,7 @@
             
             bankSoal.jawabanSingkat.forEach((q, index) => {
                 html += `<div class="question-box p-4 mb-4 shadow-sm">
-                    <p class="fw-semibold mb-3">${index + 1}. ${q.soal}</p>
+                    <p class="fw-semibold mb-3">${q.id}. ${q.soal}</p>
                     <input type="text" class="form-control" name="jasing_${q.id}" placeholder="Ketik jawaban Anda..." oninput="simpanJawabanLokal()">
                 </div>`;
             });
@@ -521,79 +496,21 @@
             }
         }
 
-        async function selesaiKuis() {
+        function selesaiKuis() {
+            simpanJawabanLokal();
             Swal.fire({
                 title: 'Kirim Jawaban?',
-                text: "Pastikan semua soal sudah terisi.",
+                text: "Pastikan semua soal sudah terisi dengan benar.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#7209B7',
                 cancelButtonColor: '#dc3545',
                 confirmButtonText: 'Ya, Kirim'
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    hitungSkor();
-                }
-            });
-        }
-
-        async function hitungSkor() {
-            const answersStr = localStorage.getItem('dakwah_jawaban') || '{"pg":{},"jasing":{}}';
-            const answers = JSON.parse(answersStr);
-            
-            // Koreksi PG
-            let benarPG = 0;
-            bankSoal.pilihanGanda.forEach(q => {
-                if(answers.pg[q.id] !== undefined && parseInt(answers.pg[q.id]) === q.jawaban) benarPG++;
-            });
-            
-            // Koreksi Jasing
-            let benarJasing = 0;
-            bankSoal.jawabanSingkat.forEach(q => {
-                let ans = answers.jasing[q.id] ? answers.jasing[q.id].trim().toLowerCase() : '';
-                if(q.kunci.includes(ans)) benarJasing++;
-            });
-
-            // Hitung persentase
-            let skorPG = (benarPG / bankSoal.pilihanGanda.length) * 100;
-            let skorJasing = (benarJasing / bankSoal.jawabanSingkat.length) * 100;
-            let finalScore = Math.round((skorPG + skorJasing) / 2);
-
-            document.getElementById('skor-pg').innerText = Math.round(skorPG);
-            document.getElementById('skor-jasing').innerText = Math.round(skorJasing);
-            
-            const nilaiEl = document.getElementById('nilai-akhir');
-            nilaiEl.innerText = finalScore;
-            if(finalScore < 70) {
-                nilaiEl.className = "display-1 fw-bold text-danger my-2";
-            } else {
-                nilaiEl.className = "display-1 fw-bold text-success my-2";
-            }
-
-            gantiHalaman('step-hasil');
-
-            if(recordId) {
-                await supabaseClient.from('progress_materi2').update({ progress: 'materi_selesai', nilai: finalScore }).eq('id', recordId);
-            }
-        }
-
-        function kerjakanLagi() {
-            Swal.fire({
-                title: 'Mulai Ulang?',
-                text: "Data nilai dan progress Anda saat ini di browser akan dihapus.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Ya, Hapus & Ulang'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    localStorage.removeItem('dakwah_nama');
-                    localStorage.removeItem('dakwah_kelas');
-                    localStorage.removeItem('dakwah_step');
-                    localStorage.removeItem('dakwah_recordId');
-                    localStorage.removeItem('dakwah_jawaban');
-                    location.reload();
+                    // Update step agar saat direfresh tidak kembali ke kuis
+                    localStorage.setItem('dakwah_step', 'step-hasil');
+                    window.location.href = 'hasil.html';
                 }
             });
         }
