@@ -48,11 +48,16 @@
     <div class="container py-4">
         
         <div class="row mb-4 align-items-center">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <h4 class="fw-bold text-ungu mb-0">Rekapitulasi Belajar Siswa</h4>
                 <p class="text-muted small mb-0">Pantau progress dan nilai siswa secara real-time.</p>
             </div>
-            <div class="col-md-6 text-md-end mt-3 mt-md-0 d-flex justify-content-md-end gap-2">
+            <div class="col-md-7 text-md-end mt-3 mt-md-0 d-flex justify-content-md-end gap-2 flex-wrap">
+                <select id="filterMateri" class="form-select w-auto fw-semibold" onchange="ambilData()">
+                    <option value="semua">Semua Materi</option>
+                    <option value="Dakwah Nabi">Dakwah Nabi</option>
+                    <option value="Mukjizat Nabi">Mukjizat Nabi</option>
+                </select>
                 <select id="filterKelas" class="form-select w-auto fw-semibold" onchange="ambilData()">
                     <option value="semua">Semua Kelas</option>
                     <option value="3A">Kelas 3A</option>
@@ -74,6 +79,7 @@
                             <th class="px-4 py-3">No</th>
                             <th class="py-3">Waktu Mulai</th>
                             <th class="py-3">Nama Siswa</th>
+                            <th class="py-3">Materi</th>
                             <th class="py-3 text-center">Kelas</th>
                             <th class="py-3">Progress Saat Ini</th>
                             <th class="py-3 text-center">Nilai</th>
@@ -81,7 +87,7 @@
                     </thead>
                     <tbody id="tabel-body">
                         <tr>
-                            <td colspan="6" class="text-center py-5 text-muted">
+                            <td colspan="7" class="text-center py-5 text-muted">
                                 <i class="fa-solid fa-circle-notch fa-spin fa-2x mb-2"></i><br>
                                 Mengambil data...
                             </td>
@@ -94,12 +100,11 @@
     </div>
 
     <script>
-        // Konfigurasi Supabase (Sama dengan index.html)
+        // Konfigurasi Supabase
         const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        // Fungsi Format Tanggal & Waktu
         function formatWaktu(isoString) {
             const date = new Date(isoString);
             return date.toLocaleString('id-ID', { 
@@ -108,56 +113,59 @@
             });
         }
 
-        // Fungsi Menerjemahkan Progress Database ke Bahasa Manusia
+        // Status progress diupdate sesuai penamaan yang ada di kode aplikasi sebelumnya
         function terjemahkanProgress(status) {
             switch(status) {
-                case 'mulai': return '<span class="badge bg-secondary">Menonton Video 1</span>';
-                case 'video1_selesai': return '<span class="badge bg-info text-dark">Menonton Video 2</span>';
-                case 'video2_selesai': return '<span class="badge bg-primary">Membaca Materi</span>';
-                case 'materi_selesai': return '<span class="badge bg-warning text-dark">Mengerjakan Kuis</span>';
-                case 'kuis_selesai': return '<span class="badge bg-success"><i class="fa-solid fa-check-circle me-1"></i> Selesai</span>';
+                case 'materi_video1': return '<span class="badge bg-secondary">Menonton Video 1</span>';
+                case 'materi_video2': return '<span class="badge bg-info text-dark">Menonton Video 2</span>';
+                case 'materi_video': return '<span class="badge bg-info text-dark">Menonton Video</span>';
+                case 'materi_baca': return '<span class="badge bg-primary">Membaca Materi</span>';
+                case 'materi_kuis': return '<span class="badge bg-warning text-dark">Mengerjakan Kuis</span>';
+                case 'materi_selesai': return '<span class="badge bg-success"><i class="fa-solid fa-check-circle me-1"></i> Selesai</span>';
                 default: return `<span class="badge bg-light text-dark">${status}</span>`;
             }
         }
 
-        // Fungsi Utama untuk Mengambil Data
         async function ambilData() {
             const tabelBody = document.getElementById('tabel-body');
             const kelasDipilih = document.getElementById('filterKelas').value;
+            const materiDipilih = document.getElementById('filterMateri').value;
             
-            tabelBody.innerHTML = `<tr><td colspan="6" class="text-center py-5 text-muted"><i class="fa-solid fa-circle-notch fa-spin fa-2x mb-2"></i><br>Mengambil data...</td></tr>`;
+            tabelBody.innerHTML = `<tr><td colspan="7" class="text-center py-5 text-muted"><i class="fa-solid fa-circle-notch fa-spin fa-2x mb-2"></i><br>Mengambil data...</td></tr>`;
 
             try {
-                // Siapkan query dasar (urutkan dari yang terbaru)
+                // Mengambil dari tabel progress_materi2
                 let query = supabaseClient
-                    .from('progress_belajar')
+                    .from('progress_materi2')
                     .select('*')
                     .order('created_at', { ascending: false });
 
-                // Tambahkan filter jika bukan "semua"
+                // Terapkan filter Kelas
                 if (kelasDipilih !== 'semua') {
                     query = query.eq('kelas', kelasDipilih);
                 }
+                
+                // Terapkan filter Materi
+                if (materiDipilih !== 'semua') {
+                    query = query.eq('materinya', materiDipilih);
+                }
 
-                // Eksekusi query
                 const { data, error } = await query;
 
                 if (error) throw error;
 
-                // Tampilkan pesan jika data kosong
                 if (data.length === 0) {
-                    tabelBody.innerHTML = `<tr><td colspan="6" class="text-center py-5 text-muted"><i class="fa-solid fa-folder-open fa-2x mb-2 text-light"></i><br>Belum ada data siswa untuk kelas ini.</td></tr>`;
+                    tabelBody.innerHTML = `<tr><td colspan="7" class="text-center py-5 text-muted"><i class="fa-solid fa-folder-open fa-2x mb-2 text-light"></i><br>Belum ada data siswa untuk filter ini.</td></tr>`;
                     return;
                 }
 
-                // Render data ke tabel
                 let barisHTML = '';
                 data.forEach((siswa, index) => {
-                    // Penentuan warna nilai
                     let kelasNilai = 'fw-bold';
                     let nilaiDitampilkan = '-';
 
-                    if (siswa.progress === 'kuis_selesai') {
+                    // Cek jika siswa sudah berada di status selesai
+                    if (siswa.progress === 'materi_selesai') {
                         nilaiDitampilkan = siswa.nilai;
                         kelasNilai += siswa.nilai < 70 ? ' text-danger' : ' text-success';
                     }
@@ -167,6 +175,7 @@
                             <td class="px-4 fw-medium text-muted">${index + 1}</td>
                             <td class="small">${formatWaktu(siswa.created_at)}</td>
                             <td class="fw-bold">${siswa.nama}</td>
+                            <td><span class="badge bg-light text-primary border border-primary">${siswa.materinya || 'Belum Diatur'}</span></td>
                             <td class="text-center"><span class="badge border border-secondary text-secondary bg-transparent">${siswa.kelas}</span></td>
                             <td>${terjemahkanProgress(siswa.progress)}</td>
                             <td class="text-center fs-5 ${kelasNilai}">${nilaiDitampilkan}</td>
@@ -178,11 +187,10 @@
 
             } catch (error) {
                 console.error('Error:', error);
-                tabelBody.innerHTML = `<tr><td colspan="6" class="text-center py-5 text-danger"><i class="fa-solid fa-triangle-exclamation fa-2x mb-2"></i><br>Gagal mengambil data. Periksa koneksi internet atau Supabase.</td></tr>`;
+                tabelBody.innerHTML = `<tr><td colspan="7" class="text-center py-5 text-danger"><i class="fa-solid fa-triangle-exclamation fa-2x mb-2"></i><br>Gagal mengambil data. Periksa koneksi internet atau Supabase.</td></tr>`;
             }
         }
 
-        // Ambil data pertama kali saat halaman dimuat
         window.onload = ambilData;
 
     </script>
