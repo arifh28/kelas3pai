@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakwah Nabi di kota Mekkah</title>
+    <title>Materi & Evaluasi Mukjizat Nabi Muhammad SAW</title>
     
-    <meta property="og:url" content="https://kelas3pai.vercel.app/dakwahnabi/index.html" />
+    <meta property="og:url" content="https://kelas3pai.vercel.app/mukjizat/index.html" />
     <meta property="og:image" content="https://osn.sdn1banjar.my.id/images/logo_sekolah.png" />
-    <meta property="og:title" content="Dakwah Nabi di kota Mekkah" />
-    <meta property="og:description" content="Dakwah Nabi di kota Mekkah Kelas 3 UPTD SDN 1 Banjar" />
-    <meta name="description" content="Dakwah Nabi di kota Mekkah Kelas 3 UPTD SDN 1 Banjar">
+    <meta property="og:title" content="Latihan Soal Materi Mukjizat Nabi Muhammad SAW" />
+    <meta property="og:description" content="Latihan Pembelajaran Interaktif Mukjizat Nabi UPTD SDN 1 Banjar" />
+    <meta name="description" content="Latihan Pembelajaran Interaktif Mukjizat Nabi UPTD SDN 1 Banjar">
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-custom shadow-sm sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-mosque me-2"></i>PAIBP - Sejarah Dakwah Nabi</a>
+            <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-star-and-crescent me-2"></i>PAIBP - Mukjizat Nabi</a>
             <span class="text-white fw-semibold" id="user-display"></span>
         </div>
     </nav>
@@ -70,7 +70,7 @@
                         <div class="text-center mb-4">
                             <i class="fa-solid fa-book-open-reader fa-3x text-ungu mb-3"></i>
                             <h3 class="fw-bold mb-1">Latihan Asesmen Sumatif Akhir</h3>
-                            <p class="text-muted small">Materi: Dakwah Secara Sembunyi & Terang-terangan</p>
+                            <p class="text-muted small">Materi: Mukjizat Nabi Muhammad SAW</p>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Nama Lengkap</label>
@@ -84,7 +84,7 @@
                                 <option value="3B">Kelas 3B</option>
                                 <option value="3C">Kelas 3C</option>
                                 <option value="3D">Kelas 3D</option>
-                            </select>                            
+                            </select>
                         </div>
                         <button onclick="mulaiBelajar()" class="btn btn-custom w-100 btn-lg" id="btn-mulai">Mulai Belajar <i class="fa-solid fa-arrow-right ms-2"></i></button>
                     </div>
@@ -92,42 +92,21 @@
             </div>
         </div>
 
-        <div id="step-video1" class="step-section">
+        <div id="step-video" class="step-section">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="card card-custom p-4">
-                        <h4 class="fw-bold text-ungu mb-3"><i class="fa-solid fa-video me-2"></i>Tahap 1: Dakwah Sembunyi-Sembunyi</h4>
+                        <h4 class="fw-bold text-ungu mb-3"><i class="fa-solid fa-video me-2"></i>Tahap 1: Tonton Video Mukjizat</h4>
                         <div class="alert alert-warning small">
-                            <i class="fa-solid fa-triangle-exclamation me-1"></i> Tonton video ini sampai selesai tanpa di-skip untuk membuka tombol "Lanjut". Klik area video untuk Play/Pause.
+                            <i class="fa-solid fa-triangle-exclamation me-1"></i> Tonton video ini sampai selesai tanpa di-skip untuk membuka tombol "Lanjut ke Materi". Klik area video untuk Play/Pause.
                         </div>
                         <div class="ratio ratio-16x9 mb-4 bg-dark rounded overflow-hidden yt-wrapper">
-                            <div id="player1"></div>
+                            <div id="player"></div>
                             <div class="yt-overlay"></div>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-secondary" onclick="toggleFullscreen('player1')"><i class="fa-solid fa-expand"></i> Layar Penuh</button>
-                            <button id="btn-lanjut-vid1" class="btn btn-custom" disabled onclick="keTahap('step-video2', 'materi_video2')">Lanjut ke Video 2 <i class="fa-solid fa-arrow-right"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="step-video2" class="step-section">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card card-custom p-4">
-                        <h4 class="fw-bold text-ungu mb-3"><i class="fa-solid fa-video me-2"></i>Tahap 2: Dakwah Terang-terangan</h4>
-                        <div class="alert alert-warning small">
-                            <i class="fa-solid fa-triangle-exclamation me-1"></i> Tonton video ini sampai selesai tanpa di-skip untuk membuka tombol "Lanjut ke Ringkasan Materi".
-                        </div>
-                        <div class="ratio ratio-16x9 mb-4 bg-dark rounded overflow-hidden yt-wrapper">
-                            <div id="player2"></div>
-                            <div class="yt-overlay"></div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-secondary" onclick="toggleFullscreen('player2')"><i class="fa-solid fa-expand"></i> Layar Penuh</button>
-                            <button id="btn-lanjut-vid2" class="btn btn-custom" disabled onclick="keTahap('step-materi', 'materi_baca')">Lanjut ke Materi <i class="fa-solid fa-arrow-right"></i></button>
+                            <button class="btn btn-outline-secondary" onclick="toggleFullscreen('player')"><i class="fa-solid fa-expand"></i> Layar Penuh</button>
+                            <button id="btn-lanjut-vid" class="btn btn-custom" disabled onclick="keTahap('step-materi', 'materi_baca')">Lanjut ke Materi <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -136,103 +115,69 @@
 
         <div id="step-materi" class="step-section">
             <div class="card card-custom p-4 p-md-5">
-                <h3 class="fw-bold text-ungu text-center mb-4"><i class="fa-solid fa-book-open me-2"></i>Ringkasan Materi</h3>
+                <h3 class="fw-bold text-ungu text-center mb-4"><i class="fa-solid fa-book-open me-2"></i>Ringkasan 10 Mukjizat</h3>
                 
                 <div class="alert alert-info small text-center mb-4">
                     <i class="fa-solid fa-circle-info me-1"></i> Silakan baca dan <strong>gulir (scroll)</strong> materi sampai ke paling bawah untuk membuka tombol evaluasi.
                 </div>
 
                 <div id="materi-scroll-container" style="max-height: 55vh; overflow-y: auto; padding-right: 10px;">
-                    <div class="card border-0 bg-light mb-4 shadow-sm">
+                    
+                    <div class="card border-0 bg-light mb-3 shadow-sm">
                         <div class="card-body">
-                            <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">1. Dakwah Secara Sembunyi-Sembunyi (Sirriyah)</h5>
-                            <ul class="list-group list-group-flush bg-transparent">
-                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
-                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Dilakukan di Makkah selama <strong>3 tahun pertama</strong> masa kenabian.</div>
-                                </li>
-                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
-                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Alasannya karena jumlah umat Islam masih sangat sedikit, kedudukannya masih lemah, serta menghindari bentrokan langsung karena kebiasaan Quraisy menyembah berhala sudah mendarah daging.</div>
-                                </li>
-                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
-                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Golongan pertama yang masuk Islam disebut <strong>Assabiqunal Awwalun</strong>. Di antaranya:
-                                        <ul class="mt-2 ps-3">
-                                            <li><strong>Khadijah binti Khuwailid</strong> (Istri Nabi)</li>
-                                            <li><strong>Zaid bin Haritsah</strong> (Anak angkat/budak Nabi)</li>
-                                            <li><strong>Ali bin Abi Thalib</strong> (Sepupu Nabi, memeluk Islam saat masih belia/anak-anak)</li>
-                                            <li><strong>Abu Bakar as-Siddiq</strong> (Sahabat terdekat Nabi)</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
-                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Berkat bantuan Abu Bakar as-Siddiq, tokoh penting lainnya ikut masuk Islam seperti Utsman bin Affan, Zubair bin Awwam, Abdurrahman bin Auf, dan Sa'ad bin Abi Waqqas.</div>
-                                </li>
-                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
-                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Ibadah yang dikerjakan saat itu adalah <strong>salat dua rakaat di waktu pagi dan petang</strong>.</div>
-                                </li>
-                            </ul>
+                            <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">Pengertian Mukjizat</h5>
+                            <p class="mb-0">Mukjizat adalah kemampuan luar biasa dari Allah Swt. untuk para nabi dan rasul-Nya. Fungsinya untuk mendukung kebenaran kenabian dan melemahkan musuh-musuh yang meragukan risalah yang dibawa.</p>
                         </div>
                     </div>
 
                     <div class="card border-0 bg-light mb-4 shadow-sm">
                         <div class="card-body">
-                            <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">2. Dakwah Secara Terang-terangan (Jahriyyah)</h5>
+                            <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">10 Mukjizat Nabi Muhammad SAW</h5>
                             <ul class="list-group list-group-flush bg-transparent">
                                 <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
                                     <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Dimulai setelah turun wahyu dari Allah pada Surah <strong>Asy-Syu'ara ayat 214-215</strong> ("Dan berilah peringatan kepada kerabat-kerabatmu yang terdekat...").</div>
+                                    <div><strong>1. Kitab Suci Al-Qur'an</strong> - Merupakan mukjizat terbesar yang abadi sepanjang zaman. Mukjizat nabi sebelumnya hanya berlaku pada masa itu saja.</div>
                                 </li>
                                 <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
                                     <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Langkah pertama Nabi adalah mengundang kerabatnya dari Bani Hasyim dan Bani Muthalib. Namun, pertemuan ini digagalkan oleh pamannya sendiri, <strong>Abu Lahab</strong>.</div>
+                                    <div><strong>2. Membelah Bulan</strong> - Terjadi ketika orang kafir Quraisy menantang pembuktian kenabian. Bulan terbelah dua atas kehendak Allah, namun orang kafir tetap menganggapnya sebagai sihir.</div>
                                 </li>
                                 <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
                                     <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Pada pertemuan selanjutnya, pamannya yang lain yaitu <strong>Abu Thalib</strong>, meskipun tidak mau masuk Islam, berjanji akan selalu <strong>melindungi dan membela</strong> Nabi dari gangguan kaum Quraisy.</div>
+                                    <div><strong>3. Air Mengalir dari Jemari Tangan</strong> - Terjadi di masa perjanjian Hudaibiyah. Air memancar dari sela-sela jari Nabi dan cukup digunakan wudu oleh sekitar 60-80 orang sahabat.</div>
                                 </li>
                                 <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
                                     <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Setelah mendapat perlindungan Abu Thalib, Nabi berdiri di <strong>Bukit Shafa</strong> dan menyeru seluruh marga Quraisy untuk memperingatkan mereka tentang adanya hari pembalasan dan azab yang pedih.</div>
+                                    <div><strong>4. Berdoa Meminta Hujan</strong> - Terjadi kekeringan parah. Saat berkhotbah, Nabi berdoa dan seketika gumpalan awan hitam datang membawa hujan.</div>
                                 </li>
                                 <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
                                     <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Lagi-lagi <strong>Abu Lahab</strong> menentang keras dan mencaci Nabi dengan kalimat "Celakalah engkau!". Atas hinaan ini, Allah membalasnya dengan menurunkan Surah <strong>Al-Lahab</strong>.</div>
+                                    <div><strong>5. Hidupnya Kerikil (Bertasbih)</strong> - Batu kerikil yang berada di telapak tangan Rasulullah terdengar bertasbih di depan para sahabat.</div>
                                 </li>
                                 <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
                                     <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div>Alasan kaum kafir Quraisy menolak dakwah karena mereka bersikeras tidak mau meninggalkan agama nenek moyang mereka. Nabi mengingatkan bahwa berhala yang mereka sembah <strong>sama sekali tidak bisa mendatangkan manfaat maupun mudarat</strong>.</div>
+                                    <div><strong>6. Pelepah Kurma yang Menangis</strong> - Pelepah kurma sedih dan menangis seperti suara unta karena Nabi berpindah berkhotbah ke atas mimbar. Pohon itu terdiam setelah Nabi mendekati dan mengusapnya.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div><strong>7. Makanan Sedikit Cukup untuk Banyak Orang</strong> - Di rumah Abu Talhah, makanan yang sangat sedikit didoakan oleh Nabi dan mampu mengenyangkan 70-80 tamu secara bergantian per 10 orang.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div><strong>8. Segelas Susu yang Mengenyangkan</strong> - Segelas susu dibagikan secara berkeliling ke seluruh Ahlus Suffah (orang yang tinggal di masjid). Atas izin Allah, semuanya kenyang dan sisanya diminum oleh Abu Hurairah dan Nabi.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div><strong>9. Meramalkan Istri</strong> - Beliau meramalkan istrinya yang paling rajin bersedekah akan menyusul meninggal paling cepat setelahnya. Ramalan itu terbukti dengan wafatnya Zainab binti Khuzaimah.</div>
+                                </li>
+                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
+                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
+                                    <div><strong>10. Mengobati Sakit Mata</strong> - Pada saat penaklukan benteng Khaibar, sahabat Ali bin Abi Thalib sakit mata. Nabi meludahi matanya dan seketika ia sembuh total.</div>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="card border-0 bg-light mb-2 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="fw-bold text-ungu border-bottom pb-2 mb-3">3. Mukjizat Nabi Muhammad saw.</h5>
-                            <ul class="list-group list-group-flush bg-transparent">
-                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
-                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div><strong>Pengertian Mukjizat:</strong> Kejadian atau perkara luar biasa dari Allah yang diberikan melalui nabi atau rasul sebagai bukti kebenaran dakwah dan kenabiannya.</div>
-                                </li>
-                                <li class="list-group-item bg-transparent border-0 ps-0 d-flex align-items-start">
-                                    <i class="fa-solid fa-check-circle text-ungu mt-1 me-2"></i>
-                                    <div><strong>Macam-macam Mukjizat Beliau:</strong>
-                                        <ol class="mt-2 ps-3">
-                                            <li>Kitab suci <strong>Al-Qur'an</strong> (mukjizat terbesar yang abadi).</li>
-                                            <li>Peristiwa <strong>Isra dan Mikraj</strong> (perjalanan malam dari Masjidilharam ke Masjidil Aqsa hingga ke Sidratul Muntaha).</li>
-                                            <li>Dapat membelah <strong>bulan</strong> menjadi dua bagian.</li>
-                                            <li><strong>Air memancar</strong> dari sela-sela jari tangan beliau.</li>
-                                            <li>Dengan doa beliau, makanan yang sedikit dapat menjadi banyak.</li>
-                                        </ol>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div> 
                 
                 <div class="text-center mt-4 border-top pt-4">
@@ -263,14 +208,13 @@
     </div>
 
     <script>
-        // Supabase Configuration
         const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
         
         let recordId = null;
         let bankSoal = null;
-        let player1, player2;
+        let player;
 
         async function muatSoal() {
             try {
@@ -284,12 +228,11 @@
         muatSoal();
 
         window.onload = () => {
-            const savedNama = localStorage.getItem('dakwah_nama');
-            const savedKelas = localStorage.getItem('dakwah_kelas');
-            const savedStep = localStorage.getItem('dakwah_step');
-            recordId = localStorage.getItem('dakwah_recordId');
+            const savedNama = localStorage.getItem('mukjizat_nama');
+            const savedKelas = localStorage.getItem('mukjizat_kelas');
+            const savedStep = localStorage.getItem('mukjizat_step');
+            recordId = localStorage.getItem('mukjizat_recordId');
             
-            // Jika status sudah selesai kuis (berada di hasil.html) tapi siswa malah reload index.html, arahkan lagi ke hasil.html
             if (savedStep === 'step-hasil') {
                 window.location.href = 'hasil.html';
                 return;
@@ -325,28 +268,16 @@
         };
 
         function onYouTubeIframeAPIReady() {
-            player1 = new YT.Player('player1', {
-                videoId: 'mTxMVP9dqNA',
+            player = new YT.Player('player', {
+                videoId: 'aQXsetdm6x8', // ID Video Mukjizat Nabi
                 playerVars: { 'controls': 0, 'disablekb': 1, 'rel': 0, 'modestbranding': 1, 'fs': 0 },
-                events: { 'onStateChange': onPlayer1StateChange }
-            });
-            player2 = new YT.Player('player2', {
-                videoId: 'aGAqsSf6pJY',
-                playerVars: { 'controls': 0, 'disablekb': 1, 'rel': 0, 'modestbranding': 1, 'fs': 0 },
-                events: { 'onStateChange': onPlayer2StateChange }
+                events: { 'onStateChange': onPlayerStateChange }
             });
         }
 
-        function onPlayer1StateChange(event) {
+        function onPlayerStateChange(event) {
             if (event.data == YT.PlayerState.ENDED) {
-                const btn = document.getElementById('btn-lanjut-vid1');
-                btn.disabled = false;
-                btn.innerHTML = 'Lanjut ke Video 2 <i class="fa-solid fa-arrow-right"></i>';
-            }
-        }
-        function onPlayer2StateChange(event) {
-            if (event.data == YT.PlayerState.ENDED) {
-                const btn = document.getElementById('btn-lanjut-vid2');
+                const btn = document.getElementById('btn-lanjut-vid');
                 btn.disabled = false;
                 btn.innerHTML = 'Lanjut ke Materi <i class="fa-solid fa-arrow-right"></i>';
             }
@@ -362,11 +293,10 @@
         function gantiHalaman(idHalaman) {
             document.querySelectorAll('.step-section').forEach(el => el.classList.remove('step-active'));
             document.getElementById(idHalaman).classList.add('step-active');
-            localStorage.setItem('dakwah_step', idHalaman);
+            localStorage.setItem('mukjizat_step', idHalaman);
             window.scrollTo(0,0);
 
-            if(idHalaman !== 'step-video1' && player1 && typeof player1.pauseVideo === 'function') player1.pauseVideo();
-            if(idHalaman !== 'step-video2' && player2 && typeof player2.pauseVideo === 'function') player2.pauseVideo();
+            if(idHalaman !== 'step-video' && player && typeof player.pauseVideo === 'function') player.pauseVideo();
         }
 
         async function mulaiBelajar() {
@@ -385,8 +315,8 @@
             document.getElementById('btn-mulai').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
             document.getElementById('btn-mulai').disabled = true;
 
-            localStorage.setItem('dakwah_nama', nama);
-            localStorage.setItem('dakwah_kelas', kelas);
+            localStorage.setItem('mukjizat_nama', nama);
+            localStorage.setItem('mukjizat_kelas', kelas);
             document.getElementById('user-display').innerHTML = `<i class="fa-regular fa-user me-1"></i> ${nama} (${kelas})`;
 
             if(!recordId) {
@@ -395,31 +325,26 @@
                     .insert([{ 
                         nama: nama, 
                         kelas: kelas, 
-                        materinya: 'Dakwah Nabi', 
-                        progress: 'materi_video1', 
+                        materinya: 'Mukjizat Nabi', // Konstanta nama materi
+                        progress: 'materi_video', 
                         nilai: 0 
                     }])
                     .select();
 
                 if (error) {
                     console.error("Supabase error:", error);
-                    Swal.fire('Peringatan', 'Gagal terhubung ke database guru. Progress hanya disimpan di perangkat ini.', 'warning');
+                    Swal.fire('Peringatan', 'Gagal terhubung ke database. Progress hanya disimpan di perangkat ini.', 'warning');
                 } else if (data && data.length > 0) {
                     recordId = data[0].id;
-                    localStorage.setItem('dakwah_recordId', recordId);
+                    localStorage.setItem('mukjizat_recordId', recordId);
                 }
             }
 
-            gantiHalaman('step-video1');
+            gantiHalaman('step-video');
         }
 
         async function keTahap(idHalaman, statusProgress) {
             gantiHalaman(idHalaman);
-            
-            // Simpan posisi step saat ini ke localStorage
-            localStorage.setItem('dakwah_step', idHalaman);
-
-            // Perbarui status progress di database Supabase
             if(recordId) {
                 await supabaseClient.from('progress_materi2').update({ progress: statusProgress }).eq('id', recordId);
             }
@@ -484,11 +409,11 @@
                 const input = document.querySelector(`input[name="jasing_${q.id}"]`);
                 if (input) answers.jasing[q.id] = input.value;
             });
-            localStorage.setItem('dakwah_jawaban', JSON.stringify(answers));
+            localStorage.setItem('mukjizat_jawaban', JSON.stringify(answers));
         }
 
         function muatJawabanLokal() {
-            const saved = localStorage.getItem('dakwah_jawaban');
+            const saved = localStorage.getItem('mukjizat_jawaban');
             if (saved) {
                 const answers = JSON.parse(saved);
                 for (const [id, val] of Object.entries(answers.pg || {})) {
@@ -514,8 +439,7 @@
                 confirmButtonText: 'Ya, Kirim'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Update step agar saat direfresh tidak kembali ke kuis
-                    localStorage.setItem('dakwah_step', 'step-hasil');
+                    localStorage.setItem('mukjizat_step', 'step-hasil');
                     window.location.href = 'hasil.html';
                 }
             });

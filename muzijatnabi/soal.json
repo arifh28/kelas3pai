@@ -1,0 +1,176 @@
+{
+  "pilihanGanda": [
+    {
+      "id": 1,
+      "soal": "Apakah pengertian dari mukjizat secara umum?",
+      "opsi": [
+        "Sihir yang dipelajari dari guru",
+        "Kemampuan luar biasa dari Allah untuk nabi dan rasul",
+        "Kekuatan yang didapat dari bertapa",
+        "Bantuan dari malaikat untuk manusia biasa"
+      ],
+      "jawaban": 1
+    },
+    {
+      "id": 2,
+      "soal": "Salah satu tujuan utama Allah Swt. memberikan mukjizat kepada seorang nabi adalah untuk...",
+      "opsi": [
+        "Menjadi orang yang paling kaya",
+        "Menakut-nakuti umat manusia",
+        "Mendukung kebenaran kenabian dan melemahkan musuh",
+        "Menghancurkan seluruh kaum yang ingkar"
+      ],
+      "jawaban": 2
+    },
+    {
+      "id": 3,
+      "soal": "Mukjizat nabi-nabi terdahulu seperti Nabi Musa dan Nabi Isa hanya berlaku pada zamannya saja. Berbeda dengan mukjizat terbesar Nabi Muhammad saw. yang abadi hingga akhir zaman, yaitu...",
+      "opsi": ["Air zamzam", "Kitab suci Al-Qur'an", "Membelah bulan", "Ka'bah"],
+      "jawaban": 1
+    },
+    {
+      "id": 4,
+      "soal": "Ketika orang-orang kafir Makkah menantang Rasulullah saw. untuk membuktikan kenabiannya dengan menunjuk ke langit, mukjizat apa yang terjadi?",
+      "opsi": ["Hujan badai turun", "Matahari berhenti bersinar", "Bulan terbelah menjadi dua", "Bintang-bintang berjatuhan"],
+      "jawaban": 2
+    },
+    {
+      "id": 5,
+      "soal": "Bagaimana reaksi orang-orang kafir Quraisy setelah melihat sendiri mukjizat bulan terbelah menjadi dua?",
+      "opsi": [
+        "Mereka langsung beriman",
+        "Mereka tetap ingkar dan menganggapnya sihir",
+        "Mereka memeluk agama Islam esok harinya",
+        "Mereka bersujud dan meminta maaf"
+      ],
+      "jawaban": 1
+    },
+    {
+      "id": 6,
+      "soal": "Pada peristiwa perjanjian Hudaibiyah, para sahabat kehabisan air. Apa mukjizat yang ditunjukkan Nabi Muhammad saw. saat itu?",
+      "opsi": [
+        "Mengubah pasir menjadi air",
+        "Air memancar dari sela-sela jari tangannya",
+        "Memanggil awan hujan dengan cepat",
+        "Menemukan sumur yang sudah kering menjadi penuh"
+      ],
+      "jawaban": 1
+    },
+    {
+      "id": 7,
+      "soal": "Menurut riwayat Anas ra., berapa kira-kira jumlah orang yang bisa minum dan berwudu dari air yang keluar dari sela jari Rasulullah saw. tersebut?",
+      "opsi": ["10-20 orang", "60-80 orang", "100-200 orang", "1000 orang"],
+      "jawaban": 1
+    },
+    {
+      "id": 8,
+      "soal": "Suatu ketika terjadi kekeringan hingga banyak hewan mati. Saat sedang berkhotbah, seseorang meminta Nabi berdoa. Apa yang seketika terjadi?",
+      "opsi": ["Mata air muncul di dalam masjid", "Awan mendung datang dan hujan turun lebat", "Tanaman langsung tumbuh hijau", "Hujan salju turun di Makkah"],
+      "jawaban": 1
+    },
+    {
+      "id": 9,
+      "soal": "Benda kecil apa yang dipegang oleh Rasulullah saw. dalam sebuah halaqah dan terdengar ikut bertasbih oleh para sahabat?",
+      "opsi": ["Daun kurma", "Biji gandum", "Batu kerikil", "Koin dirham"],
+      "jawaban": 2
+    },
+    {
+      "id": 10,
+      "soal": "Benda apakah yang terdengar menangis tersedu-sedu seperti suara unta karena sedih ditinggalkan oleh Nabi Muhammad saw. saat berkhotbah?",
+      "opsi": ["Pintu masjid", "Batu besar", "Pelepah batang kurma", "Mimbar kayu"],
+      "jawaban": 2
+    },
+    {
+      "id": 11,
+      "soal": "Apa yang dilakukan Rasulullah saw. agar benda yang menangis tersebut akhirnya bisa diam dan tenang?",
+      "opsi": ["Mendekati dan mengusapkan tangannya", "Membuangnya jauh-jauh", "Menyiramnya dengan air", "Membacakannya ayat Al-Qur'an dengan keras"],
+      "jawaban": 0
+    },
+    {
+      "id": 12,
+      "soal": "Nabi Muhammad saw. diundang makan ke rumah salah seorang sahabat, padahal makanannya sangat sedikit namun bisa mencukupi 70-80 orang. Di rumah siapakah peristiwa ini terjadi?",
+      "opsi": ["Abu Bakar", "Abu Talhah", "Utsman bin Affan", "Abu Hurairah"],
+      "jawaban": 1
+    },
+    {
+      "id": 13,
+      "soal": "Bagaimana cara para sahabat makan dari makanan yang sedikit tersebut agar semuanya kebagian atas instruksi Nabi?",
+      "opsi": ["Makan secara serentak", "Makan bergantian setiap 10 orang", "Hanya minum kuahnya saja", "Makan bergantian 2 orang sekaligus"],
+      "jawaban": 1
+    },
+    {
+      "id": 14,
+      "soal": "Siapakah sahabat nabi yang terkenal sering kelaparan namun kuat hafalannya, yang diminta memanggil Ahlus Suffah untuk meminum segelas susu?",
+      "opsi": ["Ali bin Abi Thalib", "Bilal bin Rabah", "Abu Hurairah", "Zaid bin Tsabit"],
+      "jawaban": 2
+    },
+    {
+      "id": 15,
+      "soal": "Apa mukjizat yang terjadi pada segelas susu yang dibagikan secara bergilir kepada kelompok Ahlus Suffah tersebut?",
+      "opsi": [
+        "Susu tersebut langsung habis diminum orang pertama",
+        "Susu tersebut mengenyangkan seluruh orang tanpa habis",
+        "Susu tersebut berubah rasa menjadi madu",
+        "Gelasnya bertambah banyak dengan sendirinya"
+      ],
+      "jawaban": 1
+    },
+    {
+      "id": 16,
+      "soal": "Siapakah orang yang meminum sisa susu terakhir kali setelah semua Ahlus Suffah dan Abu Hurairah selesai meminumnya hingga kenyang?",
+      "opsi": ["Abu Bakar", "Abu Thalib", "Nabi Muhammad saw.", "Istri Nabi"],
+      "jawaban": 2
+    },
+    {
+      "id": 17,
+      "soal": "Mukjizat Nabi Muhammad saw. juga berupa pengetahuan atas hal yang akan terjadi (meramal). Istri beliau yang wafat tidak lama setelah beliau wafat karena rajin bersedekah adalah...",
+      "opsi": ["Aisyah", "Zainab binti Khuzaimah", "Khadijah", "Saudah"],
+      "jawaban": 1
+    },
+    {
+      "id": 18,
+      "soal": "Pada saat menjelang penaklukan benteng Khaibar, salah satu sahabat pemegang bendera pasukan sedang menderita sakit. Sakit apakah itu?",
+      "opsi": ["Sakit perut", "Luka pedang", "Sakit mata", "Patah tulang"],
+      "jawaban": 2
+    },
+    {
+      "id": 19,
+      "soal": "Siapakah nama sahabat pemegang bendera yang sedang menderita sakit tersebut?",
+      "opsi": ["Umar bin Khattab", "Khalid bin Walid", "Ali bin Abi Thalib", "Hamzah bin Abdul Muthalib"],
+      "jawaban": 2
+    },
+    {
+      "id": 20,
+      "soal": "Bagaimana cara mukjizat Rasulullah saw. menyembuhkan sakit yang diderita Ali bin Abi Thalib di Khaibar?",
+      "opsi": ["Meneteskan madu", "Meludahi mata yang sakit tersebut", "Mengusapnya dengan daun kurma", "Meniup matanya tiga kali"],
+      "jawaban": 1
+    }
+  ],
+  "jawabanSingkat": [
+    {
+      "id": 21,
+      "soal": "Kemampuan luar biasa yang diberikan Allah Swt. kepada para nabi dan rasul disebut...",
+      "kunci": ["mukjizat", "mu'jizat"]
+    },
+    {
+      "id": 22,
+      "soal": "Mukjizat terbesar Nabi Muhammad saw. yang berlaku sepanjang masa hingga kiamat adalah...",
+      "kunci": ["al-qur'an", "al quran", "quran", "al-quran"]
+    },
+    {
+      "id": 23,
+      "soal": "Benda langit apa yang terbelah menjadi dua atas izin Allah untuk membuktikan kenabian Nabi Muhammad saw.?",
+      "kunci": ["bulan"]
+    },
+    {
+      "id": 24,
+      "soal": "Pohon apakah yang pelepahnya menangis seperti suara unta karena sedih ditinggalkan oleh Nabi Muhammad saw. saat berkhotbah?",
+      "kunci": ["kurma", "pohon kurma"]
+    },
+    {
+      "id": 25,
+      "soal": "Siapa nama sahabat yang disuruh memanggil Ahlus Suffah untuk menikmati segelas susu yang tak habis-habis?",
+      "kunci": ["abu hurairah", "abu huroiroh"]
+    }
+  ]
+}
