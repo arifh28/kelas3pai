@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Soal Asesmen Materi 5 Kelas 3 SD PAIBP</title>
+    
+    <meta property="og:url" content="https://kelas3pai.vercel.app/asesmen5/index.html" />
+    <meta property="og:image" content="https://osn.sdn1banjar.my.id/images/logo_sekolah.png" />
+    <meta property="og:title" content="Latihan Soal Asesmen Materi 5 Kelas 3 SD PAIBP" />
+    <meta property="og:description" content="Latihan Soal Asesmen Materi 5 Kelas 3 SD PAIBP UPTD SDN 1 Banjar" />
+    <meta name="description" content="Latihan Soal Asesmen Materi 5 Kelas 3 SD PAIBP UPTD SDN 1 Banjar">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f8ff; /* Tema biru muda menyesuaikan soal.html */
+            color: #334155;
+            padding: 40px 0;
+        }
+
+        .card-custom {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(13, 110, 253, 0.08);
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        h1, h2 { font-weight: 700; color: #0d6efd; }
+        .section-title {
+            border-left: 5px solid #0d6efd;
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Video Cards */
+        .video-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.15);
+            border-color: #bae6fd;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            height: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+        .video-title {
+            margin-top: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            text-align: center;
+        }
+
+        /* Leaderboard Table */
+        .table-hover tbody tr:hover {
+            background-color: #e0f2fe;
+            transition: background-color 0.2s ease;
+        }
+        .table th {
+            background-color: #0d6efd;
+            color: white;
+            font-weight: 600;
+            border: none;
+        }
+        .table td { vertical-align: middle; padding: 15px 10px; font-weight: 500; }
+        
+        .rank-badge {
+            display: inline-block;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .rank-1 { background-color: #fef08a; color: #854d0e; box-shadow: 0 0 10px rgba(253, 224, 71, 0.5); }
+        .rank-2 { background-color: #e2e8f0; color: #334155; }
+        .rank-3 { background-color: #fed7aa; color: #9a3412; }
+        .rank-other { background-color: #f1f5f9; color: #64748b; }
+
+        .btn-primary-custom {
+            background-color: #0d6efd;
+            border: none;
+            border-radius: 10px;
+            padding: 16px 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+        }
+        .btn-primary-custom:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(13, 110, 253, 0.4);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="card-custom text-center py-4">
+        <i class="fa-solid fa-book-open-reader fa-4x mb-3 text-primary"></i>
+        <h1 class="mb-2">Kisah Nabi Muhammad Saw. </h1>
+        <p class="text-muted fs-5">Tonton video pembelajarannya, lalu uji pengetahuanmu!</p>
+    </div>
+
+    <div class="card-custom">
+        <h2 class="section-title h4"><i class="fa-brands fa-youtube me-2 text-danger"></i>Materi Pembelajaran Video</h2>
+        <div class="row g-4 mt-1">
+            <div class="col-md-6">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/mTxMVP9dqNA" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Dakwah Nabi Secara Sembunyi-sembunyi</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/aGAqsSf6pJY" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Dakwah Nabi Secara Terang-terangan</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/aQXsetdm6x8" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">10 Mu'jizat Nabi Muhammad Saw.</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/bKt_wP59tQk" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Video Pembelajaran Nabi Muhammad Saw. Idolaku oleh Imam Sodik Prayogo</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-custom">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title h4 mb-0"><i class="fa-solid fa-trophy me-2 text-warning"></i>Papan Peringkat (Leaderboard)</h2>
+            <span class="badge bg-primary px-3 py-2" id="status-db"><i class="fa-solid fa-cloud-arrow-down me-1"></i>Memuat data...</span>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th class="text-center rounded-start" style="width: 80px;">Rank</th>
+                        <th>Nama Siswa</th>
+                        <th>Kelas</th>
+                        <th class="text-center">Nilai</th>
+                        <th class="rounded-end">Waktu</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    </tbody>
+            </table>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="soal.html" class="btn btn-primary-custom text-white">
+                <i class="fa-solid fa-gamepad me-2"></i>Mulai Mengerjakan Soal Latihan
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Konfigurasi Supabase
+    const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Data Default Cadangan
+    const defaultLeaderboard = [
+
+    ];
+
+    window.onload = function() {
+        loadLeaderboard();
+    }
+
+    async function loadLeaderboard() {
+        let listSiswa = [];
+        const statusBadge = document.getElementById('status-db');
+
+        // Mengambil data dari Supabase
+        try {
+            const { data: nilai_kuis, error } = await supabaseClient
+                .from('nilai_kuis')
+                .select('*')
+                .order('nilai', { ascending: false })
+                .order('waktu_detik', { ascending: true })
+                .limit(10);
+            
+            if (error) throw error;
+
+            if (nilai_kuis && nilai_kuis.length > 0) {
+                listSiswa = nilai_kuis;
+                statusBadge.innerHTML = '<i class="fa-solid fa-circle-check me-1"></i>Live';
+                statusBadge.className = 'badge bg-success px-3 py-2';
+            } else {
+                throw new Error("Data kosong");
+            }
+        } catch (err) {
+            console.log("Menggunakan data lokal/cadangan:", err.message);
+            statusBadge.innerHTML = '<i class="fa-solid fa-server me-1"></i>Mode Lokal';
+            statusBadge.className = 'badge bg-secondary px-3 py-2';
+            
+            // Gabungkan default data dengan data localStorage jika Supabase kosong/error
+            listSiswa = [...defaultLeaderboard];
+            const hasilTerakhir = localStorage.getItem('hasil_terakhir');
+            if (hasilTerakhir) {
+                const lokalData = JSON.parse(hasilTerakhir);
+                const sudahAda = listSiswa.some(s => s.nama === lokalData.nama && s.nilai === lokalData.nilai);
+                if (!sudahAda) {
+                    listSiswa.push({
+                        nama: lokalData.nama,
+                        kelas: lokalData.kelas,
+                        nilai: lokalData.nilai,
+                        waktu_detik: lokalData.waktu_detik
+                    });
+                }
+            }
+
+            // Urutkan (Nilai terbesar, lalu Waktu tercepat)
+            listSiswa.sort((a, b) => {
+                if (b.nilai !== a.nilai) return b.nilai - a.nilai; 
+                return a.waktu_detik - b.waktu_detik;
+            });
+        }
+
+        // Render tabel
+        const tbody = document.getElementById('leaderboard-body');
+        tbody.innerHTML = '';
+
+        listSiswa.forEach((siswa, index) => {
+            const tr = document.createElement('tr');
+            
+            // Lencana Peringkat
+            let rankClass = "rank-other";
+            if (index === 0) rankClass = "rank-1";
+            else if (index === 1) rankClass = "rank-2";
+            else if (index === 2) rankClass = "rank-3";
+            let rankDisplay = `<span class="rank-badge ${rankClass}">${index + 1}</span>`;
+
+            // Format Waktu
+            let menit = Math.floor(siswa.waktu_detik / 60);
+            let detik = siswa.waktu_detik % 60;
+            let waktuDisplay = `<i class="fa-regular fa-clock me-1 text-muted"></i> ${menit}m ${detik}s`;
+
+            tr.innerHTML = `
+                <td class="text-center">${rankDisplay}</td>
+                <td>
+                    <div class="fw-bold text-dark">${siswa.nama}</div>
+                </td>
+                <td><span class="badge bg-light text-dark border"><i class="fa-solid fa-school me-1"></i>${siswa.kelas}</span></td>
+                <td class="text-center h5 mb-0 text-primary fw-bold">${siswa.nilai}</td>
+                <td style="font-size: 0.9rem;">${waktuDisplay}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+</script>
+</body>
+</html>

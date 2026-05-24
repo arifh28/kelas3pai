@@ -1,0 +1,242 @@
+[
+    {
+        "id": 1,
+        "tipe_soal": "PG",
+        "pertanyaan": "Di kota manakah Nabi Muhammad saw. dilahirkan?",
+        "pil_a": "Madinah",
+        "pil_b": "Mekah",
+        "pil_c": "Syam",
+        "jawaban": "Mekah"
+    },
+    {
+        "id": 2,
+        "tipe_soal": "PG",
+        "pertanyaan": "Siapakah nama ibunda Nabi Muhammad saw.?",
+        "pil_a": "Siti Khadijah",
+        "pil_b": "Halimah Sa'diyah",
+        "pil_c": "Aminah",
+        "jawaban": "Aminah"
+    },
+    {
+        "id": 3,
+        "tipe_soal": "PG",
+        "pertanyaan": "Berapa usia Nabi Muhammad saw. saat diangkat menjadi rasul?",
+        "pil_a": "25 tahun",
+        "pil_b": "40 tahun",
+        "pil_c": "63 tahun",
+        "jawaban": "40 tahun"
+    },
+    {
+        "id": 4,
+        "tipe_soal": "PG",
+        "pertanyaan": "Mengapa tahun kelahiran Nabi Muhammad saw. disebut Tahun Gajah?",
+        "pil_a": "Pasukan bergajah menyerang Kakbah",
+        "pil_b": "Nabi lahir di atas gajah",
+        "pil_c": "Banyak gajah di Mekah",
+        "jawaban": "Pasukan bergajah menyerang Kakbah"
+    },
+    {
+        "id": 5,
+        "tipe_soal": "PG",
+        "pertanyaan": "Siapakah paman yang merawat Nabi Muhammad saw. setelah Abdul Muttalib wafat?",
+        "pil_a": "Abu Lahab",
+        "pil_b": "Abu Talib",
+        "pil_c": "Hamzah",
+        "jawaban": "Abu Talib"
+    },
+    {
+        "id": 6,
+        "tipe_soal": "PG",
+        "pertanyaan": "Wahyu pertama yang diturunkan kepada Nabi Muhammad saw. adalah...",
+        "pil_a": "Surah Al-Muddassir ayat 1-7",
+        "pil_b": "Surah Al-'Alaq ayat 1-5",
+        "pil_c": "Surah Al-Fatihah ayat 1-7",
+        "jawaban": "Surah Al-'Alaq ayat 1-5"
+    },
+    {
+        "id": 7,
+        "tipe_soal": "PG",
+        "pertanyaan": "Apa mukjizat terbesar Nabi Muhammad saw.?",
+        "pil_a": "Membelah bulan",
+        "pil_b": "Al-Qur'an",
+        "pil_c": "Isra Mikraj",
+        "jawaban": "Al-Qur'an"
+    },
+    {
+        "id": 8,
+        "tipe_soal": "PG",
+        "pertanyaan": "Siapakah sahabat yang matanya disembuhkan oleh Nabi Muhammad saw. saat Perang Khaibar?",
+        "pil_a": "Ali bin Abi Talib",
+        "pil_b": "Abu Bakar as-Siddiq",
+        "pil_c": "Usman bin Affan",
+        "jawaban": "Ali bin Abi Talib"
+    },
+    {
+        "id": 9,
+        "tipe_soal": "PG",
+        "pertanyaan": "Sikap Nabi Muhammad saw. yang tidak bergantung pada orang lain sejak kecil disebut...",
+        "pil_a": "Jujur",
+        "pil_b": "Mandiri",
+        "pil_c": "Sombong",
+        "jawaban": "Mandiri"
+    },
+    {
+        "id": 10,
+        "tipe_soal": "PG",
+        "pertanyaan": "Ke mana Nabi Muhammad saw. pernah diajak pamannya berdagang pada usia 12 tahun?",
+        "pil_a": "Madinah",
+        "pil_b": "Yaman",
+        "pil_c": "Syam",
+        "jawaban": "Syam"
+    },
+    {
+        "id": 11,
+        "tipe_soal": "PG",
+        "pertanyaan": "Berapa lama Nabi Muhammad saw. memperoleh wahyu Al-Qur'an secara berangsur-angsur?",
+        "pil_a": "22 tahun 2 bulan 22 hari",
+        "pil_b": "20 tahun 2 bulan 20 hari",
+        "pil_c": "25 tahun penuh",
+        "jawaban": "22 tahun 2 bulan 22 hari"
+    },
+    {
+        "id": 12,
+        "tipe_soal": "PG",
+        "pertanyaan": "Isra Mikraj adalah perjalanan malam dari Masjidilharam di Mekah ke...",
+        "pil_a": "Masjid Nabawi",
+        "pil_b": "Masjidilaqsa",
+        "pil_c": "Gua Hira",
+        "jawaban": "Masjidilaqsa"
+    },
+    {
+        "id": 13,
+        "tipe_soal": "PG",
+        "pertanyaan": "Berapa usia Nabi Muhammad saw. dan Siti Khadijah ketika mereka menikah?",
+        "pil_a": "Nabi 25 tahun dan Khadijah 40 tahun",
+        "pil_b": "Nabi 20 tahun dan Khadijah 25 tahun",
+        "pil_c": "Nabi 30 tahun dan Khadijah 35 tahun",
+        "jawaban": "Nabi 25 tahun dan Khadijah 40 tahun"
+    },
+    {
+        "id": 14,
+        "tipe_soal": "PG",
+        "pertanyaan": "Setelah wahyu kedua turun, Nabi Muhammad saw. diperintahkan untuk berdakwah. Mengapa pada awalnya beliau memilih berdakwah secara sembunyi-sembunyi?",
+        "pil_a": "Masyarakat Mekah mayoritas menyembah berhala, sehingga dihindari penolakan keras dan kecurigaan di awal dakwah",
+        "pil_b": "Karena beliau belum berani menghadapi pamannya yang menentang ajaran Islam",
+        "pil_c": "Karena belum mendapat izin dan dukungan penuh dari keluarga besar istrinya",
+        "jawaban": "Masyarakat Mekah mayoritas menyembah berhala, sehingga dihindari penolakan keras dan kecurigaan di awal dakwah"
+    },
+    {
+        "id": 15,
+        "tipe_soal": "PG",
+        "pertanyaan": "Hasan lupa mengerjakan tugas karena asyik berlibur ke pantai. Saat ditanya guru, Hasan mengakui kesalahannya dengan jujur. Nilai keteladanan apa yang paling tepat dari peristiwa tersebut jika dihubungkan dengan sifat nabi?",
+        "pil_a": "Kita boleh melupakan tugas asalkan berani berkata jujur di depan guru",
+        "pil_b": "Kita harus berani berkata jujur sesuai kenyataan walau ada konsekuensinya, serta tetap menjalankan kewajiban",
+        "pil_c": "Kita harus sabar menerima hukuman dari guru walau itu sebenarnya bukan murni kesalahan kita",
+        "jawaban": "Kita harus berani berkata jujur sesuai kenyataan walau ada konsekuensinya, serta tetap menjalankan kewajiban"
+    },
+    {
+        "id": 16,
+        "tipe_soal": "PG",
+        "pertanyaan": "Mukjizat adalah kejadian luar biasa yang ditunjukkan Allah Swt. Salah satunya adalah memancarkan air dari sela-sela jari. Kapan peristiwa luar biasa ini spesifik terjadi?",
+        "pil_a": "Saat penduduk Mekah dilanda kemarau panjang selama bertahun-tahun tanpa hujan",
+        "pil_b": "Saat Nabi dan para sahabat hendak berwudu, namun sangat kesulitan menemukan sumber air",
+        "pil_c": "Saat membagikan air minum untuk pasukan gajah Abrahah yang kehausan di padang pasir",
+        "jawaban": "Saat Nabi dan para sahabat hendak berwudu, namun sangat kesulitan menemukan sumber air"
+    },
+    {
+        "id": 17,
+        "tipe_soal": "PG",
+        "pertanyaan": "Ketika menghadapi kaum kafir Quraisy, Nabi Muhammad saw. sering dicemooh, dihina, hingga dilempari batu dan kotoran. Namun beliau tidak membalas dan tetap gigih. Hal ini merupakan aplikasi dari perilaku terpuji yaitu...",
+        "pil_a": "Sabar yang berarti tahan menghadapi cobaan dan tidak putus asa dalam masalah",
+        "pil_b": "Mandiri yang berarti tidak bergantung pada bantuan orang lain dalam berdakwah",
+        "pil_c": "Jujur karena selalu menyampaikan wahyu sesuai dengan apa yang diturunkan",
+        "jawaban": "Sabar yang berarti tahan menghadapi cobaan dan tidak putus asa dalam masalah"
+    },
+    {
+        "id": 18,
+        "tipe_soal": "PG",
+        "pertanyaan": "Siti Khadijah sangat mendukung dakwah Nabi Muhammad saw. dalam keadaan senang maupun sulit. Bukti nyata kesetiaan Khadijah di awal masa kenabian yang paling monumental adalah...",
+        "pil_a": "Menggantikan peran Nabi dalam memimpin kafilah dagang besar ke negeri Syam",
+        "pil_b": "Menjadi wanita pertama yang masuk Islam dan menenangkan Nabi saat tubuhnya menggigil usai menerima wahyu pertama",
+        "pil_c": "Ikut serta menyembuhkan mata Qatadah bin Nu'man yang terluka parah saat peperangan",
+        "jawaban": "Menjadi wanita pertama yang masuk Islam dan menenangkan Nabi saat tubuhnya menggigil usai menerima wahyu pertama"
+    },
+    {
+        "id": 19,
+        "tipe_soal": "PG",
+        "pertanyaan": "Surah al-Muddassir [74] ayat 1-7 berisi banyak perintah kepada Nabi Muhammad saw. Selain perintah untuk bangun dan memberi peringatan tentang ketauhidan, ada juga perintah untuk...",
+        "pil_a": "Membersihkan pakaian dan meninggalkan segala perbuatan yang keji",
+        "pil_b": "Membaca dengan menyebut nama Tuhan yang menciptakan manusia dari segumpal darah",
+        "pil_c": "Berhijrah secepatnya bersama umat Islam ke kota Madinah untuk keselamatan",
+        "jawaban": "Membersihkan pakaian dan meninggalkan segala perbuatan yang keji"
+    },
+    {
+        "id": 20,
+        "tipe_soal": "PG",
+        "pertanyaan": "Perhatikan pernyataan berikut: (1) Menyendiri di tempat yang sunyi, (2) Menjauhi dosa dari keramaian, (3) Beribadah murni kepada Allah Swt. Ketiga pernyataan tersebut adalah makna dari kebiasaan Nabi Muhammad saw. yang disebut...",
+        "pil_a": "Hijrah",
+        "pil_b": "Tahannus",
+        "pil_c": "Tawakal",
+        "jawaban": "Tahannus"
+    },
+    {
+        "id": 21,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Burung yang dikirim Allah Swt. untuk menghancurkan pasukan Abrahah bernama burung...",
+        "jawaban": "ababil"
+    },
+    {
+        "id": 22,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Paman Khadijah yang diminta mengatur pernikahannya dengan Nabi Muhammad saw. adalah...",
+        "jawaban": "waraqah"
+    },
+    {
+        "id": 23,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Golongan orang-orang yang pertama kali memeluk agama Islam disebut as-Sabiqun al-...",
+        "jawaban": "awwalun"
+    },
+    {
+        "id": 24,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Wanita pertama yang memeluk Islam dan mendampingi dakwah nabi adalah...",
+        "jawaban": "khadijah"
+    },
+    {
+        "id": 25,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Sifat nabi yang tahan menghadapi cobaan, hinaan, dan tidak mudah putus asa adalah...",
+        "jawaban": "sabar"
+    },
+    {
+        "id": 26,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Tempat Nabi Muhammad saw. menyendiri hingga menerima wahyu pertama adalah Gua...",
+        "jawaban": "hira"
+    },
+    {
+        "id": 27,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Perjalanan malam hari Nabi Muhammad saw. hingga naik ke Sidratulmuntaha dikenal dengan peristiwa...",
+        "jawaban": "mikraj"
+    },
+    {
+        "id": 28,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Pasukan gajah hancur ditimpa kerikil panas yang dibawa oleh burung Ababil. Berdasarkan teks sejarah, dari manakah kerikil-kerikil tersebut berasal?",
+        "jawaban": "neraka"
+    },
+    {
+        "id": 29,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Wahyu pertama mengajarkan pentingnya ilmu pengetahuan. Dalam ayat ke-4, Allah Swt. mengajar manusia dengan menggunakan perantara alat yaitu...",
+        "jawaban": "pena"
+    },
+    {
+        "id": 30,
+        "tipe_soal": "ISIAN",
+        "pertanyaan": "Karena selalu berkata jujur, tidak pernah menipu pembeli, dan mengembalikan barang titipan dengan utuh, Nabi Muhammad saw. mendapat julukan...",
+        "jawaban": "amin"
+    }
+]

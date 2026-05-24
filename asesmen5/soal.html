@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis PAI Kelas 3</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #334155;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        
+        .card-custom {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(13, 110, 253, 0.1);
+            background: #ffffff;
+            width: 100%;
+            max-width: 800px;
+            padding: 40px;
+        }
+
+        h1 { font-weight: 700; color: #0d6efd; }
+        
+        .btn-primary-custom {
+            background-color: #0d6efd;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-primary-custom:hover { background-color: #0a58ca; transform: translateY(-2px); }
+        
+        /* Quiz Section Styles */
+        #quiz-section { display: none; }
+        .timer-badge { font-size: 1.1rem; font-weight: 600; color: #dc3545; background: #ffeeba; padding: 8px 16px; border-radius: 8px; }
+        
+        .question-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 25px; line-height: 1.5; }
+        
+        /* Clickable Option Div */
+        .option-box {
+            display: block;
+            padding: 16px 20px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .option-box:hover { background: #e0f2fe; border-color: #bae6fd; }
+        .option-box.active {
+            background: #e0f2fe;
+            border-color: #0d6efd;
+            color: #0a58ca;
+            box-shadow: 0 4px 10px rgba(13, 110, 253, 0.15);
+        }
+        
+        /* Input Isian */
+        .isian-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .isian-input:focus { border-color: #0d6efd; outline: none; box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1); }
+        
+        .progress { height: 8px; border-radius: 4px; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center">
+    
+    <div class="card-custom text-center" id="login-section">
+        <i class="fa-solid fa-graduation-cap fa-4x mb-3 text-primary"></i>
+        <h1 class="mb-4">Kuis PAI Kelas 3</h1>
+        <p class="text-muted mb-4">Mari asah kemampuanmu tentang Kisah Nabi Muhammad saw.</p>
+        
+        <div class="form-floating mb-3 text-start">
+            <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap" required>
+            <label for="nama"><i class="fa-regular fa-user me-2"></i>Nama Lengkap</label>
+        </div>
+        
+        <div class="form-floating mb-4 text-start">
+            <select class="form-select" id="kelas">
+                <option value="3A">3A</option>
+                <option value="3B">3B</option>
+                <option value="3C">3C</option>
+                <option value="3D">3D</option>
+            </select>
+            <label for="kelas"><i class="fa-solid fa-school me-2"></i>Pilih Kelas</label>
+        </div>
+        
+        <button class="btn btn-primary-custom w-100 text-white" onclick="mulaiKuis()">
+            <i class="fa-solid fa-play me-2"></i>Mulai Kuis
+        </button>
+    </div>
+
+    <div class="card-custom" id="quiz-section">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="text-primary mb-0 fw-bold" id="question-counter">Soal 1 / 30</h5>
+            <div class="timer-badge" id="timer-display"><i class="fa-regular fa-clock me-1"></i> 00:00</div>
+        </div>
+        
+        <div class="progress">
+            <div class="progress-bar bg-primary" id="progress-bar" role="progressbar" style="width: 0%;"></div>
+        </div>
+
+        <div id="questions-container">
+            </div>
+
+        <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+            <button class="btn btn-outline-secondary px-4 fw-bold d-none" id="btn-prev" onclick="navigasiSoal(-1)">
+                <i class="fa-solid fa-arrow-left me-2"></i>Sebelumnya
+            </button>
+            <button class="btn btn-primary px-4 fw-bold ms-auto" id="btn-next" onclick="navigasiSoal(1)">
+                Selanjutnya<i class="fa-solid fa-arrow-right ms-2"></i>
+            </button>
+            <button class="btn btn-success px-4 fw-bold ms-auto d-none" id="btn-submit" onclick="selesaiKuis()">
+                <i class="fa-solid fa-check-double me-2"></i>Selesai & Kumpulkan
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let soalData = [];
+    let waktuMulai = null;
+    let timerInterval = null;
+    let waktuDetik = 0;
+    
+    let currentIndex = 0; // State untuk Pagination
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    async function mulaiKuis() {
+        const nama = document.getElementById('nama').value;
+        const kelas = document.getElementById('kelas').value;
+        
+        if (!nama.trim()) { alert("Silakan isi nama terlebih dahulu!"); return; }
+        
+        localStorage.setItem('siswa_nama', nama);
+        localStorage.setItem('siswa_kelas', kelas);
+
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'block';
+
+        try {
+            const response = await fetch('soal.json');
+            soalData = await response.json();
+            
+            // 1. Acak seluruh soal secara acak
+            soalData = shuffle(soalData);
+            
+            // 2. Urutkan agar Tipe PG selalu duluan dibanding ISIAN
+            soalData.sort((a, b) => {
+                if (a.tipe_soal === 'PG' && b.tipe_soal === 'ISIAN') return -1;
+                if (a.tipe_soal === 'ISIAN' && b.tipe_soal === 'PG') return 1;
+                return 0;
+            });
+
+            renderSemuaSoal();
+            tampilkanSoal(0);
+            
+            waktuMulai = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+        } catch (error) {
+            alert("Gagal memuat soal. Pastikan file soal.json berada di folder yang sama!");
+            console.error(error);
+        }
+    }
+
+    function updateTimer() {
+        waktuDetik++;
+        let m = Math.floor(waktuDetik / 60).toString().padStart(2, '0');
+        let s = (waktuDetik % 60).toString().padStart(2, '0');
+        document.getElementById('timer-display').innerHTML = `<i class="fa-regular fa-clock me-1"></i> ${m}:${s}`;
+    }
+
+    // Render semua soal (disembunyikan secara default)
+    function renderSemuaSoal() {
+        const container = document.getElementById('questions-container');
+        container.innerHTML = '';
+
+        soalData.forEach((soal, index) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'soal-wrapper d-none';
+            wrapper.id = `soal-index-${index}`;
+            
+            let badgeTipe = soal.tipe_soal === 'PG' 
+                ? '<span class="badge bg-primary mb-2">Pilihan Ganda</span>' 
+                : '<span class="badge bg-warning text-dark mb-2">Isian Singkat</span>';
+
+            let html = `
+                ${badgeTipe}
+                <div class="question-title">${soal.pertanyaan}</div>
+            `;
+            
+            if (soal.tipe_soal === 'PG') {
+                let pilihan = [soal.pil_a, soal.pil_b, soal.pil_c];
+                pilihan = shuffle(pilihan); 
+                
+                html += `<div class="options-container" id="options_${soal.id}">`;
+                pilihan.forEach((pil) => {
+                    // Gunakan single quotes di parameter fungsi agar aman dari tanda kutip di dalam teks
+                    let cleanPil = pil.replace(/'/g, "\\'");
+                    html += `
+                        <div class="option-box" onclick="pilihOpsi(this, 'input_${soal.id}', '${cleanPil}')">
+                            <i class="fa-regular fa-circle me-2 icon-radio"></i>${pil}
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                // Input hidden untuk menampung jawaban PG
+                html += `<input type="hidden" id="input_${soal.id}">`;
+            } else {
+                html += `<input type="text" class="isian-input" id="input_${soal.id}" placeholder="Ketik jawabanmu di sini..." autocomplete="off">`;
+            }
+            
+            wrapper.innerHTML = html;
+            container.appendChild(wrapper);
+        });
+    }
+
+    // Fungsi interaksi klik Div untuk Pilihan Ganda
+    function pilihOpsi(element, inputId, jawaban) {
+        // Hapus kelas 'active' dari semua pilihan di soal yang sama
+        let parent = element.parentElement;
+        let allOptions = parent.getElementsByClassName('option-box');
+        for (let opt of allOptions) {
+            opt.classList.remove('active');
+            opt.querySelector('.icon-radio').classList.replace('fa-circle-check', 'fa-circle');
+            opt.querySelector('.icon-radio').classList.remove('text-primary');
+        }
+        
+        // Tambah kelas 'active' ke div yang diklik
+        element.classList.add('active');
+        element.querySelector('.icon-radio').classList.replace('fa-circle', 'fa-circle-check');
+        element.querySelector('.icon-radio').classList.add('text-primary');
+
+        // Simpan nilai ke input hidden
+        document.getElementById(inputId).value = jawaban;
+    }
+
+    // Menampilkan soal berdasarkan index (Pagination)
+    function tampilkanSoal(index) {
+        // Sembunyikan semua soal
+        document.querySelectorAll('.soal-wrapper').forEach(el => el.classList.add('d-none'));
+        
+        // Tampilkan soal terpilih
+        document.getElementById(`soal-index-${index}`).classList.remove('d-none');
+        
+        // Update Counter & Progress
+        document.getElementById('question-counter').innerText = `Soal ${index + 1} dari ${soalData.length}`;
+        let progressPercent = ((index + 1) / soalData.length) * 100;
+        document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+        // Atur tombol prev, next, dan submit
+        document.getElementById('btn-prev').classList.toggle('d-none', index === 0);
+        
+        if (index === soalData.length - 1) {
+            document.getElementById('btn-next').classList.add('d-none');
+            document.getElementById('btn-submit').classList.remove('d-none');
+        } else {
+            document.getElementById('btn-next').classList.remove('d-none');
+            document.getElementById('btn-submit').classList.add('d-none');
+        }
+    }
+
+    // Fungsi tombol next/prev
+    function navigasiSoal(step) {
+        currentIndex += step;
+        tampilkanSoal(currentIndex);
+    }
+
+    // Logika evaluasi ISIAN Singkat
+    function cekJawabanIsian(jawabanUser, jawabanKunci) {
+        if (!jawabanUser) return false;
+        let userClean = jawabanUser.replace(/[^\w\s]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
+        let kunciClean = jawabanKunci.toLowerCase();
+        return userClean.includes(kunciClean);
+    }
+
+    async function selesaiKuis() {
+        // Konfirmasi sebelum submit
+        if(!confirm("Yakin ingin mengumpulkan jawaban sekarang?")) return;
+
+        clearInterval(timerInterval);
+        
+        let benar = 0;
+        let detailJawaban = [];
+
+        soalData.forEach(soal => {
+            // Ambil jawaban (bisa dari hidden input PG atau text input Isian)
+            let jwbUser = document.getElementById(`input_${soal.id}`).value;
+            let isBenar = false;
+
+            if (soal.tipe_soal === 'PG') {
+                if (jwbUser === soal.jawaban) isBenar = true;
+            } else {
+                if (cekJawabanIsian(jwbUser, soal.jawaban)) isBenar = true;
+            }
+            
+            if (isBenar) benar++;
+            detailJawaban.push({ id: soal.id, jawaban_user: jwbUser, status: isBenar });
+        });
+
+        const totalSoal = soalData.length;
+        const nilaiAkhir = Math.round((benar / totalSoal) * 100);
+        const nama = localStorage.getItem('siswa_nama');
+        const kelas = localStorage.getItem('siswa_kelas');
+
+        const hasilData = {
+            nama: nama,
+            kelas: kelas,
+            waktu_detik: waktuDetik,
+            nilai: nilaiAkhir,
+            benar: benar,
+            total: totalSoal,
+            tanggal: new Date().toISOString()
+        };
+
+        // Simpan ke localStorage
+        localStorage.setItem('hasil_terakhir', JSON.stringify(hasilData));
+        localStorage.setItem('detail_jawaban', JSON.stringify(detailJawaban));
+        
+        // Simpan ke Supabase
+        try {
+            // Tombol diubah jadi loading text
+            document.getElementById('btn-submit').innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Menyimpan...';
+            document.getElementById('btn-submit').disabled = true;
+
+            const { data, error } = await supabaseClient
+                .from('nilai_kuis')
+                .insert([hasilData]);
+                
+            if (error) throw error;
+        } catch(err) {
+            console.error("Gagal menyimpan ke Supabase", err);
+            // Tetap lanjut ke hasil meski gagal simpan database agar siswa tidak stuck
+        }
+
+        // Pindah halaman
+        window.location.href = "hasil.html";
+    }
+</script>
+</body>
+</html>

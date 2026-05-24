@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Kuis PAI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f8ff; /* Light blue background matching soal.html */
+            color: #334155;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .card-custom {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(13, 110, 253, 0.1);
+            background: #ffffff;
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 { font-weight: 700; color: #0d6efd; margin-bottom: 25px; }
+
+        .score-box {
+            background: #e0f2fe;
+            border: 5px solid #0d6efd;
+            border-radius: 50%;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            font-weight: 800;
+            color: #0d6efd;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.2);
+        }
+
+        .details-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .details-box p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+        .details-box p:last-child { margin-bottom: 0; }
+        .details-box .fw-bold { color: #1e293b; }
+
+        .btn-primary-custom {
+            background-color: #0d6efd;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-primary-custom:hover { background-color: #0a58ca; transform: translateY(-2px); }
+
+        .btn-outline-custom {
+            border: 2px solid #0d6efd;
+            color: #0d6efd;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+            background-color: transparent;
+        }
+        .btn-outline-custom:hover { background-color: #e0f2fe; color: #0a58ca; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center">
+    <div class="card-custom">
+        <i class="fa-solid fa-medal fa-4x mb-3 text-warning"></i>
+        <h1>Hasil Kuis PAI</h1>
+        
+        <div class="details-box">
+            <p><i class="fa-regular fa-user me-2 text-primary"></i>Nama: <span class="fw-bold" id="nama-siswa">-</span></p>
+            <p><i class="fa-solid fa-school me-2 text-primary"></i>Kelas: <span class="fw-bold" id="kelas-siswa">-</span></p>
+        </div>
+        
+        <div class="score-box" id="nilai-akhir">0</div>
+        
+        <div class="row text-center mb-4">
+            <div class="col-6 border-end">
+                <p class="text-muted mb-1" style="font-size: 0.9rem;"><i class="fa-solid fa-check-circle text-success me-1"></i>Jawaban Benar</p>
+                <h5 class="fw-bold text-dark" id="statistik">0 / 0</h5>
+            </div>
+            <div class="col-6">
+                <p class="text-muted mb-1" style="font-size: 0.9rem;"><i class="fa-solid fa-stopwatch text-danger me-1"></i>Waktu Pengerjaan</p>
+                <h5 class="fw-bold text-dark" id="waktu-pengerjaan">0m 0s</h5>
+            </div>
+        </div>
+
+        <div class="d-grid gap-3">
+            <a href="index.html" class="btn btn-primary-custom text-white">
+                <i class="fa-solid fa-ranking-star me-2"></i>Lihat Leaderboard
+            </a>
+            <a href="soal.html" class="btn btn-outline-custom">
+                <i class="fa-solid fa-rotate-right me-2"></i>Ulangi Kuis
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Konfigurasi Supabase (Bisa digunakan untuk fetch data lanjutan jika dibutuhkan)
+    const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    window.onload = function() {
+        // Ambil data hasil kuis dari LocalStorage
+        const hasilStr = localStorage.getItem('hasil_terakhir');
+        
+        if (hasilStr) {
+            const hasil = JSON.parse(hasilStr);
+            
+            // Masukkan data ke elemen HTML
+            document.getElementById('nama-siswa').innerText = hasil.nama;
+            document.getElementById('kelas-siswa').innerText = hasil.kelas;
+            
+            // Animasi perhitungan nilai
+            let currentScore = 0;
+            const targetScore = hasil.nilai;
+            const scoreElement = document.getElementById('nilai-akhir');
+            
+            const timer = setInterval(() => {
+                if(currentScore >= targetScore) {
+                    clearInterval(timer);
+                    scoreElement.innerText = targetScore;
+                } else {
+                    currentScore++;
+                    scoreElement.innerText = currentScore;
+                }
+            }, 15); // Kecepatan animasi (15ms per angka)
+
+            // Update Statistik
+            document.getElementById('statistik').innerText = `${hasil.benar} dari ${hasil.total}`;
+            
+            // Format Waktu
+            let m = Math.floor(hasil.waktu_detik / 60);
+            let s = hasil.waktu_detik % 60;
+            document.getElementById('waktu-pengerjaan').innerText = `${m}m ${s}s`;
+            
+        } else {
+            alert("Belum ada data kuis yang dikerjakan!");
+            window.location.href = "index.html"; // Arahkan kembali jika tidak ada data
+        }
+    }
+</script>
+</body>
+</html>
