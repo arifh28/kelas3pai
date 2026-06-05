@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian ASAT Kelas 3</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; background: #f4f4f9; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
+        button:hover { background: #218838; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        iframe { width: 100%; height: 200px; border-radius: 8px; border: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Mulai Ujian PAI ASAT Kelas 3</h2>
+        <form id="startForm">
+            <label>Nama Lengkap:</label>
+            <input type="text" id="nama" required placeholder="Masukkan nama Anda">
+            
+            <label>Kelas:</label>
+            <select id="kelas" required>
+                <option value="">Pilih Kelas</option>
+                <option value="3A">3A</option>
+                <option value="3B">3B</option>
+                <option value="3C">3C</option>
+            </select>
+            
+            <button type="submit">Mulai Ujian</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h3>Materi Pembelajaran (Video YouTube)</h3>
+        <div class="video-grid">
+            <iframe src="https://www.youtube.com/embed/KzoWSOISZQ4" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/wBhhkkXr5sM" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/DqBB96Ic6XU" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/fGOgDkELdDg" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/rPQFcgbo6v4" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('startForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nama = document.getElementById('nama').value;
+            const kelas = document.getElementById('kelas').value;
+            
+            localStorage.setItem('siswa_nama', nama);
+            localStorage.setItem('siswa_kelas', kelas);
+            localStorage.removeItem('jawaban_ujian'); // Reset jawaban jika mengulang
+            
+            window.location.href = 'soal.html';
+        });
+    </script>
+</body>
+</html>

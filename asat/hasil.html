@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Ujian</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f9; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        h1 { color: #333; }
+        .score { font-size: 60px; color: #28a745; font-weight: bold; margin: 20px 0; }
+        .info { font-size: 18px; color: #555; margin-bottom: 20px;}
+        #statusMsg { font-size: 14px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Hasil Ujian</h1>
+        <div class="info">
+            <span id="resNama"></span> - Kelas <span id="resKelas"></span>
+        </div>
+        <div class="score" id="finalScore">...</div>
+        <p id="statusMsg">Menghitung dan menyimpan nilai...</p>
+        <button onclick="window.location.href='index.html'" style="margin-top:20px; padding:10px 20px; cursor:pointer; background:#007bff; color:white; border:none; border-radius:4px;">Kembali ke Beranda</button>
+    </div>
+
+    <script>
+        const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const nama = localStorage.getItem('siswa_nama');
+        const kelas = localStorage.getItem('siswa_kelas');
+        const answers = JSON.parse(localStorage.getItem('jawaban_ujian')) || {};
+
+        if(!nama) window.location.href = 'index.html';
+
+        document.getElementById('resNama').innerText = nama;
+        document.getElementById('resKelas').innerText = kelas;
+
+        function normalizeText(text) {
+            // Hapus spasi ekstra, ubah ke lowercase, dan hapus tanda baca
+            return String(text).toLowerCase().replace(/[^a-z0-9]/gi, '');
+        }
+
+        fetch('soal.json')
+            .then(res => res.json())
+            .then(async (questions) => {
+                let correctCount = 0;
+
+                questions.forEach(q => {
+                    const userAns = answers[q.id];
+                    if(userAns !== undefined) {
+                        if(q.type === 'pg') {
+                            if(parseInt(userAns) === q.c) correctCount++;
+                        } else if (q.type === 'essay') {
+                            if(normalizeText(userAns) === normalizeText(q.c)) correctCount++;
+                        }
+                    }
+                });
+
+                // Nilai total: 100 (25 soal x 4)
+                const nilai = correctCount * 4;
+                document.getElementById('finalScore').innerText = nilai;
+
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('kelas3asat')
+                        .insert([{ nama: nama, kelas: kelas, nilai: nilai }]);
+                    
+                    if(error) throw error;
+                    document.getElementById('statusMsg').innerText = "Nilai berhasil disimpan ke database!";
+                    document.getElementById('statusMsg').style.color = "green";
+                    
+                    // Bersihkan storage setelah berhasil menyimpan
+                    localStorage.removeItem('jawaban_ujian');
+                    
+                } catch (err) {
+                    console.error(err);
+                    document.getElementById('statusMsg').innerText = "Gagal menyimpan ke database. Cek koneksi.";
+                    document.getElementById('statusMsg').style.color = "red";
+                }
+            });
+    </script>
+</body>
+</html>

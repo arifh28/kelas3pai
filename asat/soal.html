@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal Ujian</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; background: #f4f4f9; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-height: 250px;}
+        .options label { display: block; padding: 10px; border: 1px solid #ddd; margin-bottom: 8px; border-radius: 4px; cursor: pointer; }
+        .options label:hover { background: #f9f9f9; }
+        input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-finish { background: #dc3545; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h3 id="questionNumber">Soal 1/25</h3>
+        <p id="questionText" style="font-size: 18px; line-height: 1.5;"></p>
+        <div id="answerArea" class="options"></div>
+
+        <div class="nav-buttons">
+            <button id="btnPrev" onclick="prevQuestion()">Sebelumnya</button>
+            <button id="btnNext" onclick="nextQuestion()">Selanjutnya</button>
+            <button id="btnFinish" class="btn-finish" onclick="finishExam()" style="display:none;">Selesai</button>
+        </div>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentIndex = 0;
+        let answers = JSON.parse(localStorage.getItem('jawaban_ujian')) || {};
+
+        if(!localStorage.getItem('siswa_nama')) {
+            window.location.href = 'index.html';
+        }
+
+        fetch('soal.json')
+            .then(res => res.json())
+            .then(data => {
+                questions = data;
+                renderQuestion();
+            });
+
+        function renderQuestion() {
+            const q = questions[currentIndex];
+            document.getElementById('questionNumber').innerText = `Soal ${currentIndex + 1} dari ${questions.length}`;
+            document.getElementById('questionText').innerText = q.q;
+            
+            const area = document.getElementById('answerArea');
+            area.innerHTML = '';
+
+            if(q.type === 'pg') {
+                q.a.forEach((opt, idx) => {
+                    const checked = answers[q.id] == idx ? 'checked' : '';
+                    area.innerHTML += `
+                        <label>
+                            <input type="radio" name="q${q.id}" value="${idx}" onchange="saveAnswer(${q.id}, ${idx})" ${checked}>
+                            ${opt}
+                        </label>
+                    `;
+                });
+            } else {
+                const val = answers[q.id] || '';
+                area.innerHTML = `<input type="text" value="${val}" oninput="saveAnswer(${q.id}, this.value)" placeholder="Tulis jawaban singkat di sini...">`;
+            }
+
+            document.getElementById('btnPrev').disabled = currentIndex === 0;
+            
+            if(currentIndex === questions.length - 1) {
+                document.getElementById('btnNext').style.display = 'none';
+                document.getElementById('btnFinish').style.display = 'block';
+            } else {
+                document.getElementById('btnNext').style.display = 'block';
+                document.getElementById('btnFinish').style.display = 'none';
+            }
+        }
+
+        function saveAnswer(id, val) {
+            answers[id] = val;
+            localStorage.setItem('jawaban_ujian', JSON.stringify(answers));
+        }
+
+        function nextQuestion() {
+            if(currentIndex < questions.length - 1) { currentIndex++; renderQuestion(); }
+        }
+
+        function prevQuestion() {
+            if(currentIndex > 0) { currentIndex--; renderQuestion(); }
+        }
+
+        function finishExam() {
+            if(confirm('Apakah Anda yakin sudah selesai?')) {
+                window.location.href = 'hasil.html';
+            }
+        }
+    </script>
+</body>
+</html>
