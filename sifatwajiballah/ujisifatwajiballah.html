@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Sifat Wajib Allah</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f2f5;
+            color: #2b2b2b;
+        }
+        .mobile-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .app-header {
+            background: linear-gradient(135deg, #0f5132 0%, #198754 100%);
+            color: white;
+            padding: 1.5rem 1.5rem;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            text-align: center;
+        }
+        .content-area {
+            flex-grow: 1;
+            padding: 1.5rem;
+        }
+        /* Soal Container */
+        .question-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .option-label {
+            display: block;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-label:active { transform: scale(0.98); }
+        .form-check-input:checked + .option-label {
+            border-color: #198754;
+            background-color: #e8f5e9;
+            font-weight: 600;
+        }
+        .form-check-input { display: none; }
+        
+        /* Modal Grid */
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+        .num-btn {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        /* Navigasi Bawah */
+        .bottom-nav {
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+        
+        .screen { display: none; }
+        .screen.active { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-wrapper">
+        
+        <!-- SCREEN 1: LOGIN -->
+        <div id="screen-login" class="screen active">
+            <div class="app-header mb-4">
+                <h2 class="h4 fw-bold mb-1"><i class="fas fa-edit me-2"></i>Kuis PAI</h2>
+                <p class="mb-0 small opacity-75">Sifat Wajib Allah Swt.</p>
+            </div>
+            <div class="content-area">
+                <div class="card border-0 shadow-sm rounded-4 p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nama Lengkap</label>
+                            <input type="text" id="studentName" class="form-control form-control-lg" required placeholder="Masukkan namamu...">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Kelas</label>
+                            <select id="studentClass" class="form-select form-select-lg" required>
+                                <option value="" selected disabled>Pilih Kelas</option>
+                                <option value="3A">3A</option>
+                                <option value="3B">3B</option>
+                                <option value="3C">3C</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg w-100 fw-bold rounded-pill">Mulai Kuis <i class="fas fa-arrow-right ms-2"></i></button>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <a href="sifatwajibmateri.html" class="text-decoration-none text-muted small"><i class="fas fa-book me-1"></i> Kembali ke Materi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: QUIZ -->
+        <div id="screen-quiz" class="screen flex-column h-100" style="display: none;">
+            <div class="app-header d-flex justify-content-between align-items-center py-3">
+                <div class="fw-bold"><span id="q-number-badge" class="badge bg-light text-success fs-6">Soal 1/35</span></div>
+                <button class="btn btn-outline-light btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#modalNavigasi">
+                    <i class="fas fa-th me-1"></i> Daftar Soal
+                </button>
+            </div>
+            
+            <div class="content-area overflow-auto">
+                <div class="question-card">
+                    <h5 id="question-text" class="fw-bold mb-4 line-height-base">Memuat soal...</h5>
+                    
+                    <!-- Area Pilihan Ganda -->
+                    <div id="mcq-area"></div>
+                    
+                    <!-- Area Isian Singkat -->
+                    <div id="short-area" class="d-none">
+                        <input type="text" id="short-input" class="form-control form-control-lg" placeholder="Ketik jawaban (1-2 kata)..." autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-nav shadow-lg">
+                <button class="btn btn-secondary px-4 rounded-pill" id="btn-prev" onclick="changeQuestion(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="btn btn-danger rounded-pill px-4 fw-bold d-none" id="btn-submit" onclick="submitQuiz()">
+                    Kumpulkan
+                </button>
+                <button class="btn btn-success px-4 rounded-pill" id="btn-next" onclick="changeQuestion(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: RESULT -->
+        <div id="screen-result" class="screen">
+            <div class="app-header mb-4">
+                <h2 class="h4 fw-bold mb-0"><i class="fas fa-check-circle me-2"></i>Selesai!</h2>
+            </div>
+            <div class="content-area text-center">
+                <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                    <h5 id="result-name" class="text-muted mb-1">Nama</h5>
+                    <p id="result-class" class="fw-bold mb-4">Kelas</p>
+                    
+                    <div class="display-1 fw-bold text-success mb-3" id="final-score">100</div>
+                    
+                    <div class="row g-2 mb-4">
+                        <div class="col-6">
+                            <div class="p-2 bg-light rounded text-muted small">Nilai PG:<br><strong class="text-dark fs-5" id="score-pg">0</strong></div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-2 bg-light rounded text-muted small">Nilai Isian:<br><strong class="text-dark fs-5" id="score-sa">0</strong></div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-muted small"><i class="fas fa-cloud-upload-alt me-1"></i> Nilai sudah tersimpan otomatis.</p>
+                    
+                    <div class="d-flex flex-column gap-2 mt-4">
+                        <a href="sifatwajibmateri.html" class="btn btn-success w-100 rounded-pill"><i class="fas fa-book me-2"></i> Kembali ke Materi</a>
+                        <button class="btn btn-outline-danger w-100 rounded-pill" onclick="resetQuiz()"><i class="fas fa-redo me-2"></i> Ulangi Kuis (Reset)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Navigasi Soal -->
+    <div class="modal fade" id="modalNavigasi" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold fs-6">Navigasi Soal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="small text-muted mb-2">Pilihan Ganda</p>
+                    <div class="number-grid mb-3" id="nav-grid-mcq"></div>
+                    <p class="small text-muted mb-2">Isian Singkat</p>
+                    <div class="number-grid" id="nav-grid-sa"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Supabase Initialization
+        const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Bank Soal
+        const questions = [
+            // MUDAH (6)
+            { type: 'mcq', q: 'Sifat Wujud artinya...', options: ['Ada', 'Dahulu', 'Kekal'], ans: 0 },
+            { type: 'mcq', q: 'Qidam artinya...', options: ['Esa', 'Dahulu', 'Baru'], ans: 1 },
+            { type: 'mcq', q: 'Baqā’ artinya...', options: ['Kekal', 'Sementara', 'Ada'], ans: 0 },
+            { type: 'mcq', q: 'Qudrah artinya...', options: ['Maha Melihat', 'Maha Mendengar', 'Mahakuasa'], ans: 2 },
+            { type: 'mcq', q: 'Irādah artinya...', options: ['Berkehendak', 'Hidup', 'Mengetahui'], ans: 0 },
+            { type: 'mcq', q: 'Hayāh artinya...', options: ['Mati', 'Hidup', 'Melihat'], ans: 1 },
+            // SEDANG (13)
+            { type: 'mcq', q: 'Bukti Allah bersifat Wujud adalah adanya...', options: ['Alam semesta beserta isinya', 'Gedung pencakar langit', 'Jalan tol yang panjang'], ans: 0 },
+            { type: 'mcq', q: 'Allah Swt. tidak mungkin mati karena memiliki sifat...', options: ['Hayāh', '‘Ilmun', 'Sama’'], ans: 0 },
+            { type: 'mcq', q: 'Segala sesuatu yang terjadi di alam semesta ini adalah kehendak Allah. Sifatnya adalah...', options: ['Qudrah', 'Irādah', 'Baqā’'], ans: 1 },
+            { type: 'mcq', q: 'Allah mengetahui segala peristiwa yang ada di dunia ini karena bersifat...', options: ['Sama’', 'Baṣar', '‘Ilmun'], ans: 2 },
+            { type: 'mcq', q: 'Allah tidak butuh bantuan makhluk-Nya dalam mengatur alam karena bersifat...', options: ['Qiyāmuhu binafsihi', 'Wahdaniyyah', 'Qidam'], ans: 0 },
+            { type: 'mcq', q: 'Hanya ada satu Tuhan pencipta alam, hal ini membuktikan Allah bersifat...', options: ['Qidam', 'Wahdaniyyah', 'Baqā’'], ans: 1 },
+            { type: 'mcq', q: 'Al-Qur’an adalah bukti firman-Nya, yang menunjukkan sifat...', options: ['Kalām', 'Baṣar', 'Hayāh'], ans: 0 },
+            { type: 'mcq', q: 'Sifat yang menunjukkan bahwa Allah Maha Segalanya dan berbeda dengan makhluk-Nya adalah...', options: ['Wujud', 'Mukhālafatu lil hawādiṡi', 'Baqā’'], ans: 1 },
+            { type: 'mcq', q: 'Allah Maha Mendengar suara sekecil apapun serta isi hati manusia, sesuai sifat...', options: ['Baṣar', 'Sama’', 'Hayāh'], ans: 1 },
+            { type: 'mcq', q: 'Tidak ada satu makhluk pun yang luput dari penglihatan Allah, karena Ia bersifat...', options: ['Baṣar', 'Sama’', 'Kalām'], ans: 0 },
+            { type: 'mcq', q: 'Sifat Qadīran berarti bahwa Allah Swt. itu...', options: ['Maha Mengetahui', 'Maha Berkuasa', 'Maha Mendengar'], ans: 1 },
+            { type: 'mcq', q: 'Sifat Murīdan menegaskan bahwa Allah Swt. itu...', options: ['Maha Berkehendak', 'Maha Mengetahui', 'Maha Hidup'], ans: 0 },
+            { type: 'mcq', q: 'Sifat ‘Aliman (Maha Mengetahui) berkaitan erat dengan sifat...', options: ['‘Ilmun', 'Hayāh', 'Kalām'], ans: 0 },
+            // SUSAH (6)
+            { type: 'mcq', q: 'Meskipun seluruh alam raya ini hancur kiamat, Allah Swt. tetap abadi selamanya. Ini makna dari sifat...', options: ['Qidam', 'Baqā’', 'Wujud'], ans: 1 },
+            { type: 'mcq', q: 'Manusia bisa merencanakan, tetapi hasil akhir mutlak ditentukan oleh Allah. Ini adalah bukti sifat...', options: ['‘Ilmun', 'Irādah', 'Baṣar'], ans: 1 },
+            { type: 'mcq', q: 'Allah menciptakan ragam jenis manusia tanpa bantuan siapa pun. Ini bukti sifat...', options: ['Qiyāmuhu binafsihi', 'Wahdaniyyah', 'Sama’'], ans: 0 },
+            { type: 'mcq', q: 'Mustahil Allah itu lebih dari satu (Ta\'addud), karena Allah pasti memiliki sifat...', options: ['Wujud', 'Wahdaniyyah', 'Qidam'], ans: 1 },
+            { type: 'mcq', q: 'Jika ada dua tuhan, pasti alam semesta akan hancur berantakan. Oleh karena itu Allah wajib bersifat...', options: ['Esa', 'Kekal', 'Melihat'], ans: 0 },
+            { type: 'mcq', q: 'Keteraturan perputaran siang dan malam membuktikan bahwa penciptanya memiliki sifat...', options: ['Qudrah', 'Sama’', 'Kalām'], ans: 0 },
+            
+            // ISIAN SINGKAT (10) - Jawaban wajib 1-2 kata
+            { type: 'short', q: 'Apa arti dari sifat Sama’?', ans: ['mendengar'] },
+            { type: 'short', q: 'Apa arti dari sifat Baṣar?', ans: ['melihat'] },
+            { type: 'short', q: 'Apa arti dari sifat Kalām?', ans: ['berfirman', 'berkata-kata'] },
+            { type: 'short', q: 'Apa arti dari sifat Hayyan?', ans: ['mahahidup', 'hidup'] },
+            { type: 'short', q: 'Apa arti dari sifat Samī’an?', ans: ['maha mendengar', 'mendengar'] },
+            
+            { type: 'short', q: 'Apa bahasa Arab dari sifat "Esa"?', ans: ['wahdaniah', 'wahdaniyyah'] },
+            { type: 'short', q: 'Apa bahasa Arab dari sifat "Mengetahui"?', ans: ['ilmun', 'ilmu'] },
+            { type: 'short', q: 'Apa bahasa Arab dari sifat "Dahulu"?', ans: ['qidam'] },
+            { type: 'short', q: 'Apa bahasa Arab dari sifat "Ada"?', ans: ['wujud'] },
+            { type: 'short', q: 'Apa bahasa Arab dari sifat "Kekal"?', ans: ['baqa', 'baqa\''] }
+        ];
+
+        let currentQuestion = 0;
+        let userData = { nama: '', kelas: '' };
+        let answers = {};
+        
+        // Inisialisasi
+        window.onload = () => {
+            const savedState = JSON.parse(localStorage.getItem('kuisSifatAllah'));
+            if (savedState && savedState.isSubmitted) {
+                showResultScreen(savedState);
+            } else if (savedState) {
+                userData = savedState.userData;
+                answers = savedState.answers || {};
+                currentQuestion = savedState.currentQuestion || 0;
+                showQuizScreen();
+            }
+        };
+
+        // Mulai Kuis
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            userData.nama = document.getElementById('studentName').value;
+            userData.kelas = document.getElementById('studentClass').value;
+            saveState();
+            showQuizScreen();
+        });
+
+        function showQuizScreen() {
+            document.getElementById('screen-login').classList.remove('active');
+            document.getElementById('screen-quiz').classList.add('active');
+            document.getElementById('screen-quiz').style.display = 'flex';
+            renderNavModal();
+            loadQuestion(currentQuestion);
+        }
+
+        // Simpan State ke LocalStorage
+        function saveState() {
+            localStorage.setItem('kuisSifatAllah', JSON.stringify({ userData, answers, currentQuestion, isSubmitted: false }));
+        }
+
+        // Load Pertanyaan
+        function loadQuestion(index) {
+            currentQuestion = index;
+            const q = questions[index];
+            document.getElementById('q-number-badge').innerText = `Soal ${index + 1}/35`;
+            document.getElementById('question-text').innerText = q.q;
+            
+            const mcqArea = document.getElementById('mcq-area');
+            const shortArea = document.getElementById('short-area');
+            const shortInput = document.getElementById('short-input');
+
+            if (q.type === 'mcq') {
+                mcqArea.classList.remove('d-none');
+                shortArea.classList.add('d-none');
+                
+                let optionsHtml = '';
+                const labels = ['A', 'B', 'C'];
+                q.options.forEach((opt, i) => {
+                    const isChecked = answers[index] === i ? 'checked' : '';
+                    optionsHtml += `
+                        <label>
+                            <input type="radio" name="mcq" class="form-check-input" value="${i}" onchange="saveAnswer(${i})" ${isChecked}>
+                            <span class="option-label"><strong>${labels[i]}.</strong> ${opt}</span>
+                        </label>
+                    `;
+                });
+                mcqArea.innerHTML = optionsHtml;
+            } else {
+                mcqArea.classList.add('d-none');
+                shortArea.classList.remove('d-none');
+                shortInput.value = answers[index] || '';
+                // Hapus listener lama dan pasang baru
+                shortInput.oninput = (e) => saveAnswer(e.target.value);
+            }
+
+            // Tombol Navigasi
+            document.getElementById('btn-prev').disabled = index === 0;
+            
+            if (index === questions.length - 1) {
+                document.getElementById('btn-next').classList.add('d-none');
+                document.getElementById('btn-submit').classList.remove('d-none');
+            } else {
+                document.getElementById('btn-next').classList.remove('d-none');
+                document.getElementById('btn-submit').classList.add('d-none');
+            }
+            
+            updateNavModalStatus();
+            saveState();
+        }
+
+        function saveAnswer(val) {
+            if (val === "" || val === null) {
+                delete answers[currentQuestion];
+            } else {
+                answers[currentQuestion] = val;
+            }
+            updateNavModalStatus();
+            saveState();
+        }
+
+        function changeQuestion(step) {
+            const next = currentQuestion + step;
+            if (next >= 0 && next < questions.length) {
+                loadQuestion(next);
+            }
+        }
+
+        function jumpToQuestion(index) {
+            loadQuestion(index);
+            const modal = bootstrap.Modal.getInstance(document.getElementById('modalNavigasi'));
+            modal.hide();
+        }
+
+        // Render Modal Grid
+        function renderNavModal() {
+            const gridMcq = document.getElementById('nav-grid-mcq');
+            const gridSa = document.getElementById('nav-grid-sa');
+            gridMcq.innerHTML = '';
+            gridSa.innerHTML = '';
+
+            questions.forEach((q, i) => {
+                const btn = document.createElement('button');
+                btn.className = `btn btn-sm num-btn ${answers[i] !== undefined ? 'btn-success' : 'btn-outline-secondary'}`;
+                btn.innerText = i + 1;
+                btn.id = `nav-btn-${i}`;
+                btn.onclick = () => jumpToQuestion(i);
+                
+                if (q.type === 'mcq') gridMcq.appendChild(btn);
+                else gridSa.appendChild(btn);
+            });
+        }
+
+        function updateNavModalStatus() {
+            Object.keys(answers).forEach(i => {
+                const btn = document.getElementById(`nav-btn-${i}`);
+                if(btn) {
+                    btn.classList.remove('btn-outline-secondary');
+                    btn.classList.add('btn-success');
+                }
+            });
+        }
+
+        // Proses Kumpulkan
+        async function submitQuiz() {
+            const totalDijawab = Object.keys(answers).length;
+            if (totalDijawab < questions.length) {
+                const c = confirm(`Kamu baru menjawab ${totalDijawab} dari 35 soal. Yakin ingin mengumpulkan?`);
+                if (!c) return;
+            }
+
+            document.getElementById('btn-submit').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            document.getElementById('btn-submit').disabled = true;
+
+            // Hitung Nilai
+            let pgScore = 0; // 25 soal x 2 = 50 poin max
+            let saScore = 0; // 10 soal x 5 = 50 poin max
+
+            questions.forEach((q, i) => {
+                if (answers[i] !== undefined) {
+                    if (q.type === 'mcq') {
+                        if (answers[i] === q.ans) pgScore += 2;
+                    } else {
+                        // Toleransi huruf besar/kecil & spasi ekstra
+                        const ansText = answers[i].toString().trim().toLowerCase();
+                        if (q.ans.includes(ansText)) saScore += 5;
+                    }
+                }
+            });
+
+            const totalScore = pgScore + saScore;
+
+            // Kirim ke Supabase
+            try {
+                const { error } = await supabaseClient
+                    .from('quiz_sifat_allah_scores')
+                    .insert([{
+                        nama: userData.nama,
+                        kelas: userData.kelas,
+                        nilai_pg: pgScore,
+                        nilai_isian: saScore,
+                        total_nilai: totalScore
+                    }]);
+                
+                if (error) throw error;
+
+                // Simpan hasil final di local storage
+                const finalState = { userData, pgScore, saScore, totalScore, isSubmitted: true };
+                localStorage.setItem('kuisSifatAllah', JSON.stringify(finalState));
+                
+                // Reset UI state (hide quiz layout if modal is open, etc)
+                document.getElementById('screen-quiz').style.display = 'none';
+                
+                showResultScreen(finalState);
+            } catch (err) {
+                alert('Gagal mengirim data. Pastikan koneksi internet lancar dan tabel Supabase sudah dibuat.');
+                document.getElementById('btn-submit').innerHTML = 'Kumpulkan';
+                document.getElementById('btn-submit').disabled = false;
+            }
+        }
+
+        function showResultScreen(data) {
+            document.getElementById('screen-login').classList.remove('active');
+            document.getElementById('screen-quiz').classList.remove('active');
+            document.getElementById('screen-quiz').style.display = 'none';
+            document.getElementById('screen-result').classList.add('active');
+
+            document.getElementById('result-name').innerText = data.userData.nama;
+            document.getElementById('result-class').innerText = `Kelas ${data.userData.kelas}`;
+            document.getElementById('final-score').innerText = data.totalScore;
+            document.getElementById('score-pg').innerText = data.pgScore;
+            document.getElementById('score-sa').innerText = data.saScore;
+        }
+
+        function resetQuiz() {
+            if(confirm("Yakin ingin menghapus jejak dan mengulangi kuis?")) {
+                localStorage.removeItem('kuisSifatAllah');
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

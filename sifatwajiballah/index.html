@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Materi 3 Kelas 3 PAI - SDN 1 Banjar</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f2f5;
+            color: #2b2b2b;
+        }
+        .mobile-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header & Logos */
+        .app-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 1.5rem 3rem 1.5rem;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            text-align: center;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.25rem;
+        }
+        .logo-img {
+            height: 65px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+        
+        /* Content Area */
+        .content-area {
+            flex-grow: 1;
+            padding: 0 1.25rem 2rem 1.25rem;
+            margin-top: -2rem;
+        }
+        
+        /* Leaderboard Card */
+        .score-board-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .nav-pills .nav-link {
+            border-radius: 10px;
+            font-weight: 600;
+            color: #64748b;
+            padding: 0.5rem 1rem;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+        }
+        
+        /* List Score */
+        .score-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .score-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .score-item:last-child {
+            border-bottom: none;
+        }
+        .rank-badge {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .rank-1 { background: #fef08a; color: #854d0e; } /* Gold */
+        .rank-2 { background: #e2e8f0; color: #475569; } /* Silver */
+        .rank-3 { background: #fed7aa; color: #9a3412; } /* Bronze */
+        .rank-other { background: #f8fafc; color: #94a3b8; }
+        
+        .student-info { flex-grow: 1; }
+        .student-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; color: #1e293b; }
+        .student-class { font-size: 0.75rem; color: #64748b; }
+        .score-value { font-weight: 800; font-size: 1.1rem; color: #10b981; }
+        
+        /* Materi Cards */
+        .materi-card {
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .materi-card:active {
+            transform: scale(0.98);
+        }
+        .card-wajib {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .card-mustahil {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        .materi-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem 0 2rem 0;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        
+        .section-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            padding-left: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-wrapper">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-container">
+                <img src="logo_sekolah.png" alt="Logo SDN 1 Banjar" class="logo-img" onerror="this.src='https://via.placeholder.com/65?text=SDN'">
+                <img src="logo_super.png" alt="Logo SUPER" class="logo-img" onerror="this.src='https://via.placeholder.com/65?text=SUPER'">
+            </div>
+            <h1 class="h4 fw-bold mb-1">Pendidikan Agama Islam Kelas 3</h1>
+            <p class="small opacity-75 mb-0">SDN 1 Banjar - Cerdas Berkarakter</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            
+            <!-- Papan Skor (Leaderboard) -->
+            <div class="score-board-card">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="fw-bold mb-0 text-dark"><i class="fas fa-trophy text-warning me-2"></i> Papan Skor 5 Terbaik</h5>
+                </div>
+                
+                <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-wajib-tab" data-bs-toggle="pill" data-bs-target="#pills-wajib" type="button" role="tab">Wajib</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-mustahil-tab" data-bs-toggle="pill" data-bs-target="#pills-mustahil" type="button" role="tab">Mustahil</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="pills-tabContent">
+                    <!-- Tab Sifat Wajib -->
+                    <div class="tab-pane fade show active" id="pills-wajib" role="tabpanel">
+                        
+                        <h6 class="fw-bold text-muted small mb-2"><i class="fas fa-edit me-1"></i> Nilai Kuis</h6>
+                        <ul class="score-list mb-4" id="list-kuis-wajib">
+                            <li class="text-center small text-muted py-3"><i class="fas fa-spinner fa-spin"></i> Memuat data...</li>
+                        </ul>
+                        
+                        <h6 class="fw-bold text-muted small mb-2"><i class="fas fa-link me-1"></i> Nilai Tarik Benang</h6>
+                        <ul class="score-list" id="list-match-wajib">
+                            <li class="text-center small text-muted py-3"><i class="fas fa-spinner fa-spin"></i> Memuat data...</li>
+                        </ul>
+                        
+                    </div>
+                    
+                    <!-- Tab Sifat Mustahil -->
+                    <div class="tab-pane fade" id="pills-mustahil" role="tabpanel">
+                        
+                        <h6 class="fw-bold text-muted small mb-2"><i class="fas fa-edit me-1"></i> Nilai Kuis</h6>
+                        <ul class="score-list mb-4" id="list-kuis-mustahil">
+                            <li class="text-center small text-muted py-3"><i class="fas fa-spinner fa-spin"></i> Memuat data...</li>
+                        </ul>
+                        
+                        <h6 class="fw-bold text-muted small mb-2"><i class="fas fa-link me-1"></i> Nilai Tarik Benang</h6>
+                        <ul class="score-list" id="list-match-mustahil">
+                            <li class="text-center small text-muted py-3"><i class="fas fa-spinner fa-spin"></i> Memuat data...</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modul Materi -->
+            <h4 class="section-title">Modul Pembelajaran</h4>
+            
+            <a href="sifatwajibmateri.html" class="materi-card card-wajib">
+                <div>
+                    <h5 class="fw-bold mb-1">Sifat Wajib Allah</h5>
+                    <p class="small mb-0 opacity-75">Materi, Kuis & Permainan</p>
+                </div>
+                <div class="materi-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+            </a>
+            
+            <a href="sifatmustahilmateri.html" class="materi-card card-mustahil">
+                <div>
+                    <h5 class="fw-bold mb-1">Sifat Mustahil Allah</h5>
+                    <p class="small mb-0 opacity-75">Materi, Kuis & Permainan</p>
+                </div>
+                <div class="materi-icon">
+                    <i class="fas fa-ban"></i>
+                </div>
+            </a>
+            
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="mb-0">Sat Set Web &copy; 2026 - SDN 1 Banjar</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Supabase Initialization
+        const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
+        
+        // Menggunakan supabaseClient agar tidak bentrok dengan variabel global
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Fungsi bantuan untuk me-render list HTML
+        function renderScoreList(containerId, data, scoreKey) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = '<li class="text-center small text-muted py-3">Belum ada data skor.</li>';
+                return;
+            }
+            
+            data.forEach((row, index) => {
+                let rankClass = 'rank-other';
+                if (index === 0) rankClass = 'rank-1';
+                else if (index === 1) rankClass = 'rank-2';
+                else if (index === 2) rankClass = 'rank-3';
+                
+                const scoreValue = row[scoreKey] || 0;
+                
+                const li = document.createElement('li');
+                li.className = 'score-item';
+                li.innerHTML = `
+                    <div class="rank-badge ${rankClass}">${index + 1}</div>
+                    <div class="student-info">
+                        <div class="student-name">${row.nama}</div>
+                        <div class="student-class">Kelas ${row.kelas}</div>
+                    </div>
+                    <div class="score-value">${scoreValue}</div>
+                `;
+                container.appendChild(li);
+            });
+        }
+
+        // Ambil data Papan Skor
+        async function fetchLeaderboards() {
+            try {
+                // 1. Kuis Wajib
+                const resKuisWajib = await supabaseClient.from('quiz_sifat_allah_scores')
+                    .select('nama, kelas, total_nilai')
+                    .order('total_nilai', { ascending: false })
+                    .limit(5);
+                if(!resKuisWajib.error) renderScoreList('list-kuis-wajib', resKuisWajib.data, 'total_nilai');
+
+                // 2. Match Wajib
+                const resMatchWajib = await supabaseClient.from('match_sifat_allah_logs')
+                    .select('nama, kelas, nilai')
+                    .order('nilai', { ascending: false })
+                    .limit(5);
+                if(!resMatchWajib.error) renderScoreList('list-match-wajib', resMatchWajib.data, 'nilai');
+
+                // 3. Kuis Mustahil
+                const resKuisMustahil = await supabaseClient.from('quiz_sifat_mustahil_scores')
+                    .select('nama, kelas, total_nilai')
+                    .order('total_nilai', { ascending: false })
+                    .limit(5);
+                if(!resKuisMustahil.error) renderScoreList('list-kuis-mustahil', resKuisMustahil.data, 'total_nilai');
+
+                // 4. Match Mustahil
+                const resMatchMustahil = await supabaseClient.from('match_sifat_mustahil_logs')
+                    .select('nama, kelas, nilai')
+                    .order('nilai', { ascending: false })
+                    .limit(5);
+                if(!resMatchMustahil.error) renderScoreList('list-match-mustahil', resMatchMustahil.data, 'nilai');
+
+            } catch (err) {
+                console.error("Gagal memuat papan skor", err);
+                const errorMsg = '<li class="text-center small text-danger py-3">Gagal memuat data dari server.</li>';
+                document.getElementById('list-kuis-wajib').innerHTML = errorMsg;
+                document.getElementById('list-match-wajib').innerHTML = errorMsg;
+                document.getElementById('list-kuis-mustahil').innerHTML = errorMsg;
+                document.getElementById('list-match-mustahil').innerHTML = errorMsg;
+            }
+        }
+
+        // Jalankan fetch saat halaman siap
+        window.onload = fetchLeaderboards;
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tarik Benang Mustahil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #2b2b2b; overscroll-behavior-y: contain; }
+        .mobile-wrapper { max-width: 480px; margin: 0 auto; background-color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; position: relative; }
+        .app-header { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); color: white; padding: 1.5rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; text-align: center; z-index: 10; }
+        .content-area { flex-grow: 1; padding: 1.5rem 1rem; display: flex; flex-direction: column; }
+        
+        .game-board { display: flex; justify-content: space-between; position: relative; flex-grow: 1; touch-action: none; }
+        #lines-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .col-items { width: 42%; display: flex; flex-direction: column; justify-content: space-around; gap: 12px; z-index: 2; }
+        .card-item { background: #fff; border: 2px solid #fee2e2; border-radius: 12px; padding: 0.8rem 0.5rem; text-align: center; font-size: 0.85rem; font-weight: 600; position: relative; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        
+        .card-item.matched-correct { border-color: #198754; background-color: #e8f5e9; color: #0f5132; }
+        .card-item.matched-correct .dot { background-color: #198754; }
+        .matched-line-correct { stroke: #198754; }
+
+        .card-item.matched-wrong { border-color: #dc3545; background-color: #f8d7da; color: #842029; }
+        .card-item.matched-wrong .dot { background-color: #dc3545; }
+        .matched-line-wrong { stroke: #dc3545; }
+        
+        .dot { position: absolute; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; background-color: #cbd5e1; border-radius: 50%; border: 3px solid #fff; z-index: 3; }
+        .left-item .dot { right: -8px; } .right-item .dot { left: -8px; }
+        line { stroke-width: 4; stroke-linecap: round; }
+        .active-line { stroke: #cbd5e1; stroke-dasharray: 6; }
+
+        .btn-theme { background-color: #b91c1c; color: white; }
+        .screen { display: none; } .screen.active { display: flex; flex-direction: column; }
+    </style>
+</head>
+<body>
+    <div class="mobile-wrapper">
+        <div id="screen-login" class="screen active h-100">
+            <div class="app-header mb-4">
+                <h2 class="h4 fw-bold mb-1"><i class="fas fa-link me-2"></i>Tarik Benang</h2>
+                <p class="mb-0 small opacity-75">Sifat Mustahil Allah</p>
+            </div>
+            <div class="content-area">
+                <div class="card border-0 shadow-sm rounded-4 p-4">
+                    <form id="loginForm">
+                        <div class="mb-3"><label class="form-label fw-bold">Nama</label><input type="text" id="studentName" class="form-control form-control-lg" required></div>
+                        <div class="mb-4"><label class="form-label fw-bold">Kelas</label>
+                            <select id="studentClass" class="form-select form-select-lg" required>
+                                <option value="" selected disabled>Pilih Kelas</option>
+                                <option value="3A">3A</option><option value="3B">3B</option><option value="3C">3C</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-theme btn-lg w-100 fw-bold rounded-pill">Mulai Main</button>
+                    </form>
+                    <div class="mt-3 text-center"><a href="sifatmustahilmateri.html" class="text-decoration-none text-muted small"><i class="fas fa-book"></i> Materi</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-game" class="screen h-100">
+            <div class="app-header py-3">
+                <h3 class="h5 fw-bold mb-1">Pasangkan Sifat Mustahil</h3>
+                <p class="mb-0 small opacity-75">Tarik garis kiri ke kanan</p>
+            </div>
+            <div class="content-area">
+                <div class="game-board" id="game-board">
+                    <svg id="lines-svg"></svg>
+                    <div class="col-items" id="col-left"></div>
+                    <div class="col-items" id="col-right"></div>
+                </div>
+                <div class="mt-4 text-center">
+                    <button id="btn-submit" class="btn btn-theme btn-lg rounded-pill w-100 fw-bold d-none" onclick="submitGame()">Selesai & Simpan</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-result" class="screen h-100">
+            <div class="app-header mb-4"><h2 class="h4 fw-bold mb-0">Selesai!</h2></div>
+            <div class="content-area justify-content-center text-center">
+                <div class="card border-0 shadow-sm rounded-4 p-4">
+                    <div class="display-1 mb-3" id="result-icon"></div>
+                    <h5 id="result-name" class="fw-bold mb-1">Nama</h5><p id="result-class" class="text-muted mb-2">Kelas</p>
+                    <div class="display-3 fw-bold mb-4" id="final-score">100</div>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="sifatmustahilmateri.html" class="btn btn-theme w-100 rounded-pill"><i class="fas fa-book me-2"></i> Materi</a>
+                        <button class="btn btn-outline-danger w-100 rounded-pill" onclick="location.reload()">Main Lagi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const allData = [
+            { id:1, term:"‘Adamun", meaning:"Tidak ada" }, { id:2, term:"Ḥudūṡ", meaning:"Baru" },
+            { id:3, term:"Fanā’", meaning:"Binasa" }, { id:4, term:"Mumāṡalatu lil ḥawādiṡ", meaning:"Menyerupai makhluk" },
+            { id:5, term:"Qiyāmuhu bigairihi", meaning:"Bergantung makhluk" }, { id:6, term:"Ta’addud", meaning:"Lebih dari satu" },
+            { id:7, term:"’Ajzun", meaning:"Lemah" }, { id:8, term:"Karāhah", meaning:"Terpaksa" },
+            { id:9, term:"Jahlun", meaning:"Bodoh" }, { id:10, term:"Mautun", meaning:"Mati" },
+            { id:11, term:"Ṣummun", meaning:"Tuli" }, { id:12, term:"Umyun", meaning:"Buta" },
+            { id:13, term:"Bukmun", meaning:"Bisu" }, { id:14, term:"Ājizun", meaning:"Dlm keadaan lemah" },
+            { id:15, term:"Kārihan", meaning:"Dlm keadaan terpaksa" }, { id:16, term:"Jāhilan", meaning:"Dlm keadaan bodoh" },
+            { id:17, term:"Mayyitan", meaning:"Dlm keadaan mati" }, { id:18, term:"Asamma", meaning:"Dlm keadaan tuli" },
+            { id:19, term:"A‘mā", meaning:"Dlm keadaan buta" }, { id:20, term:"Abkam", meaning:"Dlm keadaan bisu" }
+        ];
+
+        let userData={nama:'', kelas:''}, drawnLines=[], finalScore=0, isDragging=false, currentLine=null, startCard=null;
+        const svg = document.getElementById('lines-svg'), board = document.getElementById('game-board');
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault(); userData.nama = document.getElementById('studentName').value; userData.kelas = document.getElementById('studentClass').value;
+            document.getElementById('screen-login').classList.remove('active'); document.getElementById('screen-game').classList.add('active'); initGame();
+        });
+
+        function initGame() {
+            document.getElementById('col-left').innerHTML=''; document.getElementById('col-right').innerHTML=''; svg.innerHTML=''; drawnLines=[]; finalScore=0;
+            let shuffled = [...allData].sort(()=>Math.random()-0.5).slice(0, 6);
+            let leftItems = [...shuffled].sort(()=>Math.random()-0.5), rightItems = [...shuffled].sort(()=>Math.random()-0.5);
+
+            leftItems.forEach(item => {
+                let div = document.createElement('div'); div.className = 'card-item left-item'; div.dataset.id = item.id;
+                div.innerHTML = `${item.term} <div class="dot left-side-dot"></div>`;
+                div.addEventListener('touchstart', dragStart, {passive:false}); div.addEventListener('mousedown', dragStart);
+                document.getElementById('col-left').appendChild(div);
+            });
+            rightItems.forEach(item => {
+                let div = document.createElement('div'); div.className = 'card-item right-item'; div.dataset.id = item.id;
+                div.innerHTML = `<div class="dot right-side-dot"></div> ${item.meaning}`; document.getElementById('col-right').appendChild(div);
+            });
+            
+            document.addEventListener('touchmove', dragMove, {passive:false}); document.addEventListener('mousemove', dragMove);
+            document.addEventListener('touchend', dragEnd); document.addEventListener('mouseup', dragEnd);
+            window.addEventListener('resize', redrawLines);
+        }
+
+        function getCoordinates(elem, alignRight) {
+            let rect = elem.getBoundingClientRect(), bRect = board.getBoundingClientRect();
+            return { x: alignRight ? rect.right - bRect.left : rect.left - bRect.left, y: rect.top - bRect.top + (rect.height / 2) };
+        }
+        function isMatched(card) { return card.classList.contains('matched-correct') || card.classList.contains('matched-wrong'); }
+
+        function dragStart(e) {
+            let card = e.target.closest('.left-item'); if(!card || isMatched(card)) return; e.preventDefault(); isDragging = true; startCard = card;
+            currentLine = document.createElementNS('http://www.w3.org/2000/svg', 'line'); currentLine.setAttribute('class', 'active-line');
+            let coord = getCoordinates(startCard, true); currentLine.setAttribute('x1', coord.x); currentLine.setAttribute('y1', coord.y); currentLine.setAttribute('x2', coord.x); currentLine.setAttribute('y2', coord.y);
+            svg.appendChild(currentLine);
+        }
+
+        function dragMove(e) {
+            if(!isDragging || !currentLine) return; e.preventDefault();
+            let bRect = board.getBoundingClientRect();
+            currentLine.setAttribute('x2', (e.touches ? e.touches[0].clientX : e.clientX) - bRect.left);
+            currentLine.setAttribute('y2', (e.touches ? e.touches[0].clientY : e.clientY) - bRect.top);
+        }
+
+        function dragEnd(e) {
+            if(!isDragging || !currentLine) return;
+            svg.style.display = 'none'; let targetElem = document.elementFromPoint(e.changedTouches ? e.changedTouches[0].clientX : e.clientX, e.changedTouches ? e.changedTouches[0].clientY : e.clientY); svg.style.display = 'block';
+            let targetCard = targetElem ? targetElem.closest('.right-item') : null;
+            
+            if(targetCard && !isMatched(targetCard)) {
+                let isCorrect = targetCard.dataset.id === startCard.dataset.id;
+                startCard.classList.add(isCorrect ? 'matched-correct' : 'matched-wrong'); targetCard.classList.add(isCorrect ? 'matched-correct' : 'matched-wrong');
+                let endCoord = getCoordinates(targetCard, false); currentLine.setAttribute('x2', endCoord.x); currentLine.setAttribute('y2', endCoord.y);
+                currentLine.setAttribute('class', isCorrect ? 'matched-line-correct' : 'matched-line-wrong');
+                drawnLines.push({line:currentLine, left:startCard, right:targetCard, isCorrect:isCorrect});
+                
+                if(isCorrect) finalScore += Math.round(100/6);
+                if(drawnLines.length === 6) { if(drawnLines.filter(d=>d.isCorrect).length === 6) finalScore=100; document.getElementById('btn-submit').classList.remove('d-none'); }
+            } else { currentLine.remove(); }
+            isDragging = false; currentLine = null; startCard = null;
+        }
+
+        function redrawLines() { drawnLines.forEach(item => { let s = getCoordinates(item.left, true), e = getCoordinates(item.right, false); item.line.setAttribute('x1', s.x); item.line.setAttribute('y1', s.y); item.line.setAttribute('x2', e.x); item.line.setAttribute('y2', e.y); }); }
+
+        async function submitGame() {
+            let btn = document.getElementById('btn-submit'); btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>'; btn.disabled=true;
+            try {
+                await supabaseClient.from('match_sifat_mustahil_logs').insert([{nama:userData.nama, kelas:userData.kelas, nilai:finalScore}]);
+                document.getElementById('screen-game').classList.remove('active'); document.getElementById('screen-result').classList.add('active');
+                document.getElementById('result-name').innerText=userData.nama; document.getElementById('result-class').innerText=`Kelas ${userData.kelas}`;
+                document.getElementById('final-score').innerText=finalScore;
+                
+                let iconEl = document.getElementById('result-icon');
+                if(finalScore>=80) { iconEl.innerHTML='<i class="fas fa-check-circle text-success"></i>'; document.getElementById('final-score').classList.add('text-success'); }
+                else if(finalScore>=50) { iconEl.innerHTML='<i class="fas fa-exclamation-circle text-warning"></i>'; document.getElementById('final-score').classList.add('text-warning'); }
+                else { iconEl.innerHTML='<i class="fas fa-times-circle text-danger"></i>'; document.getElementById('final-score').classList.add('text-danger'); }
+            } catch(err) { alert('Gagal.'); btn.innerHTML='Simpan'; btn.disabled=false; }
+        }
+    </script>
+</body>
+</html>

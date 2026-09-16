@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Sifat Wajib Allah Swt.</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f2f5;
+            color: #2b2b2b;
+        }
+        /* Pembungkus Mode Portrait Mobile-First */
+        .mobile-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            overflow-x: hidden;
+            position: relative; /* Ditambahkan untuk menampung tombol sticky */
+            padding-bottom: 80px; /* Ruang untuk sticky nav bar */
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #0f5132 0%, #198754 100%);
+            color: white;
+            padding: 2.5rem 1.5rem 3.5rem 1.5rem;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .hero-section p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        .video-container {
+            margin: -2.5rem 1.25rem 2rem 1.25rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            background: #000;
+            position: relative;
+            z-index: 2;
+        }
+        .sifat-card {
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            margin-bottom: 1rem;
+            padding: 1.25rem;
+            transition: transform 0.2s;
+        }
+        .sifat-card:active {
+            transform: scale(0.98);
+        }
+        .card-number {
+            background-color: #e8f5e9;
+            color: #198754;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .sifat-title {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1.15rem;
+            margin-bottom: 0.15rem;
+        }
+        .sifat-meaning {
+            font-weight: 600;
+            color: #198754;
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.75rem;
+            color: #0f5132;
+            text-align: right;
+            direction: rtl;
+            font-weight: bold;
+            line-height: 1.5;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #e2e8f0;
+            margin-bottom: 0.75rem;
+        }
+        .sifat-desc {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        
+        /* Navigasi Action Bar Melayang */
+        .action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .btn-action {
+            flex: 1;
+            padding: 0.75rem;
+            font-weight: 700;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-quiz {
+            background-color: #e8f5e9;
+            color: #198754;
+            border: 1px solid #198754;
+        }
+        .btn-quiz:hover, .btn-quiz:active {
+            background-color: #198754;
+            color: #fff;
+        }
+        .btn-game {
+            background-color: #fff3cd;
+            color: #ffc107;
+            border: 1px solid #ffc107;
+            color: #856404; /* Text color for better contrast on light yellow */
+        }
+        .btn-game:hover, .btn-game:active {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .action-icon {
+            font-size: 1.25rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0 2rem 0;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-wrapper">
+        <!-- Header -->
+        <header class="hero-section">
+            <h1 class="mb-2"><i class="fas fa-book-open me-2"></i>Sifat Wajib Allah</h1>
+            <p class="mb-0">
+                Sifat-sifat yang menunjukkan kesempurnaan dan kekuasaan Allah Swt.
+            </p>
+        </header>
+
+        <!-- Video Player Disematkan Di Sini -->
+        <div class="video-container">
+            <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/pc0X0gNBEu4" title="Lagu Anak Islami 20 Sifat Wajib Allah" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- List Materi (Vertikal Column) -->
+        <main class="px-3 pb-4">
+            
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">1</div>
+                    <div>
+                        <h3 class="sifat-title">Wujūd</h3>
+                        <p class="sifat-meaning">Ada</p>
+                    </div>
+                </div>
+                <div class="arabic-text">وُجُودٌ</div>
+                <p class="sifat-desc">Bukti keberadaan Allah swt. dilihat dari ciptaan-Nya yaitu makhluk hidup, langit, bumi, dan alam semesta.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">2</div>
+                    <div>
+                        <h3 class="sifat-title">Qidam</h3>
+                        <p class="sifat-meaning">Dahulu</p>
+                    </div>
+                </div>
+                <div class="arabic-text">قِدَمٌ</div>
+                <p class="sifat-desc">Allah Swt. lebih dahulu ada sebelum alam semesta diciptakan.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">3</div>
+                    <div>
+                        <h3 class="sifat-title">Baqā’</h3>
+                        <p class="sifat-meaning">Kekal atau abadi</p>
+                    </div>
+                </div>
+                <div class="arabic-text">بَقَاءٌ</div>
+                <p class="sifat-desc">Allah Swt. kekal abadi selamanya.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">4</div>
+                    <div>
+                        <h3 class="sifat-title">Mukhālafatu lil hawādiṡi</h3>
+                        <p class="sifat-meaning">Berbeda dengan makhluk</p>
+                    </div>
+                </div>
+                <div class="arabic-text">مُخَالَفَةٌ لِلْحَوَادِثِ</div>
+                <p class="sifat-desc">Allah Swt. Maha Segalannya dan tidak ada satu pun yang menyerupainnya.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">5</div>
+                    <div>
+                        <h3 class="sifat-title">Qiyāmuhu binafsihi</h3>
+                        <p class="sifat-meaning">Berdiri sendiri</p>
+                    </div>
+                </div>
+                <div class="arabic-text">قِيَامُهُ بِنَفْسِهِ</div>
+                <p class="sifat-desc">Allah Swt. tidak butuh kawan satu pun dalam menciptakan dan mengatur alam semesta ini.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">6</div>
+                    <div>
+                        <h3 class="sifat-title">Wahdaniyyah</h3>
+                        <p class="sifat-meaning">Esa</p>
+                    </div>
+                </div>
+                <div class="arabic-text">وَحْدَانِيَّةٌ</div>
+                <p class="sifat-desc">Allah Swt. satu-satunya Tuhan yang wajib disembah dan satu-satunya pencipta alam semesta.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">7</div>
+                    <div>
+                        <h3 class="sifat-title">Qudrah</h3>
+                        <p class="sifat-meaning">Mahakuasa</p>
+                    </div>
+                </div>
+                <div class="arabic-text">قُدْرَةٌ</div>
+                <p class="sifat-desc">Allah Swt. Mahakuasa atas segala sesuatu yang terjadi di alam semesta.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">8</div>
+                    <div>
+                        <h3 class="sifat-title">Irādah</h3>
+                        <p class="sifat-meaning">Berkehendak</p>
+                    </div>
+                </div>
+                <div class="arabic-text">إِرَادَةٌ</div>
+                <p class="sifat-desc">Segala sesuatu yang terjadi pada alam semesta ini adalah kehendak Allah Swt.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">9</div>
+                    <div>
+                        <h3 class="sifat-title">‘Ilmun</h3>
+                        <p class="sifat-meaning">Mengetahui</p>
+                    </div>
+                </div>
+                <div class="arabic-text">عِلْمٌ</div>
+                <p class="sifat-desc">Allah Swt. mengetahui segala peristiwa yang ada dunia ini.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">10</div>
+                    <div>
+                        <h3 class="sifat-title">Hayāh</h3>
+                        <p class="sifat-meaning">Hidup</p>
+                    </div>
+                </div>
+                <div class="arabic-text">حَيَاةٌ</div>
+                <p class="sifat-desc">Allah Swt. memiliki kehidupan yang tak terbatas atau kekal.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">11</div>
+                    <div>
+                        <h3 class="sifat-title">Sama’</h3>
+                        <p class="sifat-meaning">Mendengar</p>
+                    </div>
+                </div>
+                <div class="arabic-text">سَمْعٌ</div>
+                <p class="sifat-desc">Allah Swt. mendengar segala sesuatu, baik suara keras maupun suara lirih. Allah Swt. juga dapat mendengar perasaan dan hati manusia.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">12</div>
+                    <div>
+                        <h3 class="sifat-title">Baṣar</h3>
+                        <p class="sifat-meaning">Melihat</p>
+                    </div>
+                </div>
+                <div class="arabic-text">بَصَرٌ</div>
+                <p class="sifat-desc">Tidak ada satu makhluk pun yang luput dari penglihatan Allah Swt.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">13</div>
+                    <div>
+                        <h3 class="sifat-title">Kalām</h3>
+                        <p class="sifat-meaning">Berfirman</p>
+                    </div>
+                </div>
+                <div class="arabic-text">كَلَامٌ</div>
+                <p class="sifat-desc">Al-Qur’an merupakan firman Allah Swt. yang wajib kita baca dan amalkan.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">14</div>
+                    <div>
+                        <h3 class="sifat-title">Qadīran</h3>
+                        <p class="sifat-meaning">Berkuasa</p>
+                    </div>
+                </div>
+                <div class="arabic-text">قَادِرًا</div>
+                <p class="sifat-desc">Kuasa Allah Swt. tidak tertandingi oleh apapun dan siapa pun.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">15</div>
+                    <div>
+                        <h3 class="sifat-title">Murīdan</h3>
+                        <p class="sifat-meaning">Berkehendak</p>
+                    </div>
+                </div>
+                <div class="arabic-text">مُرِيدًا</div>
+                <p class="sifat-desc">Allah Swt. berkehendak atas semua peristiwa yang terjadi.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">16</div>
+                    <div>
+                        <h3 class="sifat-title">‘Aliman</h3>
+                        <p class="sifat-meaning">Mengetahui</p>
+                    </div>
+                </div>
+                <div class="arabic-text">عَالِمًا</div>
+                <p class="sifat-desc">Allah Swt. Maha Mengetahui segala sesuatu di alam semesta ini.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">17</div>
+                    <div>
+                        <h3 class="sifat-title">Hayyan</h3>
+                        <p class="sifat-meaning">Mahahidup</p>
+                    </div>
+                </div>
+                <div class="arabic-text">حَيًّا</div>
+                <p class="sifat-desc">Meskipun alam raya hancur, Allah Swt. tetap kekal abadi. Allah Swt. tetap hidup dan tidak pernah mati meskipun semua makhluk mati.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">18</div>
+                    <div>
+                        <h3 class="sifat-title">Samī’an</h3>
+                        <p class="sifat-meaning">Maha Mendengar</p>
+                    </div>
+                </div>
+                <div class="arabic-text">سَمِيعًا</div>
+                <p class="sifat-desc">Allah Swt. Maha Mendengar segala sesuatu, tidak ada yang luput dari pendengaran-Nya.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">19</div>
+                    <div>
+                        <h3 class="sifat-title">Baṣīran</h3>
+                        <p class="sifat-meaning">Maha Melihat</p>
+                    </div>
+                </div>
+                <div class="arabic-text">بَصِيرًا</div>
+                <p class="sifat-desc">Allah Swt. selalu melihat dan mengawasi gerak-gerik manusia.</p>
+            </div>
+    
+            <div class="sifat-card">
+                <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="card-number">20</div>
+                    <div>
+                        <h3 class="sifat-title">Mutakalliman</h3>
+                        <p class="sifat-meaning">Berfirman atau berkata-kata</p>
+                    </div>
+                </div>
+                <div class="arabic-text">مُتَكَلِّمًا</div>
+                <p class="sifat-desc">Bukti Allah Swt. berfirman adalah diturunkannya Al-Qur’an sebagai pedoman hidup umat Islam.</p>
+            </div>
+    
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="mb-0">Sat Set Web &copy; 2026 - Materi PAI</p>
+            </div>
+        </footer>
+        
+        <!-- Action Bar Melayang di Bawah -->
+        <div class="action-bar">
+            <a href="ujisifatwajiballah.html" class="btn-action btn-quiz">
+                <i class="fas fa-edit action-icon"></i>
+                <span>Uji Kuis</span>
+            </a>
+            <a href="cocoksifatwajiballah.html" class="btn-action btn-game">
+                <i class="fas fa-link action-icon"></i>
+                <span>Tarik Benang</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

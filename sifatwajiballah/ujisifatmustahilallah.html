@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Sifat Mustahil Allah</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #2b2b2b; }
+        .mobile-wrapper {
+            max-width: 480px; margin: 0 auto; background-color: #ffffff;
+            min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;
+        }
+        .app-header {
+            background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%);
+            color: white; padding: 1.5rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; text-align: center;
+        }
+        .content-area { flex-grow: 1; padding: 1.5rem; }
+        .question-card { background: #fff; border: 1px solid #fee2e2; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+        .option-label { display: block; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 10px; margin-bottom: 0.75rem; cursor: pointer; }
+        .form-check-input:checked + .option-label { border-color: #b91c1c; background-color: #fef2f2; font-weight: 600; color: #7f1d1d; }
+        .form-check-input { display: none; }
+        .number-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+        .num-btn { width: 100%; aspect-ratio: 1; border-radius: 8px; font-weight: 600; }
+        .num-btn.btn-success { background-color: #b91c1c; border-color: #b91c1c; } /* Ubah hijau ke merah */
+        .bottom-nav {
+            padding: 1rem 1.5rem; background: #fff; border-top: 1px solid #f1f5f9;
+            display: flex; justify-content: space-between; align-items: center; position: sticky; bottom: 0; z-index: 10;
+        }
+        .btn-theme { background-color: #b91c1c; color: white; }
+        .screen { display: none; }
+        .screen.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="mobile-wrapper">
+        <!-- SCREEN 1: LOGIN -->
+        <div id="screen-login" class="screen active">
+            <div class="app-header mb-4">
+                <h2 class="h4 fw-bold mb-1"><i class="fas fa-edit me-2"></i>Kuis PAI</h2>
+                <p class="mb-0 small opacity-75">Sifat Mustahil Allah Swt.</p>
+            </div>
+            <div class="content-area">
+                <div class="card border-0 shadow-sm rounded-4 p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nama Lengkap</label>
+                            <input type="text" id="studentName" class="form-control form-control-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Kelas</label>
+                            <select id="studentClass" class="form-select form-select-lg" required>
+                                <option value="" selected disabled>Pilih Kelas</option>
+                                <option value="3A">3A</option><option value="3B">3B</option><option value="3C">3C</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-theme btn-lg w-100 fw-bold rounded-pill">Mulai Kuis</button>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <a href="sifatmustahilmateri.html" class="text-decoration-none text-muted small"><i class="fas fa-book"></i> Kembali ke Materi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: QUIZ -->
+        <div id="screen-quiz" class="screen flex-column h-100" style="display: none;">
+            <div class="app-header d-flex justify-content-between align-items-center py-3">
+                <div class="fw-bold"><span id="q-number-badge" class="badge bg-light text-danger fs-6">Soal 1/35</span></div>
+                <button class="btn btn-outline-light btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#modalNavigasi"><i class="fas fa-th"></i> Daftar Soal</button>
+            </div>
+            <div class="content-area overflow-auto">
+                <div class="question-card">
+                    <h5 id="question-text" class="fw-bold mb-4">Memuat...</h5>
+                    <div id="mcq-area"></div>
+                    <div id="short-area" class="d-none">
+                        <input type="text" id="short-input" class="form-control form-control-lg" placeholder="Jawaban (1-2 kata)..." autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-nav shadow-lg">
+                <button class="btn btn-secondary px-4 rounded-pill" id="btn-prev" onclick="changeQuestion(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="btn btn-danger rounded-pill px-4 fw-bold d-none" id="btn-submit" onclick="submitQuiz()">Kumpulkan</button>
+                <button class="btn btn-theme px-4 rounded-pill" id="btn-next" onclick="changeQuestion(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: RESULT -->
+        <div id="screen-result" class="screen">
+            <div class="app-header mb-4">
+                <h2 class="h4 fw-bold mb-0"><i class="fas fa-check-circle me-2"></i>Selesai!</h2>
+            </div>
+            <div class="content-area text-center">
+                <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                    <h5 id="result-name" class="text-muted mb-1">Nama</h5>
+                    <p id="result-class" class="fw-bold mb-4">Kelas</p>
+                    <div class="display-1 fw-bold text-danger mb-3" id="final-score">0</div>
+                    <p class="text-muted small"><i class="fas fa-cloud-upload-alt me-1"></i> Nilai tersimpan.</p>
+                    <div class="d-flex flex-column gap-2 mt-4">
+                        <a href="sifatmustahilmateri.html" class="btn btn-theme w-100 rounded-pill"><i class="fas fa-book me-2"></i> Kembali ke Materi</a>
+                        <button class="btn btn-outline-secondary w-100 rounded-pill" onclick="resetQuiz()">Ulangi Kuis</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalNavigasi" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 pb-0"><h5 class="modal-title fw-bold fs-6">Navigasi Soal</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <p class="small text-muted mb-2">Pilihan Ganda</p><div class="number-grid mb-3" id="nav-grid-mcq"></div>
+                    <p class="small text-muted mb-2">Isian Singkat</p><div class="number-grid" id="nav-grid-sa"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const supabaseUrl = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const questions = [
+            // MUDAH (6)
+            { type: 'mcq', q: 'Sifat ‘Adamun artinya...', options: ['Tidak ada', 'Ada', 'Tuli'], ans: 0 },
+            { type: 'mcq', q: 'Ḥudūṡ artinya...', options: ['Mati', 'Baru', 'Kekal'], ans: 1 },
+            { type: 'mcq', q: 'Fanā’ artinya...', options: ['Binasa', 'Bodoh', 'Kekal'], ans: 0 },
+            { type: 'mcq', q: 'Jahlun artinya...', options: ['Bisu', 'Tuli', 'Bodoh'], ans: 2 },
+            { type: 'mcq', q: 'Mautun artinya...', options: ['Mati', 'Hidup', 'Mengetahui'], ans: 0 },
+            { type: 'mcq', q: 'Ṣummun artinya...', options: ['Buta', 'Tuli', 'Lemah'], ans: 1 },
+            // SEDANG (13)
+            { type: 'mcq', q: 'Allah tidak mungkin didahului oleh makhluk-Nya, karena mustahil bersifat...', options: ['Ḥudūṡ', 'Fanā’', 'Jahlun'], ans: 0 },
+            { type: 'mcq', q: 'Alam semesta diatur sendiri oleh Allah, mustahil Allah memiliki sifat...', options: ['Qiyāmuhu bigairihi', 'Wujud', 'Mautun'], ans: 0 },
+            { type: 'mcq', q: 'Sifat yang menunjukkan bahwa Allah mustahil lebih dari satu adalah...', options: ['Karāhah', 'Ta’addud', '’Ajzun'], ans: 1 },
+            { type: 'mcq', q: 'Allah Maha Kuasa atas segalanya, maka mustahil Allah bersifat...', options: ['’Ajzun (lemah)', 'Baṣar', 'Kalām'], ans: 0 },
+            { type: 'mcq', q: 'Allah tidak mungkin dipaksa dalam menentukan takdir, karena mustahil bersifat...', options: ['Jahlun', 'Karāhah', 'Ṣummun'], ans: 1 },
+            { type: 'mcq', q: 'Mustahil Allah tidak mengetahui peristiwa yang terjadi di dunia, karena tidak mungkin bersifat...', options: ['Karāhah', 'Umyun', 'Jahlun'], ans: 2 },
+            { type: 'mcq', q: 'Sifat yang berarti "menyerupai makhluk" adalah...', options: ['Mumāṡalatu lil ḥawādiṡ', 'Qiyāmuhu bigairihi', 'Fanā’'], ans: 0 },
+            { type: 'mcq', q: 'Allah tidak mungkin buta. Buta dalam bahasa Arab disebut...', options: ['Umyun', 'Bukmun', 'Mautun'], ans: 0 },
+            { type: 'mcq', q: 'Bisu atau tidak bisa berfirman adalah sifat mustahil Allah yaitu...', options: ['Ṣummun', 'Bukmun', 'Jahlun'], ans: 1 },
+            { type: 'mcq', q: 'Sifat Kārihan menegaskan bahwa Allah mustahil dalam keadaan...', options: ['Terpaksa', 'Lemah', 'Tuli'], ans: 0 },
+            { type: 'mcq', q: 'Mustahil Allah dalam keadaan mati. Sifat mustahil ini disebut...', options: ['Mayyitan', 'Jāhilan', 'Abkam'], ans: 0 },
+            { type: 'mcq', q: 'Allah mustahil tidak mendengar doa hamba-Nya, karena mustahil bersifat...', options: ['Asamma', 'A‘mā', 'Ājizun'], ans: 0 },
+            { type: 'mcq', q: 'Arti dari sifat A‘mā adalah...', options: ['Tuli', 'Buta', 'Bisu'], ans: 1 },
+            // SUSAH (6)
+            { type: 'mcq', q: 'Jika Allah binasa, alam ini akan hancur. Oleh karena itu mustahil Allah bersifat...', options: ['Ḥudūṡ', 'Fanā’', 'Jahlun'], ans: 1 },
+            { type: 'mcq', q: 'Makhluk hidup kelak akan binasa atau mati. Sifat tersebut mustahil bagi Allah Sang Khaliq, yaitu sifat...', options: ['Fanā’', 'Qidam', 'Wujud'], ans: 0 },
+            { type: 'mcq', q: 'Keteraturan tata surya membuktikan Kuasa-Nya, mustahil pencipta itu bersifat...', options: ['Ājizun', 'Jāhilan', 'Abkam'], ans: 0 },
+            { type: 'mcq', q: 'Mustahil Allah tidak berfirman karena adanya mukjizat Al-Qur\'an. Maka mustahil Allah bersifat...', options: ['Abkam', 'Asamma', 'Mayyitan'], ans: 0 },
+            { type: 'mcq', q: 'Keyakinan banyak tuhan bertentangan dengan kemustahilan sifat Allah, yaitu...', options: ['’Ajzun', 'Ta’addud', 'Mautun'], ans: 1 },
+            { type: 'mcq', q: 'Pengaturan rezeki miliaran makhluk membuktikan mustahil Allah itu...', options: ['Jāhilan (bodoh)', 'Ājizun (lemah)', 'Kārihan (terpaksa)'], ans: 0 },
+            
+            // ISIAN SINGKAT (10) - 1/2 Kata
+            { type: 'short', q: 'Apa arti Mumāṡalatu lil ḥawādiṡ?', ans: ['menyerupai makhluk', 'menyerupai'] },
+            { type: 'short', q: 'Apa arti Qiyāmuhu bigairihi?', ans: ['bergantung makhluk', 'bergantung', 'ketergantungan'] },
+            { type: 'short', q: 'Apa arti Ta’addud?', ans: ['berbilang', 'banyak', 'lebih dari satu'] },
+            { type: 'short', q: 'Apa arti sifat ’Ajzun?', ans: ['lemah'] },
+            { type: 'short', q: 'Apa arti sifat Karāhah?', ans: ['terpaksa'] },
+            
+            { type: 'short', q: 'Apa bahasa Arab dari "Bodoh"?', ans: ['jahlun', 'jahilan'] },
+            { type: 'short', q: 'Apa bahasa Arab dari "Mati"?', ans: ['mautun', 'mayyitan'] },
+            { type: 'short', q: 'Apa bahasa Arab dari "Tuli"?', ans: ['summun', 'asamma'] },
+            { type: 'short', q: 'Apa bahasa Arab dari "Buta"?', ans: ['umyun', 'ama', 'a\'ma'] },
+            { type: 'short', q: 'Apa bahasa Arab dari "Bisu"?', ans: ['bukmun', 'abkam'] }
+        ];
+
+        let currentQuestion = 0, userData = { nama: '', kelas: '' }, answers = {};
+
+        window.onload = () => {
+            const savedState = JSON.parse(localStorage.getItem('kuisSifatMustahil'));
+            if (savedState?.isSubmitted) showResultScreen(savedState);
+            else if (savedState) {
+                userData = savedState.userData; answers = savedState.answers || {}; currentQuestion = savedState.currentQuestion || 0;
+                showQuizScreen();
+            }
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            userData.nama = document.getElementById('studentName').value;
+            userData.kelas = document.getElementById('studentClass').value;
+            saveState(); showQuizScreen();
+        });
+
+        function showQuizScreen() {
+            document.getElementById('screen-login').classList.remove('active');
+            document.getElementById('screen-quiz').classList.add('active');
+            document.getElementById('screen-quiz').style.display = 'flex';
+            renderNavModal(); loadQuestion(currentQuestion);
+        }
+
+        function saveState() { localStorage.setItem('kuisSifatMustahil', JSON.stringify({ userData, answers, currentQuestion, isSubmitted: false })); }
+
+        function loadQuestion(index) {
+            currentQuestion = index; const q = questions[index];
+            document.getElementById('q-number-badge').innerText = `Soal ${index + 1}/35`;
+            document.getElementById('question-text').innerText = q.q;
+            
+            const mcqArea = document.getElementById('mcq-area'), shortArea = document.getElementById('short-area'), shortInput = document.getElementById('short-input');
+
+            if (q.type === 'mcq') {
+                mcqArea.classList.remove('d-none'); shortArea.classList.add('d-none');
+                let optionsHtml = ''; const labels = ['A', 'B', 'C'];
+                q.options.forEach((opt, i) => {
+                    const isChecked = answers[index] === i ? 'checked' : '';
+                    optionsHtml += `<label><input type="radio" name="mcq" class="form-check-input" value="${i}" onchange="saveAnswer(${i})" ${isChecked}><span class="option-label"><strong>${labels[i]}.</strong> ${opt}</span></label>`;
+                });
+                mcqArea.innerHTML = optionsHtml;
+            } else {
+                mcqArea.classList.add('d-none'); shortArea.classList.remove('d-none');
+                shortInput.value = answers[index] || ''; shortInput.oninput = (e) => saveAnswer(e.target.value);
+            }
+
+            document.getElementById('btn-prev').disabled = index === 0;
+            if (index === questions.length - 1) { document.getElementById('btn-next').classList.add('d-none'); document.getElementById('btn-submit').classList.remove('d-none'); } 
+            else { document.getElementById('btn-next').classList.remove('d-none'); document.getElementById('btn-submit').classList.add('d-none'); }
+            
+            updateNavModalStatus(); saveState();
+        }
+
+        function saveAnswer(val) { if(val==="") delete answers[currentQuestion]; else answers[currentQuestion] = val; updateNavModalStatus(); saveState(); }
+        function changeQuestion(step) { const next = currentQuestion + step; if (next >= 0 && next < questions.length) loadQuestion(next); }
+        function jumpToQuestion(index) { loadQuestion(index); bootstrap.Modal.getInstance(document.getElementById('modalNavigasi')).hide(); }
+
+        function renderNavModal() {
+            const gridMcq = document.getElementById('nav-grid-mcq'), gridSa = document.getElementById('nav-grid-sa');
+            gridMcq.innerHTML = ''; gridSa.innerHTML = '';
+            questions.forEach((q, i) => {
+                const btn = document.createElement('button');
+                btn.className = `btn btn-sm num-btn ${answers[i] !== undefined ? 'btn-success' : 'btn-outline-secondary'}`;
+                btn.innerText = i + 1; btn.id = `nav-btn-${i}`; btn.onclick = () => jumpToQuestion(i);
+                if (q.type === 'mcq') gridMcq.appendChild(btn); else gridSa.appendChild(btn);
+            });
+        }
+        function updateNavModalStatus() { Object.keys(answers).forEach(i => { const btn = document.getElementById(`nav-btn-${i}`); if(btn) { btn.classList.remove('btn-outline-secondary'); btn.classList.add('btn-success'); } }); }
+
+        async function submitQuiz() {
+            if (Object.keys(answers).length < questions.length && !confirm(`Yakin kumpulkan?`)) return;
+            const btnSub = document.getElementById('btn-submit'); btnSub.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; btnSub.disabled = true;
+
+            let pgScore = 0, saScore = 0;
+            questions.forEach((q, i) => {
+                if (answers[i] !== undefined) {
+                    if (q.type === 'mcq') { if (answers[i] === q.ans) pgScore += 2; } 
+                    else { const text = answers[i].toString().trim().toLowerCase(); if (q.ans.includes(text)) saScore += 5; }
+                }
+            });
+            const totalScore = pgScore + saScore;
+
+            try {
+                await supabaseClient.from('quiz_sifat_mustahil_scores').insert([{ nama: userData.nama, kelas: userData.kelas, nilai_pg: pgScore, nilai_isian: saScore, total_nilai: totalScore }]);
+                const finalState = { userData, pgScore, saScore, totalScore, isSubmitted: true };
+                localStorage.setItem('kuisSifatMustahil', JSON.stringify(finalState));
+                showResultScreen(finalState);
+            } catch (err) { alert('Gagal.'); btnSub.innerHTML = 'Kumpulkan'; btnSub.disabled = false; }
+        }
+
+        function showResultScreen(data) {
+            document.getElementById('screen-quiz').style.display = 'none'; document.getElementById('screen-quiz').classList.remove('active');
+            document.getElementById('screen-login').classList.remove('active'); document.getElementById('screen-result').classList.add('active');
+            document.getElementById('result-name').innerText = data.userData.nama; document.getElementById('result-class').innerText = `Kelas ${data.userData.kelas}`;
+            document.getElementById('final-score').innerText = data.totalScore;
+        }
+
+        function resetQuiz() { if(confirm("Yakin reset?")) { localStorage.removeItem('kuisSifatMustahil'); location.reload(); } }
+    </script>
+</body>
+</html>
