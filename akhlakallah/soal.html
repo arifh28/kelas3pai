@@ -62,7 +62,7 @@
 <body>
 
     <div class="app-container">
-        <!-- Header Full Width (Tanpa tombol close) -->
+        <!-- Header Full Width -->
         <div class="header-top shadow-sm">
             <h6 class="mb-0 fw-bold" id="questionCounter">Memuat...</h6>
         </div>
@@ -89,15 +89,35 @@
         let currentIndex = 0;
         let answers = [];
 
-        // Hapus history lama jika user mengulang dari awal
-        if(currentIndex === 0) {
-            localStorage.removeItem('hasil_kuis_akhlak');
-        }
-
         async function loadQuestions() {
             try {
                 const res = await fetch('soal.json');
                 questions = await res.json();
+                
+                // Tangkap perintah reset dari URL (jika user klik "Ulangi Latihan Soal")
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('reset') === 'true') {
+                    localStorage.removeItem('hasil_kuis_akhlak');
+                    // Bersihkan URL agar tidak reset terus jika direfresh
+                    window.history.replaceState({}, document.title, "soal.html");
+                }
+
+                // Cek progress tersimpan di localStorage (resume pengerjaan)
+                const savedProgress = localStorage.getItem('hasil_kuis_akhlak');
+                if (savedProgress) {
+                    answers = JSON.parse(savedProgress);
+                    currentIndex = answers.length; // Lanjut ke soal yang belum dijawab
+                } else {
+                    answers = [];
+                    currentIndex = 0;
+                }
+
+                // Jika jumlah jawaban sudah sama dengan jumlah soal, langsung redirect ke hasil
+                if (currentIndex >= questions.length && questions.length > 0) {
+                    window.location.href = 'hasil.html';
+                    return;
+                }
+
                 renderQuestion();
             } catch(e) {
                 document.getElementById('questionText').innerText = "Gagal memuat file soal.json. Pastikan file berada di folder yang sama.";
@@ -110,7 +130,7 @@
             document.getElementById('questionText').innerText = q.soal;
             
             const answerArea = document.getElementById('answerArea');
-            answerArea.innerHTML = ''; // Bersihkan area
+            answerArea.innerHTML = ''; 
             
             document.getElementById('feedbackArea').classList.add('d-none');
             document.getElementById('nextBtn').classList.add('d-none');
@@ -131,7 +151,7 @@
                 input.className = 'form-control p-3 text-center fs-5 rounded-3 fw-bold text-success';
                 input.placeholder = 'Ketik jawabanmu di sini...';
                 input.id = 'shortAnswerInput';
-                // Trigger cek jawaban saat tekan Enter
+                
                 input.addEventListener("keypress", function(event) {
                     if (event.key === "Enter") document.getElementById('btnSubmitSingkat').click();
                 });
@@ -156,13 +176,12 @@
             allBtns.forEach(b => {
                 b.disabled = true;
                 b.classList.remove('btn-outline-secondary');
-                // Beri warna hijau jika itu kunci jawaban, merah jika diklik salah
                 if(b.innerText === kunci) {
                     b.classList.add('btn-success', 'text-white', 'border-success'); 
                 } else if (b === clickedBtn && !isCorrect) {
                     b.classList.add('btn-danger', 'text-white', 'border-danger'); 
                 } else {
-                    b.classList.add('btn-light', 'text-muted'); // sisanya abu-abu
+                    b.classList.add('btn-light', 'text-muted'); 
                 }
             });
             
@@ -175,7 +194,6 @@
                 return;
             }
             
-            // Cek kesamaan string (huruf kecil, buang spasi ekstra)
             const normalize = str => str.toLowerCase().replace(/[^a-z0-9]/g, '');
             const isCorrect = normalize(userAns) === normalize(kunci);
             
@@ -203,7 +221,6 @@
             const nextBtn = document.getElementById('nextBtn');
             nextBtn.classList.remove('d-none');
             
-            // Ubah tombol jika di soal terakhir
             if(currentIndex === questions.length - 1) {
                 nextBtn.innerHTML = 'Lihat Hasil Akhir <i class="fa-solid fa-flag-checkered ms-1"></i>';
                 nextBtn.classList.replace('btn-primary', 'btn-warning');
@@ -220,11 +237,10 @@
                 currentIndex++;
                 renderQuestion();
             } else {
-                window.location.href = 'hasil.html'; // Pindah ke halaman hasil
+                window.location.href = 'hasil.html'; 
             }
         }
 
-        // Mulai kuis saat halaman termuat
         window.onload = loadQuestions;
     </script>
 </body>
