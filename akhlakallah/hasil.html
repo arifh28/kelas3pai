@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Evaluasi - Akhlak Kepada Allah</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f2f5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border: 8px solid;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container d-flex flex-column justify-content-center p-3">
+        <div class="card shadow border-0 rounded-4 text-center">
+            <div class="card-header bg-success text-white py-3 rounded-top-4 border-0">
+                <h4 class="mb-0 fw-bold"><i class="fa-solid fa-award"></i> Hasil Evaluasi</h4>
+            </div>
+            <div class="card-body p-4">
+                
+                <div id="scoreCircle" class="score-circle border-success my-4 shadow-sm bg-light">
+                    <div class="display-2 fw-bold" id="scoreDisplay">0</div>
+                </div>
+                
+                <h4 class="mb-3 fw-bold" id="messageDisplay">Menghitung...</h4>
+                <p class="text-muted mb-4">Berikut rincian pengerjaan soal kamu:</p>
+                
+                <div class="row text-center mb-4 g-2">
+                    <div class="col-6">
+                        <div class="p-3 bg-success bg-opacity-10 rounded-3 border border-success border-opacity-25">
+                            <i class="fa-solid fa-check-circle text-success fs-3 mb-2"></i>
+                            <h5 class="fw-bold text-success mb-0" id="correctCount">0</h5>
+                            <small class="text-success">Jawaban Benar</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 bg-danger bg-opacity-10 rounded-3 border border-danger border-opacity-25">
+                            <i class="fa-solid fa-times-circle text-danger fs-3 mb-2"></i>
+                            <h5 class="fw-bold text-danger mb-0" id="wrongCount">0</h5>
+                            <small class="text-danger">Jawaban Salah</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <a href="index.html" class="btn btn-outline-success py-3 fw-bold rounded-3">
+                        <i class="fa-solid fa-house me-1"></i> Kembali ke Materi
+                    </a>
+                    <!-- Menghapus localstorage dipicu di soal.html saat onload currentIndex 0, tapi bisa juga di sini -->
+                    <a href="soal.html" class="btn btn-success py-3 fw-bold rounded-3">
+                        <i class="fa-solid fa-rotate-right me-1"></i> Ulangi Latihan Soal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Ambil data jawaban dari localStorage
+            const dataStr = localStorage.getItem('hasil_kuis_akhlak');
+            if(!dataStr) {
+                // Jika tidak ada data, arahkan kembali ke index
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const answers = JSON.parse(dataStr);
+            const total = answers.length;
+            const correct = answers.filter(isTrue => isTrue).length;
+            const wrong = total - correct;
+            
+            // Hitung nilai skala 100
+            const score = Math.round((correct / total) * 100);
+
+            // Update UI
+            document.getElementById('scoreDisplay').innerText = score;
+            document.getElementById('correctCount').innerText = correct;
+            document.getElementById('wrongCount').innerText = wrong;
+
+            const scoreCircle = document.getElementById('scoreCircle');
+            const message = document.getElementById('messageDisplay');
+
+            // Berikan pesan dan warna lingkaran nilai sesuai pencapaian
+            if(score === 100) {
+                message.innerText = 'Luar Biasa! Pemahamanmu Sempurna.';
+                message.className = 'mb-3 fw-bold text-success';
+                scoreDisplay.className = 'display-2 fw-bold text-success';
+            } else if(score >= 80) {
+                message.innerText = 'Hebat! Pertahankan nilaimu.';
+                message.className = 'mb-3 fw-bold text-success';
+                scoreDisplay.className = 'display-2 fw-bold text-success';
+            } else if(score >= 60) {
+                message.innerText = 'Cukup Baik. Yuk belajar lebih giat lagi!';
+                message.className = 'mb-3 fw-bold text-warning';
+                scoreCircle.classList.replace('border-success', 'border-warning');
+                scoreDisplay.className = 'display-2 fw-bold text-warning';
+            } else {
+                message.innerText = 'Tetap Semangat! Baca materinya lagi ya.';
+                message.className = 'mb-3 fw-bold text-danger';
+                scoreCircle.classList.replace('border-success', 'border-danger');
+                scoreDisplay.className = 'display-2 fw-bold text-danger';
+            }
+        }
+    </script>
+</body>
+</html>

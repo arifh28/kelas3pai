@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Soal - Akhlak Kepada Allah</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f2f5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Ubuntu', sans-serif;
+        }
+        /* Layout Mobile-First */
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        .option-btn {
+            transition: all 0.2s;
+            border-width: 2px;
+        }
+        .option-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container d-flex flex-column justify-content-center p-3">
+        <!-- Card Soal -->
+        <div class="card shadow border-0 rounded-4">
+            <div class="card-header bg-success text-white text-center rounded-top-4 border-0 py-3 d-flex justify-content-between align-items-center">
+                <a href="index.html" class="text-white text-decoration-none"><i class="fa-solid fa-xmark fs-4"></i></a>
+                <h6 class="mb-0 fw-bold" id="questionCounter">Memuat...</h6>
+                <div style="width: 24px;"></div> <!-- Spacer -->
+            </div>
+            
+            <div class="card-body p-4">
+                <h5 id="questionText" class="mb-4 text-center fw-bold" style="line-height: 1.6;">...</h5>
+                
+                <!-- Area Pilihan / Input Jawaban -->
+                <div id="answerArea" class="d-flex flex-column gap-3"></div>
+
+                <!-- Area Feedback (Penjelasan & Kunci) -->
+                <div id="feedbackArea" class="mt-4 d-none text-start"></div>
+
+                <!-- Tombol Navigasi -->
+                <button id="nextBtn" class="btn btn-primary w-100 mt-4 d-none py-3 fw-bold rounded-3 shadow-sm" onclick="nextQuestion()">
+                    Selanjutnya <i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentIndex = 0;
+        let answers = [];
+
+        // Hapus history lama jika user mengulang
+        if(currentIndex === 0) {
+            localStorage.removeItem('hasil_kuis_akhlak');
+        }
+
+        async function loadQuestions() {
+            try {
+                const res = await fetch('soal.json');
+                questions = await res.json();
+                renderQuestion();
+            } catch(e) {
+                document.getElementById('questionText').innerText = "Gagal memuat file soal.json. Pastikan file berada di folder yang sama.";
+            }
+        }
+
+        function renderQuestion() {
+            const q = questions[currentIndex];
+            document.getElementById('questionCounter').innerText = `Soal ${currentIndex + 1} / ${questions.length}`;
+            document.getElementById('questionText').innerText = q.soal;
+            
+            const answerArea = document.getElementById('answerArea');
+            answerArea.innerHTML = ''; // Bersihkan area
+            
+            document.getElementById('feedbackArea').classList.add('d-none');
+            document.getElementById('nextBtn').classList.add('d-none');
+
+            // Cek apakah soal Pilihan Ganda atau Isian Singkat
+            if(q.pilihan_jawaban && q.pilihan_jawaban.length > 0) {
+                q.pilihan_jawaban.forEach(pil => {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn btn-outline-secondary text-start p-3 fw-semibold rounded-3 option-btn';
+                    btn.innerText = pil;
+                    btn.onclick = () => checkAnswerMCQ(btn, pil, q.kunci, q.pembahasan);
+                    answerArea.appendChild(btn);
+                });
+            } else {
+                // Jawaban Singkat
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'form-control p-3 text-center fs-5 rounded-3 fw-bold text-success';
+                input.placeholder = 'Ketik jawabanmu di sini...';
+                input.id = 'shortAnswerInput';
+                // Trigger cek jawaban saat tekan Enter
+                input.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") document.getElementById('btnSubmitSingkat').click();
+                });
+                
+                const submitBtn = document.createElement('button');
+                submitBtn.id = 'btnSubmitSingkat';
+                submitBtn.className = 'btn btn-success p-3 fw-bold rounded-3';
+                submitBtn.innerText = 'Cek Jawaban';
+                submitBtn.onclick = () => checkAnswerShort(input.value, q.kunci, q.pembahasan);
+                
+                answerArea.appendChild(input);
+                answerArea.appendChild(submitBtn);
+                input.focus();
+            }
+        }
+
+        function checkAnswerMCQ(clickedBtn, userAns, kunci, pembahasan) {
+            const isCorrect = userAns === kunci;
+            saveAnswer(isCorrect);
+            
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('btn-outline-secondary');
+                // Beri warna hijau jika itu kunci jawaban, merah jika diklik salah
+                if(b.innerText === kunci) {
+                    b.classList.add('btn-success', 'text-white', 'border-success'); 
+                } else if (b === clickedBtn && !isCorrect) {
+                    b.classList.add('btn-danger', 'text-white', 'border-danger'); 
+                } else {
+                    b.classList.add('btn-light', 'text-muted'); // sisanya abu-abu
+                }
+            });
+            
+            showFeedback(isCorrect, `Kunci Jawaban: <strong>${kunci}</strong><br><em>${pembahasan}</em>`);
+        }
+
+        function checkAnswerShort(userAns, kunci, pembahasan) {
+            if(!userAns.trim()) {
+                alert('Silakan isi jawaban terlebih dahulu!');
+                return;
+            }
+            
+            // Cek kesamaan string (huruf kecil, buang spasi ekstra)
+            const normalize = str => str.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const isCorrect = normalize(userAns) === normalize(kunci);
+            
+            const input = document.getElementById('shortAnswerInput');
+            input.disabled = true;
+            input.classList.add(isCorrect ? 'is-valid' : 'is-invalid');
+            
+            const btn = document.getElementById('btnSubmitSingkat');
+            btn.disabled = true;
+
+            showFeedback(isCorrect, `Kunci Jawaban: <strong>${kunci}</strong><br><em>${pembahasan}</em>`);
+            saveAnswer(isCorrect);
+        }
+
+        function showFeedback(isCorrect, text) {
+            const fbArea = document.getElementById('feedbackArea');
+            fbArea.classList.remove('d-none');
+            
+            if(isCorrect) {
+                fbArea.innerHTML = `<div class="alert alert-success mb-0 rounded-3 border-0 bg-success bg-opacity-10"><i class="fa-solid fa-circle-check text-success"></i> <strong class="text-success">Benar!</strong> <hr class="my-2 border-success opacity-25">${text}</div>`;
+            } else {
+                fbArea.innerHTML = `<div class="alert alert-danger mb-0 rounded-3 border-0 bg-danger bg-opacity-10"><i class="fa-solid fa-circle-xmark text-danger"></i> <strong class="text-danger">Salah!</strong> <hr class="my-2 border-danger opacity-25">${text}</div>`;
+            }
+            
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.classList.remove('d-none');
+            
+            // Ubah tombol jika di soal terakhir
+            if(currentIndex === questions.length - 1) {
+                nextBtn.innerHTML = 'Lihat Hasil Akhir <i class="fa-solid fa-flag-checkered ms-1"></i>';
+                nextBtn.classList.replace('btn-primary', 'btn-warning');
+            }
+        }
+
+        function saveAnswer(isCorrect) {
+            answers.push(isCorrect);
+            localStorage.setItem('hasil_kuis_akhlak', JSON.stringify(answers));
+        }
+
+        function nextQuestion() {
+            if(currentIndex < questions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            } else {
+                window.location.href = 'hasil.html'; // Pindah ke halaman hasil
+            }
+        }
+
+        // Mulai kuis saat halaman termuat
+        window.onload = loadQuestions;
+    </script>
+</body>
+</html>
