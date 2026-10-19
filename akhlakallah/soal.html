@@ -17,18 +17,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
-        body {
+        body, html {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            height: 100%;
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Ubuntu', sans-serif;
         }
-        /* Layout Mobile-First */
+        /* Layout Mobile-First Full Screen */
         .app-container {
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .header-top {
+            background-color: #198754;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .content-area {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .option-btn {
             transition: all 0.2s;
@@ -41,29 +61,26 @@
 </head>
 <body>
 
-    <div class="app-container d-flex flex-column justify-content-center p-3">
-        <!-- Card Soal -->
-        <div class="card shadow border-0 rounded-4">
-            <div class="card-header bg-success text-white text-center rounded-top-4 border-0 py-3 d-flex justify-content-between align-items-center">
-                <a href="index.html" class="text-white text-decoration-none"><i class="fa-solid fa-xmark fs-4"></i></a>
-                <h6 class="mb-0 fw-bold" id="questionCounter">Memuat...</h6>
-                <div style="width: 24px;"></div> <!-- Spacer -->
-            </div>
+    <div class="app-container">
+        <!-- Header Full Width (Tanpa tombol close) -->
+        <div class="header-top shadow-sm">
+            <h6 class="mb-0 fw-bold" id="questionCounter">Memuat...</h6>
+        </div>
+        
+        <!-- Area Konten Utama -->
+        <div class="content-area">
+            <h5 id="questionText" class="mb-4 text-center fw-bold" style="line-height: 1.6;">...</h5>
             
-            <div class="card-body p-4">
-                <h5 id="questionText" class="mb-4 text-center fw-bold" style="line-height: 1.6;">...</h5>
-                
-                <!-- Area Pilihan / Input Jawaban -->
-                <div id="answerArea" class="d-flex flex-column gap-3"></div>
+            <!-- Area Pilihan / Input Jawaban -->
+            <div id="answerArea" class="d-flex flex-column gap-3"></div>
 
-                <!-- Area Feedback (Penjelasan & Kunci) -->
-                <div id="feedbackArea" class="mt-4 d-none text-start"></div>
+            <!-- Area Feedback (Penjelasan & Kunci) -->
+            <div id="feedbackArea" class="mt-4 d-none text-start"></div>
 
-                <!-- Tombol Navigasi -->
-                <button id="nextBtn" class="btn btn-primary w-100 mt-4 d-none py-3 fw-bold rounded-3 shadow-sm" onclick="nextQuestion()">
-                    Selanjutnya <i class="fa-solid fa-arrow-right ms-1"></i>
-                </button>
-            </div>
+            <!-- Tombol Navigasi -->
+            <button id="nextBtn" class="btn btn-primary w-100 mt-4 d-none py-3 fw-bold rounded-3 shadow-sm" onclick="nextQuestion()">
+                Selanjutnya <i class="fa-solid fa-arrow-right ms-1"></i>
+            </button>
         </div>
     </div>
 
@@ -72,7 +89,7 @@
         let currentIndex = 0;
         let answers = [];
 
-        // Hapus history lama jika user mengulang
+        // Hapus history lama jika user mengulang dari awal
         if(currentIndex === 0) {
             localStorage.removeItem('hasil_kuis_akhlak');
         }
