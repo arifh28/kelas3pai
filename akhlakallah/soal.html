@@ -94,25 +94,23 @@
                 const res = await fetch('soal.json');
                 questions = await res.json();
                 
-                // Tangkap perintah reset dari URL (jika user klik "Ulangi Latihan Soal")
+                // Tangkap perintah reset dari URL
                 const urlParams = new URLSearchParams(window.location.search);
                 if (urlParams.get('reset') === 'true') {
                     localStorage.removeItem('hasil_kuis_akhlak');
-                    // Bersihkan URL agar tidak reset terus jika direfresh
                     window.history.replaceState({}, document.title, "soal.html");
                 }
 
-                // Cek progress tersimpan di localStorage (resume pengerjaan)
+                // Resume pengerjaan dari localStorage
                 const savedProgress = localStorage.getItem('hasil_kuis_akhlak');
                 if (savedProgress) {
                     answers = JSON.parse(savedProgress);
-                    currentIndex = answers.length; // Lanjut ke soal yang belum dijawab
+                    currentIndex = answers.length; 
                 } else {
                     answers = [];
                     currentIndex = 0;
                 }
 
-                // Jika jumlah jawaban sudah sama dengan jumlah soal, langsung redirect ke hasil
                 if (currentIndex >= questions.length && questions.length > 0) {
                     window.location.href = 'hasil.html';
                     return;
@@ -135,7 +133,6 @@
             document.getElementById('feedbackArea').classList.add('d-none');
             document.getElementById('nextBtn').classList.add('d-none');
 
-            // Cek apakah soal Pilihan Ganda atau Isian Singkat
             if(q.pilihan_jawaban && q.pilihan_jawaban.length > 0) {
                 q.pilihan_jawaban.forEach(pil => {
                     const btn = document.createElement('button');
@@ -145,7 +142,6 @@
                     answerArea.appendChild(btn);
                 });
             } else {
-                // Jawaban Singkat
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.className = 'form-control p-3 text-center fs-5 rounded-3 fw-bold text-success';
@@ -195,7 +191,19 @@
             }
             
             const normalize = str => str.toLowerCase().replace(/[^a-z0-9]/g, '');
-            const isCorrect = normalize(userAns) === normalize(kunci);
+            const normalizedUserAns = normalize(userAns);
+            
+            let isCorrect = false;
+            let displayKunci = "";
+
+            // Mengecek jika kunci jawaban berupa array (memiliki lebih dari satu kemungkinan benar)
+            if (Array.isArray(kunci)) {
+                isCorrect = kunci.some(k => normalize(k) === normalizedUserAns);
+                displayKunci = kunci.join(" / "); // Menampilkan semua kemungkinan kunci dengan pemisah garis miring
+            } else {
+                isCorrect = normalizedUserAns === normalize(kunci);
+                displayKunci = kunci;
+            }
             
             const input = document.getElementById('shortAnswerInput');
             input.disabled = true;
@@ -204,7 +212,7 @@
             const btn = document.getElementById('btnSubmitSingkat');
             btn.disabled = true;
 
-            showFeedback(isCorrect, `Kunci Jawaban: <strong>${kunci}</strong><br><em>${pembahasan}</em>`);
+            showFeedback(isCorrect, `Kunci Jawaban: <strong>${displayKunci}</strong><br><em>${pembahasan}</em>`);
             saveAnswer(isCorrect);
         }
 

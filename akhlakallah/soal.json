@@ -223,70 +223,118 @@
     "nomor": 21,
     "soal": "Berbaik sangka kepada Allah disebut?",
     "pilihan_jawaban": [],
-    "kunci": "Husnuzan",
-    "pembahasan": "Istilah berbaik sangka dalam agama Islam adalah husnuzan."
+    "kunci": [
+      "Husnuzan",
+      "Husnuzon",
+      "Khusnuzon",
+      "Khusnuzan",
+      "Khusnudzan",
+      "Khusnudzon"
+    ],
+    "pembahasan": "Istilah berbaik sangka dalam agama Islam adalah husnuzan atau husnuzon."
   },
   {
     "nomor": 22,
     "soal": "Berburuk sangka kepada Allah disebut?",
     "pilihan_jawaban": [],
-    "kunci": "Su'uzan",
-    "pembahasan": "Su'uzan adalah sikap berburuk sangka."
+    "kunci": [
+      "Su'uzan",
+      "Su'uzon",
+      "Suuzan",
+      "Suuzon",
+      "Suudzon",
+      "Suudzan"
+    ],
+    "pembahasan": "Su'uzan atau su'uzon adalah sikap berburuk sangka."
   },
   {
     "nomor": 23,
     "soal": "Saat sedang senang kita harus bersikap?",
     "pilihan_jawaban": [],
-    "kunci": "Bersyukur",
+    "kunci": [
+      "Bersyukur",
+      "Syukur",
+      "sukur"
+    ],
     "pembahasan": "Mensyukuri nikmat adalah bentuk prasangka baik."
   },
   {
     "nomor": 24,
     "soal": "Saat tertimpa musibah kita harus bersikap?",
     "pilihan_jawaban": [],
-    "kunci": "Sabar",
+    "kunci": [
+      "Sabar",
+      "Bersabar"
+    ],
     "pembahasan": "Sabar diperlukan saat menghadapi ujian atau musibah."
   },
   {
     "nomor": 25,
     "soal": "Nabi yang pernah ditelan ikan paus adalah Nabi?",
     "pilihan_jawaban": [],
-    "kunci": "Yunus",
+    "kunci": [
+      "Yunus",
+      "Nabi Yunus",
+      "Yunus a.s.",
+      "Yunus as"
+    ],
     "pembahasan": "Nabi Yunus a.s. diselamatkan Allah dari perut ikan paus."
   },
   {
     "nomor": 26,
     "soal": "Hati orang yang selalu husnuzan akan terasa?",
     "pilihan_jawaban": [],
-    "kunci": "Tenang",
+    "kunci": [
+      "Tenang",
+      "Tenteram",
+      "Tentram",
+      "Damai"
+    ],
     "pembahasan": "Berbaik sangka memberikan kedamaian dan ketenangan hati."
   },
   {
     "nomor": 27,
     "soal": "Sikap tidak mudah menyerah saat gagal disebut?",
     "pilihan_jawaban": [],
-    "kunci": "Optimis",
+    "kunci": [
+      "Optimis",
+      "Pantang menyerah",
+      "Pantang mundur"
+    ],
     "pembahasan": "Optimis berarti terus berusaha dan berharap kebaikan."
   },
   {
     "nomor": 28,
     "soal": "Sakit yang menimpa seorang muslim dapat menghapus?",
     "pilihan_jawaban": [],
-    "kunci": "Dosa",
+    "kunci": [
+      "Dosa",
+      "Dosa kecil",
+      "Dosa-dosa"
+    ],
     "pembahasan": "Sakit bisa menjadi penggugur atau pelebur dosa-dosa kecil."
   },
   {
     "nomor": 29,
     "soal": "Menyerahkan hasil kepada Allah dilakukan setelah kita?",
     "pilihan_jawaban": [],
-    "kunci": "Berusaha",
+    "kunci": [
+      "Berusaha",
+      "Berikhtiar",
+      "Ikhtiar",
+      "Maksimal"
+    ],
     "pembahasan": "Kita diwajibkan berusaha terlebih dahulu sebelum menyerahkan hasilnya."
   },
   {
     "nomor": 30,
     "soal": "Allah tidak akan mengecewakan hamba-Nya yang selalu?",
     "pilihan_jawaban": [],
-    "kunci": "Bersabar",
+    "kunci": [
+      "Bersabar",
+      "Sabar",
+      "Percaya"
+    ],
     "pembahasan": "Percaya dan bersabar adalah kunci agar tidak dikecewakan oleh ketentuan Allah."
   }
 ]
