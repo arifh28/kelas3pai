@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal Azan dan Iqamah - PAI Kelas 3</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --color-blue: #0d6efd;
+            --color-yellow: #ffc107;
+            --color-green: #198754;
+            --border-tegas: 3px solid #000;
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8f9fa; 
+            color: #000; 
+        }
+        h1, h2, h3, h4, h5, .font-ubuntu { 
+            font-family: 'Ubuntu', sans-serif; 
+            font-weight: 700; 
+        }
+        .box-tegas { 
+            border: var(--border-tegas); 
+            border-radius: 0; 
+            box-shadow: 5px 5px 0px #000; 
+            background-color: #fff; 
+            margin-bottom: 25px; 
+            overflow: hidden; 
+        }
+        .header-blue { background-color: var(--color-blue); color: #fff; border-bottom: var(--border-tegas); padding: 15px; }
+        .header-yellow { background-color: var(--color-yellow); color: #000; border-bottom: var(--border-tegas); padding: 15px; }
+        
+        .btn-tegas { 
+            border: var(--border-tegas); 
+            border-radius: 0; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            box-shadow: 4px 4px 0px #000; 
+            transition: all 0.1s ease; 
+            cursor: pointer; 
+        }
+        .btn-tegas:active { 
+            transform: translate(4px, 4px); 
+            box-shadow: 0px 0px 0px #000; 
+        }
+        .btn-blue { background-color: var(--color-blue); color: #fff; }
+        .btn-yellow { background-color: var(--color-yellow); color: #000; }
+        .btn-green { background-color: var(--color-green); color: #fff; }
+        .btn-blue:hover, .btn-green:hover { color: #fff; }
+        .btn-yellow:hover { color: #000; }
+
+        .radio-custom input[type="radio"] { 
+            width: 1.2rem; 
+            height: 1.2rem; 
+            margin-right: 10px; 
+            cursor: pointer; 
+        }
+        .radio-custom label { 
+            cursor: pointer; 
+            width: 100%; 
+            display: block; 
+            padding: 10px; 
+            border: 2px solid transparent; 
+            transition: all 0.2s; 
+        }
+        .radio-custom label:hover { 
+            background-color: #f1f1f1; 
+            border-color: #ccc; 
+        }
+        .input-tegas { 
+            border: 2px solid #000; 
+            border-radius: 0; 
+            box-shadow: 3px 3px 0px #000; 
+            padding: 10px; 
+            width: 100%; 
+        }
+        .input-tegas:focus { 
+            outline: none; 
+            border-color: var(--color-blue); 
+        }
+        .unanswered { 
+            border: 2px solid red !important; 
+            background-color: #ffe6e6 !important; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4" style="max-width: 700px;">
+        <h2 class="text-center font-ubuntu text-uppercase mb-4">Latihan Soal PAI<br>Azan dan Iqamah</h2>
+        
+        <!-- Form Data Diri -->
+        <div class="box-tegas" id="form-data-diri">
+            <div class="header-blue font-ubuntu">
+                <h4 class="mb-0"><i class="fa-solid fa-user me-2"></i> Data Diri</h4>
+            </div>
+            <div class="p-4">
+                <div class="mb-3">
+                    <label class="fw-bold mb-2">Nama Lengkap</label>
+                    <input type="text" id="inputNama" class="input-tegas form-control" placeholder="Masukkan nama..." required>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold mb-2">Kelas</label>
+                    <select id="inputKelas" class="input-tegas form-select" required>
+                        <option value="">-- Pilih Kelas --</option>
+                        <option value="3A">Kelas 3A</option>
+                        <option value="3B">Kelas 3B</option>
+                        <option value="3C">Kelas 3C</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-tegas btn-green w-100 py-3 mt-3" onclick="mulaiMengerjakan()">
+                    MULAI MENGERJAKAN <i class="fa-solid fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Wadah Soal (Satu per Satu) -->
+        <div id="quiz-container" style="display: none;">
+            
+            <div id="soal-list">
+                <!-- Konten Soal Akan Di-Render Oleh JS Disini -->
+            </div>
+            
+            <!-- Tombol Navigasi -->
+            <div class="d-flex justify-content-between mt-3">
+                <button id="btnPrev" class="btn btn-tegas btn-blue px-4 py-2" onclick="prevQuestion()" style="display: none;">
+                    <i class="fa-solid fa-arrow-left me-2"></i> SEBELUMNYA
+                </button>
+                <button id="btnNext" class="btn btn-tegas btn-yellow px-4 py-2 ms-auto" onclick="nextQuestion()">
+                    SELANJUTNYA <i class="fa-solid fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+            
+            <!-- Tombol Kirim -->
+            <div id="btnSubmitContainer" class="text-center my-4" style="display: none;">
+                <button class="btn btn-tegas btn-green w-100 py-3" onclick="kirimJawaban()" style="font-size: 1.2rem;">
+                    KIRIM JAWABAN <i class="fa-solid fa-paper-plane ms-2"></i>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        let dataSoal = [];
+        let currentIndex = 0; // Indeks soal yang sedang aktif
+
+        // 1. Load soal dari JSON
+        fetch('soal.json')
+            .then(res => res.json())
+            .then(data => { 
+                dataSoal = data; 
+                renderSoal(); 
+            })
+            .catch(err => console.error("Gagal memuat soal:", err));
+
+        // 2. Acak array pilihan jawaban agar urutan A-C berbeda tiap siswa
+        function shuffle(array) {
+            let curr = array.length, rand;
+            while (curr != 0) {
+                rand = Math.floor(Math.random() * curr);
+                curr--;
+                [array[curr], array[rand]] = [array[rand], array[curr]];
+            }
+            return array;
+        }
+
+        // 3. Render SEMUA soal, tapi disembunyikan menggunakan class 'd-none'
+        function renderSoal() {
+            const container = document.getElementById('soal-list');
+            let html = '';
+            
+            dataSoal.forEach((item, index) => {
+                let nomor = index + 1;
+                // Tambahkan 'd-none' secara bawaan agar semua soal tersembunyi
+                html += `<div class="box-tegas soal-box d-none" id="box-soal-${index}">`;
+                
+                // Header soal dengan badge progress
+                html += `<div class="header-yellow font-ubuntu d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Soal No. ${nomor}</h5>
+                            <span class="badge bg-dark text-white" style="font-size:1rem;">${nomor} / ${dataSoal.length}</span>
+                         </div>`;
+                         
+                html += `<div class="p-3">`;
+                html += `<p class="fw-bold lh-lg" style="font-size:1.1rem;">${item.soal}</p>`;
+                
+                // Tipe Soal Pilihan Ganda (PG)
+                if (item.tipe_soal === 'pg') {
+                    let pilihanAcak = shuffle([...item.pilihan_jawaban]);
+                    html += `<div class="radio-custom">`;
+                    pilihanAcak.forEach((pil) => {
+                        html += `
+                            <label class="d-flex align-items-center mb-2">
+                                <input type="radio" name="soal_${item.id}" value="${pil}" onchange="simpanJawaban(${item.id}, this.value)">
+                                <span>${pil}</span>
+                            </label>`;
+                    });
+                    html += `</div>`;
+                } 
+                // Tipe Soal Jawaban Singkat (JASING)
+                else if (item.tipe_soal === 'jasing') {
+                    html += `<input type="text" name="soal_${item.id}" class="input-tegas form-control mt-2" placeholder="Ketik jawaban singkat disini..." oninput="simpanJawaban(${item.id}, this.value)">`;
+                }
+                
+                html += `</div></div>`;
+            });
+            
+            container.innerHTML = html;
+            pulihkanJawaban();
+            showQuestion(0); // Tampilkan soal pertama kali
+        }
+
+        // 4. Logika Tampilkan Soal (Satu per satu)
+        function showQuestion(index) {
+            // Sembunyikan soal yang sedang aktif
+            let currentBox = document.getElementById(`box-soal-${currentIndex}`);
+            if(currentBox) currentBox.classList.add('d-none');
+            
+            // Perbarui Indeks
+            currentIndex = index;
+            
+            // Tampilkan soal baru
+            let newBox = document.getElementById(`box-soal-${currentIndex}`);
+            if(newBox) newBox.classList.remove('d-none');
+            
+            // Atur Visibilitas Tombol Navigasi
+            document.getElementById('btnPrev').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+            
+            // Jika di soal terakhir, sembunyikan 'Selanjutnya' dan tampilkan 'Kirim'
+            if(currentIndex === dataSoal.length - 1) {
+                document.getElementById('btnNext').style.display = 'none';
+                document.getElementById('btnSubmitContainer').style.display = 'block';
+            } else {
+                document.getElementById('btnNext').style.display = 'inline-block';
+                document.getElementById('btnSubmitContainer').style.display = 'none';
+            }
+        }
+
+        function nextQuestion() {
+            if(currentIndex < dataSoal.length - 1) showQuestion(currentIndex + 1);
+        }
+
+        function prevQuestion() {
+            if(currentIndex > 0) showQuestion(currentIndex - 1);
+        }
+
+        // 5. Simpan setiap jawaban ke localStorage
+        function simpanJawaban(idSoal, nilai) {
+            let jawabanUser = JSON.parse(localStorage.getItem('jawabanUser')) || {};
+            jawabanUser[idSoal] = nilai;
+            localStorage.setItem('jawabanUser', JSON.stringify(jawabanUser));
+            
+            // Cari indeks elemen HTML
+            let indeksElemenHtml = dataSoal.findIndex(item => item.id === idSoal);
+            
+            // Hapus penanda merah (unanswered) jika user mulai mengisi
+            document.getElementById(`box-soal-${indeksElemenHtml}`).classList.remove('unanswered');
+        }
+
+        // 6. Pulihkan data jika halaman sempat tertutup/refresh
+        function pulihkanJawaban() {
+            if(localStorage.getItem('namaSiswa')) document.getElementById('inputNama').value = localStorage.getItem('namaSiswa');
+            if(localStorage.getItem('kelasSiswa')) document.getElementById('inputKelas').value = localStorage.getItem('kelasSiswa');
+            
+            let jawabanUser = JSON.parse(localStorage.getItem('jawabanUser')) || {};
+            
+            dataSoal.forEach(item => {
+                if (jawabanUser[item.id]) {
+                    if(item.tipe_soal === 'pg') {
+                        let radio = document.querySelector(`input[name="soal_${item.id}"][value="${jawabanUser[item.id]}"]`);
+                        if(radio) radio.checked = true;
+                    } else {
+                        let input = document.querySelector(`input[name="soal_${item.id}"]`);
+                        if(input) input.value = jawabanUser[item.id];
+                    }
+                }
+            });
+        }
+
+        // 7. Mulai Mengerjakan (Submit Data Diri)
+        function mulaiMengerjakan() {
+            const nama = document.getElementById('inputNama').value.trim();
+            const kelas = document.getElementById('inputKelas').value;
+            
+            if(!nama || !kelas) {
+                alert("Harap isi Nama dan Kelas terlebih dahulu!");
+                return;
+            }
+            localStorage.setItem('namaSiswa', nama);
+            localStorage.setItem('kelasSiswa', kelas);
+            
+            document.getElementById('form-data-diri').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+        }
+
+        // Cek jika sudah login sebelumnya (bypass form data diri)
+        window.onload = () => {
+            if(localStorage.getItem('namaSiswa') && localStorage.getItem('kelasSiswa')) {
+                mulaiMengerjakan();
+            }
+        };
+
+        // 8. Kirim Jawaban Akhir (Validasi)
+        function kirimJawaban() {
+            let jawabanUser = JSON.parse(localStorage.getItem('jawabanUser')) || {};
+            let soalBelumDijawab = -1;
+
+            // Cari soal pertama yang belum dijawab
+            for (let i = 0; i < dataSoal.length; i++) {
+                let item = dataSoal[i];
+                if (!jawabanUser[item.id] || jawabanUser[item.id].toString().trim() === "") {
+                    soalBelumDijawab = i;
+                    break;
+                }
+            }
+
+            // Jika ada soal yang kosong, loncat ke soal tersebut
+            if(soalBelumDijawab !== -1) {
+                alert(`Soal Nomor ${soalBelumDijawab + 1} belum dijawab! Silahkan isi terlebih dahulu.`);
+                showQuestion(soalBelumDijawab);
+                document.getElementById(`box-soal-${soalBelumDijawab}`).classList.add('unanswered');
+                return;
+            }
+
+            // Hitung nilai dan redirect jika semuanya lengkap
+            let benar = 0;
+            dataSoal.forEach(item => {
+                let jwb = jawabanUser[item.id].toString().trim().toLowerCase();
+                
+                if(item.tipe_soal === 'pg') {
+                    if(jwb === item.kunci_jawaban.toLowerCase()) benar++;
+                } else if(item.tipe_soal === 'jasing') {
+                    // Validasi berdasarkan array kemungkinan jawaban
+                    let kunci = item.kunci_jawaban.map(k => k.toLowerCase());
+                    if(kunci.includes(jwb)) benar++;
+                }
+            });
+
+            let nilai = Math.round((benar / dataSoal.length) * 100);
+            
+            localStorage.setItem('nilaiAkhir', nilai);
+            localStorage.setItem('jumlahBenar', benar);
+            localStorage.setItem('totalSoal', dataSoal.length);
+
+            window.location.href = 'hasil.html';
+        }
+    </script>
+</body>
+</html>

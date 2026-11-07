@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Azan dan Iqamah - UPTD SDN 1 Banjar</title>
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="Materi Akhlak Kepada Allah Kelas 3 Semester 1 PAI - UPTD SDN 1 Banjar">
+    <meta property="og:description" content="Rangkuman materi Akhlak Terpuji kepada Allah Swt. (Husnuzan) untuk siswa Kelas 3 SD. Membahas pengertian, contoh sikap, dan hikmah berbaik sangka.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kelas3pai.vercel.app/akhlakallah/logo_sekolah.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --color-blue: #0d6efd;
+            --color-yellow: #ffc107;
+            --color-green: #198754;
+            --border-tegas: 3px solid #000;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8f9fa;
+            color: #000;
+        }
+        
+        h1, h2, h3, h4, h5, .font-ubuntu {
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Mobile-First Header Logos */
+        .top-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 10px 10px 10px;
+        }
+        .school-logo {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        /* Brutalist / Sharp UI Styles */
+        .box-tegas {
+            border: var(--border-tegas);
+            border-radius: 0;
+            box-shadow: 5px 5px 0px #000;
+            background-color: #fff;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .header-blue { background-color: var(--color-blue); color: #fff; border-bottom: var(--border-tegas); padding: 15px; }
+        .header-yellow { background-color: var(--color-yellow); color: #000; border-bottom: var(--border-tegas); padding: 15px; }
+        .header-green { background-color: var(--color-green); color: #fff; border-bottom: var(--border-tegas); padding: 15px; }
+
+        .btn-tegas {
+            border: var(--border-tegas);
+            border-radius: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.1s ease-in-out;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-tegas:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #000;
+        }
+        .btn-blue { background-color: var(--color-blue); color: #fff; }
+        .btn-yellow { background-color: var(--color-yellow); color: #000; }
+        .btn-green { background-color: var(--color-green); color: #fff; }
+        
+        .btn-blue:hover, .btn-green:hover { color: #fff; }
+        .btn-yellow:hover { color: #000; }
+
+        /* Video Container responsive */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-bottom: var(--border-tegas);
+            background-color: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Modal Fullscreen PDF Mobile-friendly (Diperbaiki) */
+        .modal-fullscreen .modal-content {
+            border: none;
+            border-radius: 0;
+            height: 100vh; /* Memaksa tinggi penuh layar */
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+        .modal-header-tegas {
+            border-bottom: var(--border-tegas);
+            border-radius: 0;
+            background-color: var(--color-blue);
+            color: #fff;
+            flex-shrink: 0; /* Header tidak akan menyusut */
+        }
+        
+        /* Tombol Aksi di Modal (Close & Download) */
+        .btn-modal-action {
+            background-color: #fff;
+            border: var(--border-tegas);
+            color: #000;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+            text-decoration: none;
+        }
+        .btn-modal-action:active {
+            background-color: #ddd;
+        }
+        .btn-modal-action.bg-yellow {
+            background-color: var(--color-yellow);
+        }
+        .btn-modal-action.bg-yellow:active {
+            background-color: #e0a800;
+        }
+
+        /* Memastikan iframe memenuhi sisa ruang */
+        .modal-body {
+            flex: 1 1 auto; /* Mengambil seluruh sisa tinggi di bawah header */
+            padding: 0;
+            background-color: #525659; /* Warna gelap khas PDF viewer agar lebih rapi */
+        }
+        iframe.pdf-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Logo Paling Atas Bersandingan -->
+    <div class="top-logos">
+        <img src="logo_sekolah.png" alt="Logo SDN 1 Banjar" class="school-logo">
+        <img src="logo_super.png" alt="Logo Super" class="school-logo">
+    </div>
+
+    <!-- 2. Judul -->
+    <div class="container px-3 mt-2 text-center">
+        <h2 class="font-ubuntu text-uppercase">Materi PAI Kelas 3</h2>
+        <p class="fw-bold mb-4">Azan dan Iqamah - UPTD SDN 1 Banjar</p>
+    </div>
+
+    <div class="container px-3">
+        
+        <!-- 3. Video Pembelajaran -->
+        <div class="box-tegas">
+            <div class="header-yellow text-center font-ubuntu">
+                <h4 class="mb-0"><i class="fa-brands fa-youtube text-danger me-2"></i> Video Pembelajaran</h4>
+            </div>
+            <div class="video-container">
+                <iframe id="yt-video" src="https://www.youtube.com/embed/GpMxvrnEMH0?enablejsapi=1" title="Video Pembelajaran" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- 4. Rangkuman Video Pembelajaran -->
+        <div class="box-tegas">
+            <div class="header-blue font-ubuntu">
+                <h4 class="mb-0"><i class="fa-solid fa-video me-2"></i> Rangkuman Video</h4>
+            </div>
+            <div class="p-3">
+                <ul>
+                    <li><strong>Pengertian Azan:</strong> Seruan kepada kaum muslimin untuk memberitahukan masuknya waktu salat dan ajakan untuk melaksanakan salat berjamaah.</li>
+                    <li><strong>Istilah:</strong> Orang yang mengumandangkan azan disebut <em>muazin</em>, dan orang yang mendengarkannya disebut <em>mustamik</em>.</li>
+                    <li><strong>Syarat & Sunah Muazin:</strong> Muazin harus beragama Islam, berakal sehat, laki-laki, dan mumayyiz. Sangat disunahkan dalam keadaan suci, menghadap kiblat, berdiri, dan bersuara nyaring serta merdu.</li>
+                    <li><strong>Iqamah:</strong> Seruan bahwa salat berjamaah akan segera didirikan. Ketentuannya sama dengan azan, ditambah membaca lafal <i>"Qad qamatis salah"</i>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Materi Buku Siswa (Rangkuman & Embed) -->
+        <div class="box-tegas">
+            <div class="header-green font-ubuntu">
+                <h4 class="mb-0"><i class="fa-solid fa-book-open me-2"></i> Materi Buku Siswa</h4>
+            </div>
+            <div class="p-3">
+                <ul>
+                    <li>Secara bahasa, azan berarti pemberitahuan atau seruan sebagai tanda waktu salat fardu telah tiba.</li>
+                    <li>Melantunkan azan hukumnya sunah muakad, sedangkan ikamah merupakan seruan singkat bahwa salat fardu akan segera didirikan.</li>
+                    <li>Adab muazin dalam tata cara azan meliputi berdiri menghadap kiblat, menyumbat telinga, dan menoleh ke arah kanan ketika membaca <i>"Hayya 'alasy-syalah"</i> serta menoleh ke kiri ketika membaca <i>"Hayya 'alal-falah"</i>.</li>
+                    <li>Azan Subuh mempunyai sedikit perbedaan dengan tambahan lafal <i>"As-salatu khairum minan-naum"</i>.</li>
+                    <li>Sebagai pendengar azan, kita dianjurkan untuk mendengarkan dengan saksama, menghentikan kegiatan, menjawab setiap lafal muazin, dan berdoa setelah azan selesai.</li>
+                    <li>Dalam sejarah Islam, muazin pertama yang diangkat oleh Rasulullah saw. adalah sahabat Bilal bin Rabah r.a.</li>
+                </ul>
+                <div class="d-grid mt-3">
+                    <button class="btn btn-tegas btn-yellow py-2" onclick="openPdfModal('buku_siswa.pdf', 'Buku Siswa PAI')">
+                        <i class="fa-solid fa-file-pdf me-2"></i> Buka PDF Buku Siswa
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Materi LKPD (Rangkuman & Embed) -->
+        <div class="box-tegas">
+            <div class="header-blue font-ubuntu">
+                <h4 class="mb-0"><i class="fa-solid fa-file-pen me-2"></i> Rangkuman Materi LKPD</h4>
+            </div>
+            <div class="p-3">
+                <ul>
+                    <li>Azan merupakan seruan untuk memberitahukan umat Islam bahwa waktu salat telah masuk.</li>
+                    <li>Iqamah digunakan sebagai penanda bahwa ibadah shalat berjamaah akan segera dimulai.</li>
+                    <li>Tujuan utama azan dikumandangkan di masjid adalah untuk mengajak umat Islam melaksanakan shalat berjamaah.</li>
+                    <li>Sikap yang benar dan tepat ketika mendengar azan berkumandang adalah berhenti sejenak, tidak bercanda/berbicara, dan mendengarkan dengan baik.</li>
+                    <li>Setelah mendengar azan usai, kita disunahkan untuk bersiap mengambil air wudu untuk melaksanakan salat.</li>
+                </ul>
+                <div class="d-grid mt-3">
+                    <button class="btn btn-tegas btn-yellow py-2" onclick="openPdfModal('lkpd.pdf', 'Lembar Kerja Peserta Didik')">
+                        <i class="fa-solid fa-file-pdf me-2"></i> Buka PDF LKPD
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Tombol Menuju Soal Paling Bawah -->
+        <div class="text-center my-5">
+            <a href="soal.html" class="btn btn-tegas btn-yellow w-100 py-3 nav-link-stop" style="font-size: 1.2rem;">
+                LANJUT KE SOAL <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Modal Dinamis untuk PDF Viewer -->
+    <div class="modal modal-fullscreen fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div class="modal-dialog m-0">
+            <div class="modal-content h-100">
+                <!-- Header Modal -->
+                <div class="modal-header modal-header-tegas d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title font-ubuntu text-truncate w-75" id="pdfModalLabel">Tampilan Dokumen</h5>
+                    <div class="d-flex gap-2">
+                        <!-- Tombol Download (Samping X) -->
+                        <a id="downloadPdfBtn" href="#" download class="btn-modal-action bg-yellow" title="Download PDF">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                        <!-- Tombol Close (X) -->
+                        <button type="button" class="btn-modal-action" onclick="closePdfModal()" aria-label="Close" title="Kembali">
+                            <i class="fa-solid fa-xmark fa-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Body Modal -->
+                <div class="modal-body p-0">
+                    <iframe id="pdfIframe" class="pdf-iframe" src="" title="PDF Viewer"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Fitur: Hentikan video YouTube secara otomatis jika link navigasi diklik
+        document.querySelectorAll('.nav-link-stop').forEach(link => {
+            link.addEventListener('click', function(e) {
+                var iframe = document.getElementById('yt-video');
+                if(iframe) {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                }
+            });
+        });
+
+        // Kontrol Modal PDF untuk mendukung tombol Back di Android dan tombol X
+        let pdfModalInstance;
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            pdfModalInstance = new bootstrap.Modal(document.getElementById('pdfModal'));
+        });
+
+        function openPdfModal(pdfUrl, title) {
+            // Set URL dan Judul iframe
+            document.getElementById('pdfIframe').src = pdfUrl;
+            document.getElementById('pdfModalLabel').innerText = title;
+            
+            // Set link href untuk tombol download
+            document.getElementById('downloadPdfBtn').href = pdfUrl;
+            
+            // Tampilkan modal
+            pdfModalInstance.show();
+            
+            // Tambahkan state ke history browser untuk menangani tombol 'Back' bawaan Android
+            window.history.pushState({ modalOpen: true }, "");
+        }
+
+        function closePdfModal() {
+            // Menggunakan history.back() agar state tetap sinkron, 
+            // fungsi popstate di bawah akan otomatis menyembunyikan modal.
+            window.history.back();
+        }
+
+        // Listener untuk tombol kembali (back) perangkat Android atau browser
+        window.addEventListener('popstate', function(event) {
+            if (document.getElementById('pdfModal').classList.contains('show')) {
+                pdfModalInstance.hide();
+                // Hapus src agar pdf tidak terus dimuat di background
+                setTimeout(() => { document.getElementById('pdfIframe').src = ""; }, 300);
+            }
+        });
+    </script>
+</body>
+</html>

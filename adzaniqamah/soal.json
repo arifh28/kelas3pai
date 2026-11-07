@@ -1,0 +1,387 @@
+[
+  {
+    "id": 1,
+    "tipe_soal": "pg",
+    "kategori": "mudah",
+    "soal": "Seruan atau panggilan untuk memberitahukan bahwa waktu salat fardu telah tiba disebut...",
+    "pilihan_jawaban": [
+      "Azan",
+      "Iqamah",
+      "Takbir"
+    ],
+    "kunci_jawaban": "Azan",
+    "pembahasan": "Azan adalah penanda masuknya waktu salat fardu."
+  },
+  {
+    "id": 2,
+    "tipe_soal": "pg",
+    "kategori": "mudah",
+    "soal": "Orang yang mengumandangkan azan di masjid disebut...",
+    "pilihan_jawaban": [
+      "Imam",
+      "Khatib",
+      "Muazin"
+    ],
+    "kunci_jawaban": "Muazin",
+    "pembahasan": "Muazin adalah sebutan bagi orang yang mengumandangkan azan."
+  },
+  {
+    "id": 3,
+    "tipe_soal": "pg",
+    "kategori": "mudah",
+    "soal": "Tujuan utama azan dikumandangkan adalah untuk mengajak umat Islam melaksanakan...",
+    "pilihan_jawaban": [
+      "Salat sunah",
+      "Salat berjamaah",
+      "Membaca Al-Qur'an"
+    ],
+    "kunci_jawaban": "Salat berjamaah",
+    "pembahasan": "Azan bertujuan mengumpulkan umat Islam untuk salat berjamaah."
+  },
+  {
+    "id": 4,
+    "tipe_soal": "pg",
+    "kategori": "mudah",
+    "soal": "Tempat yang paling utama untuk mengumandangkan azan adalah di...",
+    "pilihan_jawaban": [
+      "Rumah",
+      "Pasar",
+      "Masjid"
+    ],
+    "kunci_jawaban": "Masjid",
+    "pembahasan": "Azan disunahkan dikumandangkan di masjid atau tempat salat."
+  },
+  {
+    "id": 5,
+    "tipe_soal": "pg",
+    "kategori": "mudah",
+    "soal": "Hukum mengumandangkan azan sebelum salat berjamaah adalah...",
+    "pilihan_jawaban": [
+      "Wajib",
+      "Sunah muakad",
+      "Mubah"
+    ],
+    "kunci_jawaban": "Sunah muakad",
+    "pembahasan": "Hukum azan dan iqamah adalah sunah muakad (sangat dianjurkan)."
+  },
+  {
+    "id": 6,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Perbedaan utama antara azan dan iqamah adalah...",
+    "pilihan_jawaban": [
+      "Azan tanda masuk waktu salat, iqamah tanda salat segera dimulai",
+      "Azan diucapkan pelan, iqamah diucapkan nyaring",
+      "Azan untuk salat sunah, iqamah untuk salat wajib"
+    ],
+    "kunci_jawaban": "Azan tanda masuk waktu salat, iqamah tanda salat segera dimulai",
+    "pembahasan": "Azan memanggil dari jauh, iqamah untuk jamaah yang sudah bersiap salat."
+  },
+  {
+    "id": 7,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Berikut ini yang merupakan syarat menjadi seorang muazin adalah...",
+    "pilihan_jawaban": [
+      "Laki-laki, muslim, berakal",
+      "Perempuan, balig, suci",
+      "Anak kecil, cerdas, berani"
+    ],
+    "kunci_jawaban": "Laki-laki, muslim, berakal",
+    "pembahasan": "Syarat muazin adalah beragama Islam, berakal sehat, laki-laki, dan mumayyiz."
+  },
+  {
+    "id": 8,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Saat mendengar azan berkumandang, sikap yang paling tepat sesuai adab adalah...",
+    "pilihan_jawaban": [
+      "Berhenti sejenak dan menjawab azan",
+      "Berbicara dengan suara keras",
+      "Meneruskan permainan agar cepat selesai"
+    ],
+    "kunci_jawaban": "Berhenti sejenak dan menjawab azan",
+    "pembahasan": "Kita dianjurkan mendengarkan dengan khusyuk dan menjawab azan."
+  },
+  {
+    "id": 9,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Lafal 'Hayya 'alal-falah' dijawab oleh orang yang mendengarkan azan dengan bacaan...",
+    "pilihan_jawaban": [
+      "Allahu Akbar",
+      "La haula wa la quwwata illa billah",
+      "La ilaha illallah"
+    ],
+    "kunci_jawaban": "La haula wa la quwwata illa billah",
+    "pembahasan": "Lafal ajakan (hayya 'alas salah/falah) dijawab dengan hauqolah."
+  },
+  {
+    "id": 10,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Lafal takbir 'Allahu Akbar' pada awal azan dikumandangkan sebanyak...",
+    "pilihan_jawaban": [
+      "Dua kali",
+      "Tiga kali",
+      "Empat kali"
+    ],
+    "kunci_jawaban": "Dua kali",
+    "pembahasan": "Muazin membaca Allahu Akbar, Allahu Akbar (2 kali)."
+  },
+  {
+    "id": 11,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Perhatikan tabel berikut!<br><table class='table table-bordered text-start'><tr><th>No</th><th>Lafal Azan</th></tr><tr><td>1</td><td>Allahu Akbar</td></tr><tr><td>2</td><td>Asyhadu alla ilaha illallah</td></tr><tr><td>3</td><td>Hayya 'alasy-syalah</td></tr></table><br>Lafal nomor 2 memiliki arti...",
+    "pilihan_jawaban": [
+      "Allah Maha Besar",
+      "Aku bersaksi tiada tuhan selain Allah",
+      "Marilah mendirikan salat"
+    ],
+    "kunci_jawaban": "Aku bersaksi tiada tuhan selain Allah",
+    "pembahasan": "Syahadat tauhid bermakna kesaksian bahwa tiada tuhan selain Allah."
+  },
+  {
+    "id": 12,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Hasan sedang asyik bermain sepeda. Tiba-tiba terdengar kumandang azan Asar dari masjid. Tindakan Hasan yang menunjukkan adab yang baik adalah...",
+    "pilihan_jawaban": [
+      "Membesarkan volume radio agar tidak terdengar",
+      "Menghentikan permainan dan bersiap mengambil air wudu",
+      "Melanjutkan bersepeda ke tempat yang jauh"
+    ],
+    "kunci_jawaban": "Menghentikan permainan dan bersiap mengambil air wudu",
+    "pembahasan": "Adab mendengar azan adalah menghentikan aktivitas dan bersiap salat."
+  },
+  {
+    "id": 13,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Dalam salat fardu sehari semalam, azan dikumandangkan sebanyak...",
+    "pilihan_jawaban": [
+      "3 kali",
+      "4 kali",
+      "5 kali"
+    ],
+    "kunci_jawaban": "5 kali",
+    "pembahasan": "Sesuai jumlah waktu salat fardu (Subuh, Zuhur, Asar, Magrib, Isya)."
+  },
+  {
+    "id": 14,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Kalimat yang diucapkan muazin setelah azan selesai sebagai bentuk permohonan keberkahan disebut...",
+    "pilihan_jawaban": [
+      "Doa Iftitah",
+      "Doa Qunut",
+      "Doa setelah azan"
+    ],
+    "kunci_jawaban": "Doa setelah azan",
+    "pembahasan": "Setelah azan selesai, disunahkan membaca doa setelah azan."
+  },
+  {
+    "id": 15,
+    "tipe_soal": "pg",
+    "kategori": "sedang",
+    "soal": "Perhatikan pernyataan berikut:<br>1. Berdiri menghadap kiblat.<br>2. Diucapkan dengan suara pelan.<br>3. Suci dari hadas.<br>Adab yang benar saat mengumandangkan azan ditunjukkan oleh nomor...",
+    "pilihan_jawaban": [
+      "1 dan 2",
+      "1 dan 3",
+      "2 dan 3"
+    ],
+    "kunci_jawaban": "1 dan 3",
+    "pembahasan": "Azan harus diucapkan dengan suara lantang dan merdu, bukan pelan."
+  },
+  {
+    "id": 16,
+    "tipe_soal": "pg",
+    "kategori": "susah",
+    "soal": "Pak Budi sedang berjalan menuju masjid. Belum sampai di teras masjid, ia mendengar lafal 'Qad qamatis-salah' dikumandangkan. Hal ini menandakan bahwa...",
+    "pilihan_jawaban": [
+      "Waktu salat fardu baru saja masuk",
+      "Salat berjamaah akan segera dimulai",
+      "Waktu salat fardu telah habis"
+    ],
+    "kunci_jawaban": "Salat berjamaah akan segera dimulai",
+    "pembahasan": "Lafal tersebut adalah bagian dari iqamah yang berarti salat segera didirikan."
+  },
+  {
+    "id": 17,
+    "tipe_soal": "pg",
+    "kategori": "susah",
+    "soal": "Azan subuh memiliki tambahan lafal khusus dibandingkan azan salat lainnya karena...",
+    "pilihan_jawaban": [
+      "Waktu subuh sangat singkat",
+      "Mengingatkan bahwa salat lebih baik daripada tidur",
+      "Menandakan pergantian hari dalam Islam"
+    ],
+    "kunci_jawaban": "Mengingatkan bahwa salat lebih baik daripada tidur",
+    "pembahasan": "Lafal 'As-salatu khairum minan-naum' berarti salat itu lebih baik daripada tidur."
+  },
+  {
+    "id": 18,
+    "tipe_soal": "pg",
+    "kategori": "susah",
+    "soal": "Bilal bin Rabah r.a ditunjuk oleh Rasulullah saw. sebagai muazin pertama dalam sejarah Islam. Alasan utama pemilihan beliau adalah...",
+    "pilihan_jawaban": [
+      "Berasal dari keluarga bangsawan Makkah",
+      "Memiliki suara yang sangat merdu dan lantang",
+      "Merupakan sahabat yang paling tua usianya"
+    ],
+    "kunci_jawaban": "Memiliki suara yang sangat merdu dan lantang",
+    "pembahasan": "Bilal dipilih karena suaranya yang lantang, merdu, dan penuh penghayatan."
+  },
+  {
+    "id": 19,
+    "tipe_soal": "pg",
+    "kategori": "susah",
+    "soal": "Seorang muazin disunahkan menolehkan wajahnya ke arah kanan ketika mengumandangkan lafal...",
+    "pilihan_jawaban": [
+      "Hayya 'alasy-syalah",
+      "Hayya 'alal-falah",
+      "Allahu Akbar"
+    ],
+    "kunci_jawaban": "Hayya 'alasy-syalah",
+    "pembahasan": "Disunahkan menoleh ke kanan saat 'Hayya 'alasy-syalah' dan ke kiri saat 'Hayya 'alal-falah'."
+  },
+  {
+    "id": 20,
+    "tipe_soal": "pg",
+    "kategori": "susah",
+    "soal": "Perhatikan tabel lafal dan arti berikut!<br><table class='table table-bordered text-start'><tr><th>Lafal</th><th>Arti</th></tr><tr><td>X</td><td>Marilah menuju kejayaan</td></tr><tr><td>Y</td><td>Salat itu lebih baik dari tidur</td></tr></table><br>Lafal yang tepat untuk menggantikan huruf X dan Y secara berurutan adalah...",
+    "pilihan_jawaban": [
+      "Hayya 'alasy-syalah dan Allahu Akbar",
+      "Hayya 'alal-falah dan As-salatu khairum minan-naum",
+      "Asyhadu alla ilaha illallah dan Qad qamatis-salah"
+    ],
+    "kunci_jawaban": "Hayya 'alal-falah dan As-salatu khairum minan-naum",
+    "pembahasan": "Kejayaan (falah) dan salat lebih baik dari tidur (khairum minan-naum)."
+  },
+  {
+    "id": 21,
+    "tipe_soal": "jasing",
+    "kategori": "mudah",
+    "soal": "Panggilan sebagai tanda bahwa waktu salat fardu telah tiba disebut...",
+    "kunci_jawaban": [
+      "azan",
+      "adzan",
+      "adan"
+    ],
+    "pembahasan": "Azan adalah panggilan masuk waktu salat."
+  },
+  {
+    "id": 22,
+    "tipe_soal": "jasing",
+    "kategori": "mudah",
+    "soal": "Seruan singkat yang menandakan bahwa salat fardu berjamaah akan segera didirikan disebut...",
+    "kunci_jawaban": [
+      "iqamah",
+      "ikamah",
+      "iqomat",
+      "iqomah"
+    ],
+    "pembahasan": "Iqamah adalah tanda dimulainya salat."
+  },
+  {
+    "id": 23,
+    "tipe_soal": "jasing",
+    "kategori": "sedang",
+    "soal": "Orang yang mendengarkan kumandang azan disebut sebagai...",
+    "kunci_jawaban": [
+      "mustamik",
+      "mustami"
+    ],
+    "pembahasan": "Mustamik adalah istilah untuk pendengar azan."
+  },
+  {
+    "id": 24,
+    "tipe_soal": "jasing",
+    "kategori": "sedang",
+    "soal": "Saat melantunkan azan, seorang muazin disunahkan untuk berdiri tegak dan menghadap ke arah...",
+    "kunci_jawaban": [
+      "kiblat",
+      "qiblat",
+      "kakbah",
+      "ka'bah"
+    ],
+    "pembahasan": "Menghadap kiblat adalah salah satu sunah azan."
+  },
+  {
+    "id": 25,
+    "tipe_soal": "jasing",
+    "kategori": "sedang",
+    "soal": "Seorang muazin disunahkan melantunkan azan dalam keadaan suci, baik suci dari najis maupun suci dari...",
+    "kunci_jawaban": [
+      "hadas",
+      "hadats",
+      "hadas kecil",
+      "hadas besar"
+    ],
+    "pembahasan": "Suci dari hadas dan najis adalah sunah bagi muazin."
+  },
+  {
+    "id": 26,
+    "tipe_soal": "jasing",
+    "kategori": "sedang",
+    "soal": "Di dalam susunan azan, lafal 'Allahu Akbar' pada bagian awal diucapkan sebanyak ... kali.",
+    "kunci_jawaban": [
+      "dua",
+      "2",
+      "dua kali",
+      "2 kali"
+    ],
+    "pembahasan": "Lafal takbir dibaca dua kali (Allahu Akbar, Allahu Akbar)."
+  },
+  {
+    "id": 27,
+    "tipe_soal": "jasing",
+    "kategori": "sedang",
+    "soal": "Ketika muazin membaca lafal 'Asyhadu alla ilaha illallah', kita menjawabnya dengan lafal...",
+    "kunci_jawaban": [
+      "asyhadu alla ilaha illallah",
+      "sama",
+      "sama seperti muazin"
+    ],
+    "pembahasan": "Kita menjawab sama persis dengan yang diucapkan muazin."
+  },
+  {
+    "id": 28,
+    "tipe_soal": "jasing",
+    "kategori": "susah",
+    "soal": "Siapa orang yang mengumandangkan adzan pertama kali pada fathul mekkah?",
+    "kunci_jawaban": [
+      "bilal bin rabah",
+      "bilal",
+      "sahabat bilal",
+      "bilal bin rabah r.a",
+      "bilal bin rabah ra"
+    ],
+    "pembahasan": "Bilal bin Rabah adalah muazin pertama Rasulullah."
+  },
+  {
+    "id": 29,
+    "tipe_soal": "jasing",
+    "kategori": "susah",
+    "soal": "Kalimat 'Hayya 'alasy-syalah' merupakan sebuah ajakan yang memiliki arti marilah mendirikan...",
+    "kunci_jawaban": [
+      "salat",
+      "shalat",
+      "sholat"
+    ],
+    "pembahasan": "Artinya adalah ajakan untuk segera mendirikan salat."
+  },
+  {
+    "id": 30,
+    "tipe_soal": "jasing",
+    "kategori": "susah",
+    "soal": "Selain menoleh ke kanan, muazin disunahkan menoleh ke arah kiri ketika mengumandangkan lafal Hayya 'alal...",
+    "kunci_jawaban": [
+      "falah",
+      "falaah",
+      "falakh"
+    ],
+    "pembahasan": "Menoleh ke kiri pada saat lafal Hayya 'alal-falah."
+  }
+]
