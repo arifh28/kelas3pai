@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisah Kelahiran Nabi Muhammad SAW</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS with Custom Config for Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f0f9ff;
+            overflow: hidden; /* Mencegah scroll pada body utama untuk IFP */
+        }
+        
+        /* Transisi halus */
+        .transition-all { transition: all 0.3s ease; }
+        
+        /* Custom scrollbar */
+        .scrollable-section {
+            overflow-y: auto;
+            height: calc(100vh - 80px); /* 80px adalah tinggi header */
+        }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #e0f2fe; }
+        ::-webkit-scrollbar-thumb { background: #0284c7; border-radius: 6px; }
+        
+        /* Slide Animasi & Layout Penuh Layar */
+        .slide { 
+            display: none; 
+            animation: fadeIn 0.4s ease-in-out; 
+            height: 100%;
+            width: 100%;
+        }
+        .slide.active { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+        /* Wadah konten dalam slide agar tidak melebihi layar */
+        .slide-content-box {
+            width: 95%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 1.5rem;
+        }
+
+        .slide img {
+            max-height: 45vh;
+            object-fit: contain;
+            width: auto;
+            margin-top: 1rem;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .video-container iframe { width: 100%; height: 100%; }
+
+        /* Emoji Button (Now with FontAwesome Icon) */
+        .emoji-btn { filter: grayscale(100%); opacity: 0.5; transition: transform 0.2s; }
+        .emoji-btn.selected { filter: grayscale(0%); opacity: 1; transform: scale(1.3); background-color: #dbeafe; }
+    </style>
+</head>
+<body class="h-screen flex flex-col text-slate-800">
+
+    <!-- Header / Navbar -->
+    <header class="bg-sky-600 text-white shadow-lg h-[80px] px-6 flex items-center justify-between z-20 shrink-0">
+        <div class="flex items-center gap-4">
+            <button id="menuBtn" class="p-3 bg-sky-500 hover:bg-sky-400 rounded-xl transition-all shadow-inner" aria-label="Menu">
+                <i class="fa-solid fa-bars text-2xl w-6 h-6 flex justify-center items-center"></i>
+            </button>
+            <h1 class="text-2xl md:text-3xl font-heading font-extrabold tracking-wide drop-shadow-md hidden sm:block">Kisah Kelahiran & Masa Kecil Nabi Muhammad SAW</h1>
+        </div>
+        <button id="fullscreenBtn" class="p-3 bg-amber-400 hover:bg-amber-500 text-sky-900 rounded-xl transition-all font-bold shadow-md flex items-center gap-3">
+            <i id="fsIcon" class="fa-solid fa-expand text-2xl"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="bg-white w-80 shadow-2xl h-full fixed left-0 top-0 transform -translate-x-full transition-transform duration-300 z-40 flex flex-col">
+        <div class="h-[80px] px-6 bg-sky-100 flex justify-between items-center border-b-2 border-sky-200">
+            <h2 class="text-2xl font-heading font-bold text-sky-800">Menu Utama</h2>
+            <button id="closeMenuBtn" class="p-2 bg-sky-200 rounded-full text-sky-800 hover:bg-sky-300 w-10 h-10 flex justify-center items-center">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+        </div>
+        <nav class="flex-1 p-6 flex flex-col gap-5">
+            <button onclick="switchTab('beranda')" class="nav-btn w-full text-left p-5 text-xl rounded-2xl font-bold bg-sky-600 text-white shadow-md transition-all flex items-center gap-4">
+                <i class="fa-solid fa-house text-2xl w-8 text-center"></i> Beranda
+            </button>
+            <button onclick="switchTab('materi')" class="nav-btn w-full text-left p-5 text-xl rounded-2xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex items-center gap-4">
+                <i class="fa-solid fa-book-open text-2xl w-8 text-center"></i> Materi
+            </button>
+            <button onclick="switchTab('soal')" class="nav-btn w-full text-left p-5 text-xl rounded-2xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex items-center gap-4">
+                <i class="fa-solid fa-pen-to-square text-2xl w-8 text-center"></i> Latihan Soal
+            </button>
+            <button onclick="switchTab('refleksi')" class="nav-btn w-full text-left p-5 text-xl rounded-2xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex items-center gap-4">
+                <i class="fa-solid fa-face-smile-beam text-2xl w-8 text-center"></i> Refleksi
+            </button>
+        </nav>
+    </aside>
+
+    <!-- Overlay Sidebar -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-sky-900 bg-opacity-50 z-30 hidden transition-opacity"></div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 w-full relative bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+        
+        <!-- SECTION: BERANDA -->
+        <section id="sec-beranda" class="content-section absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-sky-50 z-10">
+            <div class="bg-white p-12 rounded-[3rem] shadow-2xl border-8 border-sky-100 max-w-4xl w-full transform transition-all hover:scale-105">
+                <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-sky-600 mb-6 drop-shadow-sm">Selamat Datang!</h1>
+                <p class="text-2xl md:text-3xl text-slate-600 mb-10 leading-relaxed">
+                    Media Pembelajaran Interaktif<br>
+                    <strong class="text-sky-800 font-heading">Kisah Kelahiran Nabi Muhammad SAW dan Masa Kecilnya</strong>
+                </p>
+                <button onclick="switchTab('materi')" class="px-10 py-6 bg-orange-500 text-white text-3xl font-bold rounded-full shadow-[0_8px_0_rgb(194,65,12)] hover:bg-orange-400 hover:translate-y-1 hover:shadow-[0_4px_0_rgb(194,65,12)] transition-all flex items-center justify-center gap-4 mx-auto w-auto">
+                    Mulai Belajar <i class="fa-solid fa-rocket"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION: MATERI (No Scroll, IFP Optimized) -->
+        <section id="sec-materi" class="content-section absolute inset-0 hidden flex-col bg-white">
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-200 h-2 shrink-0">
+                <div id="slideProgress" class="bg-green-500 h-2 transition-all duration-500" style="width: 10%;"></div>
+            </div>
+
+            <!-- Slide Container -->
+            <div id="slideContainer" class="flex-1 relative w-full flex items-center justify-center p-4">
+                
+                <!-- Slide 1: Video 1 -->
+                <div class="slide active">
+                    <div class="slide-content-box bg-slate-50 border-4 border-slate-200">
+                        <h2 class="text-4xl font-heading font-bold text-sky-700 mb-6">Mengenal Kisah Kelahiran Nabi Muhammad SAW</h2>
+                        <div class="video-container border-8 border-sky-300">
+                            <iframe src="https://www.youtube.com/embed/j5AwiRHX5BE" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Video 2 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-slate-50 border-4 border-slate-200">
+                        <h2 class="text-4xl font-heading font-bold text-sky-700 mb-6">Kisah Masa Kecil Sang Rasul</h2>
+                        <div class="video-container border-8 border-sky-300">
+                            <iframe src="https://www.youtube.com/embed/W3iWZ79j64I" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-sky-50 border-4 border-sky-200">
+                        <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-sky-800 mb-4">Kelahiran di Tahun Gajah</h2>
+                        <p class="text-2xl md:text-3xl leading-snug text-slate-700">
+                            Nabi Muhammad saw. lahir di Kota Makkah pada hari Senin, tanggal <strong>12 Rabiulawal Tahun Gajah</strong>. 
+                            Dinamakan Tahun Gajah karena terjadi serangan oleh pasukan gajah dari Yaman yang dipimpin <strong>Raja Abrahah</strong>, yang dihancurkan Allah dengan <strong>burung Ababil</strong>.
+                        </p>
+                        <img src="image_4b213f.png" alt="Zaman Jahiliyyah dan Silsilah Keluarga" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-orange-50 border-4 border-orange-200">
+                        <h2 class="text-5xl font-heading font-extrabold text-orange-700 mb-8">Lahir dalam Keadaan Yatim</h2>
+                        <p class="text-3xl leading-relaxed text-slate-800 text-justify">
+                            Ayah beliau, <strong>Abdullah</strong>, telah meninggal dunia saat Nabi masih dalam kandungan (sekitar 6 bulan). 
+                            Ibu beliau bernama <strong>Siti Aminah</strong>. <br><br>
+                            Kakeknya, <strong>Abdul Muttalib</strong>, sangat gembira dan memberinya nama <strong>"Muhammad"</strong> (orang yang terpuji).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 5 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-green-50 border-4 border-green-200">
+                        <h2 class="text-5xl font-heading font-extrabold text-green-700 mb-8">Masa Pengasuhan di Pedesaan</h2>
+                        <p class="text-3xl leading-relaxed text-slate-800 text-justify">
+                            Bayi Muhammad dititipkan kepada wanita baik hati bernama <strong>Halimah as-Sa'diyah</strong> dari dusun Bani Sa'ad agar tumbuh sehat, kuat, dan berbahasa fasih. <br><br>
+                            Selama merawatnya, kehidupan Halimah dipenuhi keberkahan; ternak menjadi gemuk dan susu melimpah.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 6 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-sky-50 border-4 border-sky-200">
+                        <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-sky-800 mb-4">Menjadi Yatim Piatu</h2>
+                        <p class="text-2xl md:text-3xl leading-snug text-slate-700">
+                            Saat berusia enam tahun, dalam perjalanan pulang dari ziarah di Madinah, ibundanya wafat di desa <strong>Abwa</strong>. Muhammad kecil kini yatim piatu namun tidak pernah berkecil hati.
+                        </p>
+                        <img src="image_4b2100.png" alt="Peristiwa Bergajah dan Pengasuhan" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+                <!-- Slide 7 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-purple-50 border-4 border-purple-200">
+                        <h2 class="text-5xl font-heading font-extrabold text-purple-700 mb-8">Diasuh Kakek dan Paman</h2>
+                        <p class="text-3xl leading-relaxed text-slate-800 text-justify">
+                            Sepeninggal ibunya, beliau diasuh kakeknya, <strong>Abdul Muttalib</strong>. Namun saat usia 8 tahun kakeknya wafat.<br><br>
+                            Pengasuhan dilanjutkan oleh pamannya, <strong>Abu Talib</strong>. Bersama pamannya, beliau tumbuh mandiri, berani, dan suka membantu.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 8 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-orange-50 border-4 border-orange-200">
+                        <h2 class="text-5xl font-heading font-extrabold text-orange-700 mb-8">Menggembala Domba & Gelar Al-Amin</h2>
+                        <p class="text-3xl leading-relaxed text-slate-800 text-justify">
+                            Pada masa kanak-kanak, beliau bekerja <strong>menggembalakan domba</strong> penduduk Makkah. Ini melatih kesabaran dan ketekunan.<br><br>
+                            Karena kejujurannya sejak kecil, beliau diberi julukan <strong>Al-Amin</strong> (orang yang dapat dipercaya).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 9 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-emerald-50 border-4 border-emerald-200">
+                        <h2 class="text-5xl font-heading font-extrabold text-emerald-700 mb-8">Kisah Teladan: Kejujuran Muhammad Kecil</h2>
+                        <ul class="text-3xl leading-loose text-slate-800 text-left list-none space-y-4">
+                            <li><i class="fa-solid fa-star text-emerald-500 mr-3"></i> Tidak pernah berbohong dalam hal kecil maupun besar.</li>
+                            <li><i class="fa-solid fa-star text-emerald-500 mr-3"></i> Tidak pernah berbuat curang saat bermain atau bekerja.</li>
+                            <li><i class="fa-solid fa-star text-emerald-500 mr-3"></i> Menjalankan amanah/titipan dengan penuh tanggung jawab.</li>
+                            <li><i class="fa-solid fa-star text-emerald-500 mr-3"></i> Menjaga kehormatan diri dari perbuatan tercela di zaman Jahiliah.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Slide 10 -->
+                <div class="slide">
+                    <div class="slide-content-box bg-yellow-50 border-4 border-yellow-200">
+                        <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-yellow-700 mb-4">Ayo Ingat Poin Penting Ini!</h2>
+                        <p class="text-2xl mb-2 text-slate-600">Mari mencintai Rasulullah dengan mengikuti akhlaknya.</p>
+                        <img src="image_4b1e3b.png" alt="Ayo Ingat" class="border-4 border-yellow-300 rounded-xl" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Slide Controls (Bottom Bar) -->
+            <div class="bg-white border-t-2 border-slate-100 p-4 shrink-0 flex justify-between items-center px-8 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                <button id="prevBtn" class="px-8 py-4 bg-slate-200 text-slate-700 text-2xl font-bold rounded-2xl hover:bg-slate-300 disabled:opacity-30 transition-all flex items-center gap-3" onclick="changeSlide(-1)">
+                    <i class="fa-solid fa-arrow-left"></i> <span class="hidden sm:inline"> Sebelumnya</span>
+                </button>
+                <span id="slideCounter" class="text-2xl font-extrabold text-sky-700 bg-sky-100 px-8 py-3 rounded-full border-2 border-sky-200">
+                    1 / 10
+                </span>
+                <button id="nextBtn" class="px-8 py-4 bg-sky-500 text-white text-2xl font-bold rounded-2xl hover:bg-sky-600 transition-all shadow-md flex items-center gap-3" onclick="changeSlide(1)">
+                    <span class="hidden sm:inline">Selanjutnya </span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION: LATIHAN SOAL (Scrollable) -->
+        <section id="sec-soal" class="content-section absolute inset-0 hidden scrollable-section bg-slate-50 p-6 md:p-12">
+            <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl p-8 md:p-10 border-4 border-sky-200">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-heading font-extrabold text-sky-700">Latihan Soal</h2>
+                    <p class="text-xl text-slate-500 mt-2">Uji pemahamanmu dari materi yang telah dibaca!</p>
+                </div>
+
+                <div id="quizContainer" class="flex flex-col gap-8">
+                    <!-- Soal digenerate via JS -->
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <button onclick="resetQuiz()" class="px-8 py-4 bg-orange-500 text-white text-2xl font-bold rounded-full shadow-[0_6px_0_rgb(194,65,12)] hover:bg-orange-400 hover:translate-y-1 hover:shadow-[0_2px_0_rgb(194,65,12)] transition-all inline-flex items-center gap-3">
+                        <i class="fa-solid fa-rotate-right"></i> Ulangi Latihan
+                    </button>
+                </div>
+            </div>
+            <div class="h-20"></div> <!-- Padding bawah -->
+        </section>
+
+        <!-- SECTION: REFLEKSI (Scrollable) -->
+        <section id="sec-refleksi" class="content-section absolute inset-0 hidden scrollable-section bg-purple-50 p-6 md:p-12">
+            <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl p-8 md:p-10 border-4 border-purple-200">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-heading font-extrabold text-purple-700">Refleksi Belajar</h2>
+                    <p class="text-xl text-slate-500 mt-2">Bagaimana perasaanmu setelah belajar hari ini?</p>
+                </div>
+
+                <!-- Form Input Jumlah Siswa -->
+                <div id="setupRefleksi" class="max-w-md mx-auto bg-purple-100 p-8 rounded-3xl shadow-inner border border-purple-200 text-center">
+                    <label class="block text-2xl font-heading font-bold text-purple-900 mb-6">Jumlah Siswa Hadir:</label>
+                    <input type="number" id="studentCount" min="1" max="50" class="w-full font-heading text-center text-4xl p-4 border-4 border-purple-300 rounded-2xl mb-8 focus:outline-none focus:border-purple-600 bg-white" value="10">
+                    <button onclick="startReflection()" class="w-full px-8 py-5 bg-green-500 text-white text-2xl font-bold rounded-2xl shadow-[0_6px_0_rgb(22,163,74)] hover:bg-green-400 hover:translate-y-1 hover:shadow-[0_2px_0_rgb(22,163,74)] transition-all flex justify-center items-center gap-3">
+                        Mulai Isi Perasaan <i class="fa-solid fa-hand-point-down"></i>
+                    </button>
+                </div>
+
+                <!-- Daftar Siswa (Hidden by default) -->
+                <div id="activeRefleksi" class="hidden flex flex-col gap-6">
+                    <div id="studentList" class="flex flex-col gap-4">
+                        <!-- Baris siswa digenerate via JS -->
+                    </div>
+
+                    <div class="mt-10 text-center border-t-2 border-slate-100 pt-8">
+                        <button onclick="finishReflection()" class="px-12 py-5 bg-sky-500 text-white text-3xl font-bold rounded-full shadow-[0_6px_0_rgb(2,132,199)] hover:bg-sky-400 hover:translate-y-1 hover:shadow-[0_2px_0_rgb(2,132,199)] transition-all inline-flex items-center gap-3">
+                            <i class="fa-solid fa-check-double"></i> Selesai Refleksi
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="h-20"></div>
+        </section>
+
+    </main>
+
+    <!-- Custom Modal -->
+    <div id="msgModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl shadow-2xl p-10 max-w-lg w-full text-center transform scale-90 transition-transform duration-300" id="msgModalBox">
+            <div class="text-7xl mb-6 animate-bounce" id="msgIcon">
+                <!-- Icon HTML will be injected here -->
+            </div>
+            <h3 class="text-4xl font-heading font-extrabold text-sky-800 mb-4" id="msgTitle">Judul</h3>
+            <p class="text-2xl text-slate-600 mb-8" id="msgText">Pesan text disini.</p>
+            <button onclick="closeModal()" class="w-full px-8 py-5 bg-sky-500 text-white text-2xl font-bold rounded-2xl shadow-md hover:bg-sky-600 transition-colors">
+                Tutup Peringatan
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================
+           1. NAVIGASI, SIDEBAR & FULLSCREEN
+           ========================================= */
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        
+        function toggleMenu() {
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+        
+        document.getElementById('menuBtn').addEventListener('click', toggleMenu);
+        document.getElementById('closeMenuBtn').addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden', 'flex-col');
+            
+            if(tabId === 'materi') {
+                document.getElementById('sec-materi').classList.add('flex-col');
+                document.getElementById('sec-materi').classList.replace('hidden', 'flex');
+            }
+            
+            if(tabId !== 'materi') {
+                document.querySelectorAll('iframe').forEach(iframe => {
+                    let src = iframe.src;
+                    iframe.src = src; 
+                });
+            }
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-sky-600', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+            
+            const btnMap = { 'beranda':0, 'materi':1, 'soal':2, 'refleksi':3 };
+            const activeBtn = document.querySelectorAll('.nav-btn')[btnMap[tabId]];
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+                activeBtn.classList.add('bg-sky-600', 'text-white');
+            }
+
+            if(!sidebar.classList.contains('-translate-x-full')) toggleMenu();
+            
+            if(tabId === 'soal' && document.getElementById('quizContainer').children.length === 0) renderQuiz();
+        }
+
+        document.getElementById('fullscreenBtn').addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                document.getElementById('fsIcon').className = "fa-solid fa-compress text-2xl";
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                    document.getElementById('fsIcon').className = "fa-solid fa-expand text-2xl";
+                }
+            }
+        });
+
+        /* =========================================
+           2. LOGIKA SLIDER MATERI
+           ========================================= */
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function updateSliderUI() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                    const iframe = slide.querySelector('iframe');
+                    if(iframe) iframe.src = iframe.src; 
+                }
+            });
+
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${slides.length}`;
+            document.getElementById('slideProgress').style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            
+            const nBtn = document.getElementById('nextBtn');
+            if (currentSlide === slides.length - 1) {
+                nBtn.innerHTML = '<span class="hidden sm:inline">Ke Latihan Soal </span> <i class="fa-solid fa-file-pen"></i>';
+                nBtn.classList.replace('bg-sky-500', 'bg-green-500');
+                nBtn.classList.replace('hover:bg-sky-600', 'hover:bg-green-600');
+            } else {
+                nBtn.innerHTML = '<span class="hidden sm:inline">Selanjutnya </span> <i class="fa-solid fa-arrow-right"></i>';
+                nBtn.classList.replace('bg-green-500', 'bg-sky-500');
+                nBtn.classList.replace('hover:bg-green-600', 'hover:bg-sky-600');
+            }
+        }
+
+        function changeSlide(dir) {
+            if (dir === 1 && currentSlide === slides.length - 1) {
+                switchTab('soal'); 
+                return;
+            }
+            currentSlide += dir;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+            updateSliderUI();
+        }
+
+        /* =========================================
+           3. LOGIKA LATIHAN SOAL
+           ========================================= */
+        const quizData = [
+            { q: "Kapan Nabi Muhammad saw. dilahirkan?", options: ["12 Rabiulawal Tahun Gajah", "10 Muharram"], ans: 0, exp: "Tepat sekali! Nabi Muhammad saw. lahir di Makkah pada 12 Rabiulawal Tahun Gajah." },
+            { q: "Mengapa dinamakan Tahun Gajah?", options: ["Ada pasukan gajah menyerang Makkah", "Banyak gajah peliharaan penduduk"], ans: 0, exp: "Benar! Saat itu pasukan gajah pimpinan Raja Abrahah menyerang Makkah." },
+            { q: "Siapa nama ayah Nabi Muhammad saw.?", options: ["Abu Talib", "Abdullah"], ans: 1, exp: "Pintar! Ayah beliau bernama Abdullah, yang wafat sebelum beliau lahir." },
+            { q: "Siapakah ibu susuan Nabi Muhammad dari Bani Sa'ad?", options: ["Halimah as-Sa'diyah", "Siti Khadijah"], ans: 0, exp: "Benar! Halimah as-Sa'diyah merawat beliau di pedesaan hingga usia 4-6 tahun." },
+            { q: "Di mana ibunda Siti Aminah wafat saat perjalanan pulang dari Madinah?", options: ["Desa Abwa", "Gua Hira"], ans: 0, exp: "Tepat! Ibunda beliau wafat di desa Abwa saat beliau berusia 6 tahun." },
+            { q: "Siapa yang mengasuh Nabi Muhammad setelah ibunya wafat?", options: ["Paman Abu Talib", "Kakek Abdul Muttalib"], ans: 1, exp: "Benar! Kakeknya, Abdul Muttalib, mengasuh beliau yang saat itu yatim piatu." },
+            { q: "Setelah kakeknya meninggal di usia 8 tahun, siapa yang melanjutkan mengasuh beliau?", options: ["Abu Talib", "Abu Lahab"], ans: 0, exp: "Tepat! Sang paman, Abu Talib, yang bijaksana mengambil alih pengasuhan." },
+            { q: "Pekerjaan apa yang dilakukan Nabi Muhammad saat masa kanak-kanak?", options: ["Menggembala domba", "Pandai besi"], ans: 0, exp: "Benar! Beliau menggembalakan domba milik penduduk Makkah." },
+            { q: "Sikap apa yang sangat menonjol pada diri Muhammad kecil?", options: ["Jujur dan dapat dipercaya", "Suka bermusuhan"], ans: 0, exp: "Hebat! Beliau sangat jujur, tidak pernah berbohong, dan tidak pernah curang." },
+            { q: "Apa julukan yang diberikan masyarakat Makkah kepada beliau karena kejujurannya?", options: ["Al-Amin", "Al-Fatih"], ans: 0, exp: "Luar biasa! Al-Amin berarti orang yang dapat dipercaya." }
+        ];
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizData.forEach((item, qIndex) => {
+                const qBox = document.createElement('div');
+                qBox.className = "bg-white border-4 border-slate-100 rounded-3xl p-6 md:p-8 shadow-sm";
+                
+                let html = `<h3 class="text-2xl font-bold text-slate-800 mb-6">${qIndex + 1}. ${item.q}</h3>`;
+                html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+                
+                item.options.forEach((opt, oIndex) => {
+                    html += `
+                        <button id="btn-q${qIndex}-o${oIndex}" class="p-5 text-xl font-bold rounded-2xl border-4 border-slate-200 bg-slate-50 hover:border-sky-400 hover:bg-sky-50 transition-all text-left flex items-center" onclick="checkAnswer(${qIndex}, ${oIndex}, ${item.ans})">
+                            <span class="inline-flex justify-center items-center w-10 h-10 rounded-full bg-slate-200 text-slate-700 font-heading mr-4 shrink-0">${String.fromCharCode(65 + oIndex)}</span>
+                            <span>${opt}</span>
+                        </button>
+                    `;
+                });
+                
+                html += `</div>`;
+                html += `<div id="feedback-${qIndex}" class="mt-6 p-5 rounded-2xl hidden text-xl font-bold text-center border-4"></div>`;
+                
+                qBox.innerHTML = html;
+                container.appendChild(qBox);
+            });
+        }
+
+        function checkAnswer(qIndex, selectedIndex, correctIndex) {
+            const feedbackBox = document.getElementById(`feedback-${qIndex}`);
+            const buttons = [
+                document.getElementById(`btn-q${qIndex}-o0`),
+                document.getElementById(`btn-q${qIndex}-o1`)
+            ];
+
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:border-sky-400', 'hover:bg-sky-50', 'cursor-pointer');
+            });
+
+            if (selectedIndex === correctIndex) {
+                buttons[selectedIndex].classList.replace('border-slate-200', 'border-green-500');
+                buttons[selectedIndex].classList.replace('bg-slate-50', 'bg-green-100');
+                
+                feedbackBox.className = "mt-6 p-5 rounded-2xl text-xl font-bold text-green-900 bg-green-100 border-4 border-green-400 animate-pulse";
+                feedbackBox.innerHTML = `<i class="fa-solid fa-circle-check"></i> BENAR! <br><span class="text-lg font-medium mt-2 block text-green-800">${quizData[qIndex].exp}</span>`;
+            } else {
+                buttons[selectedIndex].classList.replace('border-slate-200', 'border-red-500');
+                buttons[selectedIndex].classList.replace('bg-slate-50', 'bg-red-100');
+                
+                buttons[correctIndex].classList.replace('border-slate-200', 'border-green-500');
+                buttons[correctIndex].classList.replace('bg-slate-50', 'bg-green-100');
+                
+                feedbackBox.className = "mt-6 p-5 rounded-2xl text-xl font-bold text-red-900 bg-red-100 border-4 border-red-400";
+                feedbackBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> KURANG TEPAT. <br><span class="text-lg font-medium mt-2 block text-red-800">${quizData[qIndex].exp}</span>`;
+            }
+            feedbackBox.classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            renderQuiz();
+            document.getElementById('sec-soal').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* =========================================
+           4. LOGIKA REFLEKSI
+           ========================================= */
+        function startReflection() {
+            const count = parseInt(document.getElementById('studentCount').value);
+            if (isNaN(count) || count < 1 || count > 50) {
+                showModal("Perhatian", "Masukkan jumlah siswa yang benar (1-50).", '<i class="fa-solid fa-triangle-exclamation text-yellow-500"></i>');
+                return;
+            }
+
+            document.getElementById('setupRefleksi').classList.add('hidden');
+            const list = document.getElementById('studentList');
+            list.innerHTML = '';
+            
+            // Array icon FontAwesome beserta warnanya (menggantikan Emoji teks)
+            const emojis = [
+                '<i class="fa-solid fa-face-grin-stars text-yellow-400"></i>',
+                '<i class="fa-solid fa-face-smile text-lime-500"></i>',
+                '<i class="fa-solid fa-face-meh text-slate-400"></i>',
+                '<i class="fa-solid fa-face-frown text-orange-500"></i>',
+                '<i class="fa-solid fa-face-sad-tear text-red-500"></i>'
+            ];
+            
+            for (let i = 1; i <= count; i++) {
+                const row = document.createElement('div');
+                row.className = "bg-white p-5 rounded-3xl shadow-sm border-4 border-purple-100 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-purple-300 transition-all";
+                
+                let rowHtml = `<span class="text-3xl font-heading font-extrabold text-purple-800 min-w-[150px] text-center md:text-left">Siswa ${i}</span>`;
+                rowHtml += `<div class="flex gap-3 md:gap-5 emoji-group" data-student="${i}">`;
+                
+                emojis.forEach((emoji) => {
+                    rowHtml += `
+                        <button class="emoji-btn text-5xl md:text-6xl p-3 rounded-full hover:bg-purple-100 transition-all focus:outline-none flex items-center justify-center w-16 h-16 md:w-20 md:h-20" onclick="selectEmoji(this)">
+                            ${emoji}
+                        </button>
+                    `;
+                });
+                
+                rowHtml += `</div>`;
+                row.innerHTML = rowHtml;
+                list.appendChild(row);
+            }
+            
+            document.getElementById('activeRefleksi').classList.remove('hidden');
+        }
+
+        function selectEmoji(btnElement) {
+            const group = btnElement.closest('.emoji-group');
+            group.querySelectorAll('.emoji-btn').forEach(b => {
+                b.classList.remove('selected', 'bg-blue-100');
+            });
+            btnElement.classList.add('selected', 'bg-blue-100');
+        }
+
+        function finishReflection() {
+            const groups = document.querySelectorAll('.emoji-group');
+            let allSelected = true;
+            groups.forEach(group => {
+                if (!group.querySelector('.selected')) allSelected = false;
+            });
+
+            if(!allSelected) {
+                showModal("Belum Lengkap!", "Masih ada siswa yang belum memilih perasaannya.", '<i class="fa-solid fa-circle-exclamation text-orange-500"></i>');
+            } else {
+                showModal("Alhamdulillah!", "Terima kasih! Refleksi belajar hari ini telah berhasil disimpan.", '<i class="fa-solid fa-award text-yellow-500"></i>');
+                setTimeout(() => {
+                    document.getElementById('activeRefleksi').classList.add('hidden');
+                    document.getElementById('setupRefleksi').classList.remove('hidden');
+                    document.getElementById('sec-refleksi').scrollTo({ top: 0, behavior: 'smooth' });
+                }, 1500);
+            }
+        }
+
+        /* =========================================
+           5. MODAL CUSTOM
+           ========================================= */
+        function showModal(title, text, iconHTML) {
+            document.getElementById('msgTitle').innerText = title;
+            document.getElementById('msgText').innerText = text;
+            document.getElementById('msgIcon').innerHTML = iconHTML; // Menggunakan innerHTML untuk FontAwesome
+            const modal = document.getElementById('msgModal');
+            const box = document.getElementById('msgModalBox');
+            modal.classList.remove('hidden');
+            setTimeout(() => { box.classList.replace('scale-90', 'scale-100'); }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('msgModal');
+            const box = document.getElementById('msgModalBox');
+            box.classList.replace('scale-100', 'scale-90');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        // Init UI pertama kali
+        updateSliderUI();
+    </script>
+</body>
+</html>
