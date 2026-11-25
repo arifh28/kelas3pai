@@ -1,0 +1,712 @@
+[
+  {
+    "id": 1,
+    "elemen": "Al-Qur'an",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "",
+    "pertanyaan": "Perhatikan huruf-huruf hijaiyah berikut: <span class='arabic'>ب - ت - ث</span>. Apabila ketiga huruf tersebut ditulis bersambung menjadi satu kata, bentuk penulisan yang benar adalah ....",
+    "pilihan": [
+      "<span class='arabic'>بَتَثَ</span>",
+      "<span class='arabic'>بَ تَ ثَ</span>",
+      "<span class='arabic'>بَتَ ثَ</span>"
+    ],
+    "jawaban": "<span class='arabic'>بَتَثَ</span>",
+    "pembahasan": "Huruf Ba (ب), Ta (ت), dan Tsa (ث) termasuk huruf yang dapat disambung di awal, tengah, maupun akhir kata."
+  },
+  {
+    "id": 2,
+    "elemen": "Al-Qur'an",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Surah Al-Kausar merupakan surah ke-108 dalam Al-Qur'an yang diturunkan di Kota Makkah sebelum Nabi Muhammad saw. hijrah.",
+    "pertanyaan": "Arti dari nama Surah Al-Kausar adalah ....",
+    "pilihan": [
+      "Nikmat yang Banyak",
+      "Pertolongan Allah",
+      "Waktu Subuh"
+    ],
+    "jawaban": "Nikmat yang Banyak",
+    "pembahasan": "Al-Kausar artinya Nikmat yang Banyak, juga merupakan nama sebuah telaga di surga."
+  },
+  {
+    "id": 3,
+    "elemen": "Al-Qur'an",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "<table class='table table-bordered table-sm text-center bg-white mb-2'><thead><tr><th>No</th><th>Potongan Lafaz</th></tr></thead><tbody><tr><td>1</td><td class='arabic'>مِنْ رَبِّهِمْ</td></tr><tr><td>2</td><td class='arabic'>فِيْ جِيْدِهَا</td></tr><tr><td>3</td><td class='arabic'>مَنْ يَعْمَلْ</td></tr></tbody></table>",
+    "pertanyaan": "Berdasarkan tabel di atas, nomor yang menunjukkan bacaan hukum tajwid Mad Thabi'i adalah ....",
+    "pilihan": [
+      "2",
+      "1",
+      "3"
+    ],
+    "jawaban": "2",
+    "pembahasan": "Lafaz فِيْ جِيْدِهَا mengandung harakat kasrah diikuti huruf ya' sukun (يْ) sehingga dibaca panjang 2 harakat (Mad Thabi'i)."
+  },
+  {
+    "id": 4,
+    "elemen": "Al-Qur'an",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "Perhatikan susunan ayat Surah Al-Kausar secara acak berikut:<br>1) <span class='arabic'>إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ</span><br>2) <span class='arabic'>إِنَّآ أَعْطَيْنَـٰكَ ٱلْكَوْثَرَ</span><br>3) <span class='arabic'>فَصَلِّ لِرَبِّكَ وَٱنْحَرْ</span>",
+    "pertanyaan": "Urutan ayat Surah Al-Kausar yang benar dari ayat pertama hingga ketiga adalah ....",
+    "pilihan": [
+      "2 - 3 - 1",
+      "2 - 1 - 3",
+      "3 - 2 - 1"
+    ],
+    "jawaban": "2 - 3 - 1",
+    "pembahasan": "Urutan Surah Al-Kausar: (1) Inna a'tainakal-kausar, (2) Fasalli lirabbika wanhar, (3) Inna syani'aka huwal-abtar."
+  },
+  {
+    "id": 5,
+    "elemen": "Al-Qur'an",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Rafi diminta gurunya menulis kata bahasa Arab yang terdiri dari huruf <span class='arabic'>د - ر - س</span>. Rafi menulisnya dengan menyambungkan semua huruf tersebut menjadi satu rangkaian tanpa terputus.",
+    "pertanyaan": "Analisislah penulisan Rafi tersebut! Mengapa cara penulisan Rafi dinyatakan kurang tepat?",
+    "pilihan": [
+      "Huruf dal dan ra tidak dapat disambung dengan huruf sesudahnya",
+      "Huruf sin hanya boleh ditulis di bagian awal kata saja",
+      "Ketiga huruf tersebut tidak boleh diberi harakat fathah"
+    ],
+    "jawaban": "Huruf dal dan ra tidak dapat disambung dengan huruf sesudahnya",
+    "pembahasan": "Huruf dal (د) dan ra (ر) termasuk dalam 6 huruf (ا د ذ ر ز و) yang tidak dapat disambung dengan huruf di sebelah kirinya (sesudahnya)."
+  },
+  {
+    "id": 6,
+    "elemen": "Al-Qur'an",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Perhatikan pernyataan-pernyataan berikut:<br>1) Harakat fathah bertemu huruf alif tanpa harakat<br>2) Harakat kasrah bertemu huruf wawu sukun<br>3) Harakat dhammah bertemu huruf wawu sukun<br>4) Harakat fathah bertemu huruf ya' sukun",
+    "pertanyaan": "Pasangan syarat terjadinya bacaan Mad Thabi'i yang tepat ditunjukkan oleh nomor ....",
+    "pilihan": [
+      "1 dan 3",
+      "2 dan 4",
+      "1 dan 4"
+    ],
+    "jawaban": "1 dan 3",
+    "pembahasan": "Syarat Mad Thabi'i adalah fathah diikuti alif, kasrah diikuti ya' sukun, dan dhammah diikuti wawu sukun."
+  },
+  {
+    "id": 7,
+    "elemen": "Al-Qur'an",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Keluarga Pak Ahmad baru saja dikaruniai rezeki panen yang melimpah. Sebagai bentuk rasa syukur sesuai pesan pokok Surah Al-Kausar ayat kedua, keluarga Pak Ahmad melaksanakan ibadah tertentu.",
+    "pertanyaan": "Dua ibadah utama yang diperintahkan dalam Surah Al-Kausar ayat kedua sebagai wujud syukur adalah ....",
+    "pilihan": [
+      "Mendirikan salat dan berkurban",
+      "Berpuasa Ramadan dan membayar zakat",
+      "Bersedekah dan menunaikan ibadah haji"
+    ],
+    "jawaban": "Mendirikan salat dan berkurban",
+    "pembahasan": "Ayat ke-2 Surah Al-Kausar (Fasalli lirabbika wanhar) memerintahkan untuk mendirikan salat karena Allah dan berkurban."
+  },
+  {
+    "id": 8,
+    "elemen": "Al-Qur'an",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Pada masa dakwah di Makkah, kaum kafir Quraisy mengejek Nabi Muhammad saw. karena putra beliau wafat saat masih kecil sehingga dianggap tidak memiliki penerus. Allah Swt. kemudian menurunkan Surah Al-Kausar untuk menghibur Nabi.",
+    "pertanyaan": "Kesimpulan yang sesuai dengan isi kandungan ayat terakhir Surah Al-Kausar terhadap orang yang membenci Nabi adalah ....",
+    "pilihan": [
+      "Mereka akan terputus dari rahmat dan kebaikan Allah Swt.",
+      "Mereka akan mendapatkan harta yang berlimpah di dunia",
+      "Mereka akan diampuni tanpa perlu meminta maaf kepada Nabi"
+    ],
+    "jawaban": "Mereka akan terputus dari rahmat dan kebaikan Allah Swt.",
+    "pembahasan": "Ayat ke-3 menegaskan bahwa orang-orang yang membenci Nabi Muhammad saw. dialah yang terputus (al-abtar) dari rahmat Allah."
+  },
+  {
+    "id": 9,
+    "elemen": "Akidah",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Dalam pembelajaran Akidah, peserta didik mengenal tiga kelompok sifat bagi Allah Swt., yaitu sifat wajib, sifat mustahil, dan sifat jaiz.",
+    "pertanyaan": "Pengertian dari sifat wajib bagi Allah Swt. adalah sifat yang ....",
+    "pilihan": [
+      "Pasti dimiliki oleh Allah Swt. sesuai kesempurnaan-Nya",
+      "Tidak mungkin dimiliki oleh Allah Swt.",
+      "Boleh dilakukan atau tidak dilakukan oleh Allah Swt."
+    ],
+    "jawaban": "Pasti dimiliki oleh Allah Swt. sesuai kesempurnaan-Nya",
+    "pembahasan": "Sifat wajib adalah sifat kesempurnaan yang pasti dimiliki oleh Allah Swt. dan berjumlah 20 sifat."
+  },
+  {
+    "id": 10,
+    "elemen": "Akidah",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Allah Swt. memiliki 20 sifat wajib dan 20 sifat mustahil yang saling berlawanan makna.",
+    "pertanyaan": "Lawan dari sifat wajib Baqa' (Kekal) adalah sifat mustahil Fana' yang artinya ....",
+    "pilihan": [
+      "Rusak atau binasa",
+      "Lemah atau tidak berdaya",
+      "Membutuhkan bantuan orang lain"
+    ],
+    "jawaban": "Rusak atau binasa",
+    "pembahasan": "Baqa' artinya kekal, sedangkan sifat mustahil lawannya adalah Fana' yang artinya rusak atau binasa."
+  },
+  {
+    "id": 11,
+    "elemen": "Akidah",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "<table class='table table-bordered table-sm text-center bg-white mb-2'><thead><tr><th>Sifat Wajib</th><th>Sifat Mustahil</th></tr></thead><tbody><tr><td>Qudrat</td><td>'Ajzun</td></tr><tr><td>'Ilmu</td><td>Jahlun</td></tr><tr><td>Wahdaniyah</td><td>...</td></tr></tbody></table>",
+    "pertanyaan": "Sifat mustahil yang tepat untuk melengkapi bagian titik-titik pada tabel di atas adalah ....",
+    "pilihan": [
+      "Ta'addud",
+      "Hudus",
+      "Bukmun"
+    ],
+    "jawaban": "Ta'addud",
+    "pembahasan": "Wahdaniyah artinya Esa/Tunggal, lawannya adalah Ta'addud yang artinya berbilang atau lebih dari satu."
+  },
+  {
+    "id": 12,
+    "elemen": "Akidah",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "Perhatikan pernyataan berikut:<br>'Allah Swt. bebas berkehendak menciptakan sesuatu atau tidak menciptakannya tanpa ada satu pun makhluk yang dapat memaksa-Nya.'",
+    "pertanyaan": "Pernyataan tersebut menjelaskan pengertian dari ....",
+    "pilihan": [
+      "Sifat Jaiz Allah Swt.",
+      "Sifat Mustahil Allah Swt.",
+      "Sifat Wajib Allah Swt."
+    ],
+    "jawaban": "Sifat Jaiz Allah Swt.",
+    "pembahasan": "Sifat jaiz Allah Swt. hanya ada satu, yaitu kebebasan Allah berbuat sesuatu atau tidak berbuat sesuatu (fi'lu kulli mumkinin au tarkuhu)."
+  },
+  {
+    "id": 13,
+    "elemen": "Akidah",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Saat ulangan harian berlangsung, pengawas ujian keluar ruangan sebentar untuk mengambil kertas. Nabila tetap mengerjakan soal sendiri dan tidak mau melihat catatan meskipun teman sebangkunya mengajak menyontek.",
+    "pertanyaan": "Sikap Nabila tersebut mencerminkan keyakinannya terhadap sifat wajib Allah Swt., yaitu ....",
+    "pilihan": [
+      "Basar dan 'Ilmu",
+      "Qidam dan Baqa'",
+      "Iradat dan Hayat"
+    ],
+    "jawaban": "Basar dan 'Ilmu",
+    "pembahasan": "Meyakini Allah Maha Melihat (Basar) dan Maha Mengetahui ('Ilmu) membuat seseorang selalu jujur meskipun tidak diawasi manusia."
+  },
+  {
+    "id": 14,
+    "elemen": "Akidah",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Seluruh alam semesta beserta matahari, bulan, dan bintang berjalan teratur tanpa pernah bertabrakan. Tidak ada satu pun makhluk yang membantu Allah Swt. dalam mengatur semuanya.",
+    "pertanyaan": "Keteraturan alam semesta tersebut membuktikan bahwa Allah Swt. mustahil bersifat Ihtiyaju lighairihi karena Allah memiliki sifat wajib ....",
+    "pilihan": [
+      "Qiyamuhu binafsihi",
+      "Mukhalafatu lil hawadisi",
+      "Mutakalliman"
+    ],
+    "jawaban": "Qiyamuhu binafsihi",
+    "pembahasan": "Qiyamuhu binafsihi artinya berdiri sendiri tanpa membutuhkan bantuan siapa pun, lawannya adalah Ihtiyaju lighairihi."
+  },
+  {
+    "id": 15,
+    "elemen": "Akidah",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Bacalah deskripsi berikut dengan saksama:<br>'Manusia membutuhkan makan, minum, dan tidur agar tetap hidup, serta suatu saat akan menua dan meninggal dunia. Sebaliknya, Pencipta alam semesta tidak memiliki kesamaan sedikit pun dengan ciptaan-Nya.'",
+    "pertanyaan": "Sifat wajib Allah Swt. yang paling tepat dengan deskripsi tersebut adalah ....",
+    "pilihan": [
+      "Mukhalafatu lil hawadisi",
+      "Sami'an",
+      "Qadiran"
+    ],
+    "jawaban": "Mukhalafatu lil hawadisi",
+    "pembahasan": "Mukhalafatu lil hawadisi artinya Allah Swt. berbeda dengan seluruh makhluk ciptaan-Nya."
+  },
+  {
+    "id": 16,
+    "elemen": "Akidah",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Perhatikan kisah berikut:<br>'Ada seorang anak yang berbisik-bisik di dalam kamar yang gelap gulita sambil berdoa memohon kesehatan untuk ibunya yang sedang sakit.'",
+    "pertanyaan": "Meskipun doa itu diucapkan dengan suara sangat pelan, Allah Swt. tetap mengetahuinya karena Allah mustahil bersifat ....",
+    "pilihan": [
+      "Samamun",
+      "'Umyun",
+      "Bukmun"
+    ],
+    "jawaban": "Samamun",
+    "pembahasan": "Allah memiliki sifat wajib Sama' (Maha Mendengar), sehingga mustahil Allah bersifat Samamun (Tuli)."
+  },
+  {
+    "id": 17,
+    "elemen": "Akhlak",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Setiap muslim diperintahkan untuk membiasakan akhlak terpuji kepada Allah Swt., salah satunya adalah sikap husnuzan.",
+    "pertanyaan": "Arti dari kata husnuzan adalah ....",
+    "pilihan": [
+      "Berbaik sangka",
+      "Berburuk sangka",
+      "Rendah hati"
+    ],
+    "jawaban": "Berbaik sangka",
+    "pembahasan": "Husnuzan berasal dari kata husnu (baik) dan zan (sangka), sehingga berarti berbaik sangka."
+  },
+  {
+    "id": 18,
+    "elemen": "Akhlak",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Ketika seseorang memiliki sikap husnuzan kepada Allah Swt., ia tidak akan mudah mengeluh saat menghadapi ujian.",
+    "pertanyaan": "Lawan kata dari sifat terpuji husnuzan adalah ....",
+    "pilihan": [
+      "Suuzan",
+      "Tawadu",
+      "Amanah"
+    ],
+    "jawaban": "Suuzan",
+    "pembahasan": "Lawan dari berbaik sangka (husnuzan) adalah berburuk sangka (suuzan)."
+  },
+  {
+    "id": 19,
+    "elemen": "Akhlak",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "Farhan sudah berlatih keras untuk lomba pidato tingkat kecamatan. Namun saat pengumuman, Farhan belum berhasil menjadi juara pertama.",
+    "pertanyaan": "Sikap husnuzan kepada Allah Swt. yang sebaiknya ditunjukkan oleh Farhan adalah ....",
+    "pilihan": [
+      "Menerima dengan ikhlas dan menjadikannya motivasi untuk berlatih lebih giat",
+      "Menyalahkan dewan juri karena merasa penampilannya paling bagus",
+      "Berhenti belajar pidato karena merasa usahanya sia-sia"
+    ],
+    "jawaban": "Menerima dengan ikhlas dan menjadikannya motivasi untuk berlatih lebih giat",
+    "pembahasan": "Husnuzan dalam menghadapi ketentuan Allah diwujudkan dengan berlapang dada, bersabar, dan terus berusaha memperbaiki diri."
+  },
+  {
+    "id": 20,
+    "elemen": "Akhlak",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "Hujan turun dengan deras tepat ketika Rina hendak berangkat bermain sepeda ke taman bersama teman-temannya.",
+    "pertanyaan": "Ucapan yang mencerminkan sikap husnuzan kepada Allah Swt. pada situasi tersebut adalah ....",
+    "pilihan": [
+      "Alhamdulillah, hujan adalah rahmat Allah dan menyuburkan tanaman",
+      "Mengapa hujan harus turun sekarang saat aku ingin bermain?",
+      "Hujan ini benar-benar membuat hariku menjadi buruk"
+    ],
+    "jawaban": "Alhamdulillah, hujan adalah rahmat Allah dan menyuburkan tanaman",
+    "pembahasan": "Menyadari adanya hikmah dan kebaikan di balik setiap ketetapan Allah adalah ciri sikap husnuzan."
+  },
+  {
+    "id": 21,
+    "elemen": "Akhlak",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Perhatikan beberapa pernyataan berikut:<br>1) Meyakini bahwa doa yang belum terkabul akan diganti Allah dengan yang lebih baik<br>2) Merasa Allah tidak menyayangi dirinya ketika sedang jatuh sakit<br>3) Tetap bersyukur meskipun uang saku yang diberikan orang tua lebih sedikit dari biasanya<br>4) Mengeluh sepanjang hari karena cuaca terasa sangat panas",
+    "pertanyaan": "Pernyataan yang mencerminkan perilaku husnuzan kepada Allah Swt. ditunjukkan oleh nomor ....",
+    "pilihan": [
+      "1 dan 3",
+      "2 dan 4",
+      "1 dan 4"
+    ],
+    "jawaban": "1 dan 3",
+    "pembahasan": "Nomor 1 dan 3 menunjukkan keyakinan positif dan rasa syukur kepada Allah Swt., sedangkan 2 dan 4 termasuk keluh kesah/suuzan."
+  },
+  {
+    "id": 22,
+    "elemen": "Akhlak",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Perhatikan daftar manfaat sikap berikut:<br>1) Hati menjadi lebih tenang dan tidak mudah gelisah<br>2) Mudah merasa iri melihat keberhasilan teman<br>3) Menumbuhkan sikap optimis dan pantang menyerah<br>4) Menjadikan seseorang sering menyalahkan keadaan",
+    "pertanyaan": "Manfaat membiasakan sikap husnuzan kepada Allah Swt. dalam kehidupan sehari-hari ditunjukkan oleh nomor ....",
+    "pilihan": [
+      "1 dan 3",
+      "1 dan 2",
+      "3 dan 4"
+    ],
+    "jawaban": "1 dan 3",
+    "pembahasan": "Husnuzan memberikan ketenangan batin (1) serta menumbuhkan rasa optimis dalam berusaha (3)."
+  },
+  {
+    "id": 23,
+    "elemen": "Akhlak",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Siti sudah berdoa setiap selesai salat agar dibelikan sepeda baru. Namun hingga akhir tahun, orang tuanya belum memiliki cukup uang untuk membelinya karena biaya pengobatan nenek.",
+    "pertanyaan": "Tindakan Siti yang paling tepat sebagai wujud husnuzan kepada Allah Swt. adalah ....",
+    "pilihan": [
+      "Tetap berdoa dan bersyukur karena kesembuhan nenek jauh lebih penting",
+      "Berhenti berdoa karena merasa keinginannya tidak didengar Allah",
+      "Marah kepada orang tua karena tidak menepati keinginan anaknya"
+    ],
+    "jawaban": "Tetap berdoa dan bersyukur karena kesembuhan nenek jauh lebih penting",
+    "pembahasan": "Orang yang berhusnuzan percaya bahwa Allah Maha Mengetahui waktu terbaik untuk mengabulkan doa hamba-Nya."
+  },
+  {
+    "id": 24,
+    "elemen": "Akhlak",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Dalam sebuah hadis qudsi disebutkan bahwa Allah Swt. berfirman: 'Aku sesuai dengan prasangka hamba-Ku kepada-Ku.'",
+    "pertanyaan": "Pelajaran penting yang dapat diambil dari pesan hadis tersebut bagi seorang pelajar adalah ....",
+    "pilihan": [
+      "Selalu berpikir positif dan yakin Allah akan memudahkan setiap usaha belajar",
+      "Cukup berdoa saja tanpa perlu belajar sebelum menghadapi ujian",
+      "Menyerah apabila menemui soal pelajaran yang dianggap sulit"
+    ],
+    "jawaban": "Selalu berpikir positif dan yakin Allah akan memudahkan setiap usaha belajar",
+    "pembahasan": "Berbaik sangka kepada Allah harus diiringi dengan ikhtiar (usaha sungguh-sungguh) dan keyakinan akan pertolongan-Nya."
+  },
+  {
+    "id": 25,
+    "elemen": "Fikih",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Setiap masuk waktu salat fardu lima waktu, dari menara masjid terdengar seruan yang memanggil umat Islam untuk segera menunaikan salat berjamaah.",
+    "pertanyaan": "Sebutan bagi orang yang mengumandangkan azan adalah ....",
+    "pilihan": [
+      "Muazin",
+      "Mustami'",
+      "Makmum"
+    ],
+    "jawaban": "Muazin",
+    "pembahasan": "Muazin adalah orang yang mengumandangkan azan, sedangkan mustami' adalah orang yang mendengarkan azan."
+  },
+  {
+    "id": 26,
+    "elemen": "Fikih",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Perhatikan lafaz bacaan berikut:<br><span class='arabic fw-bold'>قَدْ قَامَتِ الصَّلَاةُ</span>",
+    "pertanyaan": "Lafaz bacaan tersebut hanya dikumandangkan sebanyak dua kali pada saat ....",
+    "pilihan": [
+      "Iqamah",
+      "Azan Zuhur",
+      "Azan Magrib"
+    ],
+    "jawaban": "Iqamah",
+    "pembahasan": "Lafaz 'Qad qamatish-shalah' (sungguh salat telah didirikan) merupakan bacaan khusus pada iqamah."
+  },
+  {
+    "id": 27,
+    "elemen": "Fikih",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "Jamaah di musala telah selesai melaksanakan salat sunah rawatib dan sudah merapikan saf. Tidak lama kemudian, seorang petugas berdiri mengumandangkan seruan tanda salat berjamaah akan segera dimulai.",
+    "pertanyaan": "Nama seruan ibadah yang dikumandangkan sebelum salat berjamaah dimulai tersebut adalah ....",
+    "pilihan": [
+      "Iqamah",
+      "Azan",
+      "Takbiratul ihram"
+    ],
+    "jawaban": "Iqamah",
+    "pembahasan": "Iqamah adalah seruan atau pemberitahuan bahwa salat berjamaah akan segera dimulai."
+  },
+  {
+    "id": 28,
+    "elemen": "Fikih",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "Fajar bersiap mengumandangkan azan Asar di musala sekolah. Ia terlebih dahulu mengambil air wudu dan memastikan pakaiannya bersih serta menutup aurat.",
+    "pertanyaan": "Arah hadap yang benar bagi Fajar saat mengumandangkan azan adalah menghadap ....",
+    "pilihan": [
+      "Kiblat",
+      "Barisan jamaah",
+      "Pintu masuk musala"
+    ],
+    "jawaban": "Kiblat",
+    "pembahasan": "Salah satu ketentuan tata cara mengumandangkan azan adalah berdiri tegak menghadap kiblat."
+  },
+  {
+    "id": 29,
+    "elemen": "Fikih",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Perhatikan tata cara berikut:<br>1) Berdiri tegak menghadap kiblat dalam keadaan suci<br>2) Memasukkan ujung kedua jari telunjuk ke lubang telinga<br>3) Mengumandangkan lafaz dengan suara sangat cepat dan tergesa-gesa<br>4) Menolehkan kepala ke kanan saat lafaz Hayya 'alas-salah dan ke kiri saat Hayya 'alal-falah",
+    "pertanyaan": "Tata cara mengumandangkan azan yang sesuai dengan tuntunan syariat ditunjukkan oleh nomor ....",
+    "pilihan": [
+      "1, 2, dan 4",
+      "1, 3, dan 4",
+      "2, 3, dan 4"
+    ],
+    "jawaban": "1, 2, dan 4",
+    "pembahasan": "Azan dikumandangkan dengan suara lantang, jelas, dan perlahan (tidak tergesa-gesa), menghadap kiblat, jari telunjuk di telinga, serta menoleh saat hayya'alatain."
+  },
+  {
+    "id": 30,
+    "elemen": "Fikih",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Pada waktu fajar menyingsing, terdengar muazin melafalkan kalimat <span class='arabic fw-bold'>اَلصَّلَاةُ خَيْرٌ مِنَ النَّوْمِ</span> setelah membaca <em>Hayya 'alal-falah</em>.",
+    "pertanyaan": "Maksud dan waktu pengucapan lafaz tambahan (tatswib) tersebut adalah ....",
+    "pilihan": [
+      "Salat itu lebih baik daripada tidur, dibaca pada Azan Subuh",
+      "Marilah menuju kemenangan, dibaca pada Azan Jumat",
+      "Sungguh salat telah didirikan, dibaca pada Iqamah Isya"
+    ],
+    "jawaban": "Salat itu lebih baik daripada tidur, dibaca pada Azan Subuh",
+    "pembahasan": "Ash-shalatu khairum minan-naum artinya 'salat itu lebih baik daripada tidur' dan hanya dibaca pada Azan Subuh."
+  },
+  {
+    "id": 31,
+    "elemen": "Fikih",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "<table class='table table-bordered table-sm bg-white mb-2'><thead><tr><th>Perbedaan</th><th>Azan</th><th>Iqamah</th></tr></thead><tbody><tr><td>Tujuan</td><td>Memberitahu masuknya waktu salat</td><td>Tanda salat segera dimulai</td></tr><tr><td>Jumlah bacaan</td><td>Lebih panjang (takbir 4x di awal)</td><td>Lebih singkat (takbir 2x di awal)</td></tr><tr><td>Irama suara</td><td>...</td><td>Lebih cepat dan singkat</td></tr></tbody></table>",
+    "pertanyaan": "Keterangan yang paling tepat untuk melengkapi kolom irama suara pada Azan adalah ....",
+    "pilihan": [
+      "Perlahan, lantang, dan merdu",
+      "Berbisik dan sangat pelan",
+      "Sambil duduk di atas mimbar"
+    ],
+    "jawaban": "Perlahan, lantang, dan merdu",
+    "pembahasan": "Azan dikumandangkan dengan suara lantang, merdu, dan perlahan (tarassul), sedangkan iqamah lebih cepat (hadr)."
+  },
+  {
+    "id": 32,
+    "elemen": "Fikih",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Ketika sedang bermain di halaman rumah, Ahmad mendengar muazin mengumandangkan lafaz <em>Hayya 'alas-salah</em> dari masjid dekat rumahnya.",
+    "pertanyaan": "Bacaan jawaban yang disunahkan bagi Ahmad sebagai orang yang mendengar (mustami') lafaz tersebut adalah ....",
+    "pilihan": [
+      "<span class='arabic'>لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ</span>",
+      "<span class='arabic'>سُبْحَانَ اللهِ وَبِحَمْدِهِ</span>",
+      "<span class='arabic'>اَلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ</span>"
+    ],
+    "jawaban": "<span class='arabic'>لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ</span>",
+    "pembahasan": "Saat mendengar muazin membaca Hayya 'alas-salah dan Hayya 'alal-falah, mustami' menjawab dengan La haula wala quwwata illa billah."
+  },
+  {
+    "id": 33,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Nabi Muhammad saw. dilahirkan di Kota Makkah dari pasangan ayah bernama Abdullah dan ibu bernama Siti Aminah.",
+    "pertanyaan": "Tanggal dan bulan kelahiran Nabi Muhammad saw. dalam kalender Hijriah adalah ....",
+    "pilihan": [
+      "12 Rabiul Awal",
+      "17 Ramadan",
+      "10 Muharam"
+    ],
+    "jawaban": "12 Rabiul Awal",
+    "pembahasan": "Nabi Muhammad saw. lahir pada hari Senin, 12 Rabiul Awal Tahun Gajah di Kota Makkah."
+  },
+  {
+    "id": 34,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "pg",
+    "level": "mudah",
+    "stimulus": "Sejak masa kanak-kanak, Nabi Muhammad saw. sudah hidup mandiri dan tidak mau merepotkan keluarga yang mengasuhnya.",
+    "pertanyaan": "Pekerjaan yang pernah dilakukan Nabi Muhammad saw. saat masih kecil untuk membantu pamannya adalah ....",
+    "pilihan": [
+      "Menggembala kambing",
+      "Membuat tembikar",
+      "Menjadi nelayan"
+    ],
+    "jawaban": "Menggembala kambing",
+    "pembahasan": "Saat masa kanak-kanak, Nabi Muhammad saw. bekerja menggembala kambing milik penduduk Makkah."
+  },
+  {
+    "id": 35,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "Ketika Nabi Muhammad saw. berusia 6 tahun, ibunya Siti Aminah wafat di Abwa dalam perjalanan pulang dari Madinah. Nabi kemudian diasuh oleh kakeknya hingga usia 8 tahun.",
+    "pertanyaan": "Setelah kakeknya Abdul Muthalib wafat, orang yang mengasuh Nabi Muhammad saw. selanjutnya adalah ....",
+    "pilihan": [
+      "Abu Thalib",
+      "Halimah As-Sa'diyah",
+      "Hamzah bin Abdul Muthalib"
+    ],
+    "jawaban": "Abu Thalib",
+    "pembahasan": "Setelah ibunya (Siti Aminah) dan kakeknya (Abdul Muthalib) wafat, Nabi Muhammad saw. diasuh oleh pamannya Abu Thalib."
+  },
+  {
+    "id": 36,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "pg",
+    "level": "sedang",
+    "stimulus": "Tahun kelahiran Nabi Muhammad saw. dikenal dalam sejarah Islam dengan sebutan Tahun Gajah.",
+    "pertanyaan": "Peristiwa besar yang melatarbelakangi penamaan Tahun Gajah tersebut adalah ....",
+    "pilihan": [
+      "Penyerangan Ka'bah oleh pasukan bergajah pimpinan Raja Abrahah",
+      "Perjalanan dagang pertama penduduk Makkah ke negeri Syam",
+      "Pembangunan kembali sumur Zamzam oleh kakek Nabi"
+    ],
+    "jawaban": "Penyerangan Ka'bah oleh pasukan bergajah pimpinan Raja Abrahah",
+    "pembahasan": "Tahun Gajah dinamakan demikian karena bertepatan dengan peristiwa pasukan bergajah Raja Abrahah dari Yaman yang hendak menghancurkan Ka'bah."
+  },
+  {
+    "id": 37,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Dalam perjalanan menuju kantin sekolah, Dimas menemukan dompet kecil berisi uang yang terjatuh di lantai. Dimas segera menyerahkan dompet tersebut kepada guru piket agar diumumkan kepada pemiliknya.",
+    "pertanyaan": "Perilaku Dimas tersebut meneladani sifat terpuji Nabi Muhammad saw. sejak kecil sehingga beliau mendapat gelar ....",
+    "pilihan": [
+      "Al-Amin",
+      "Al-Faruq",
+      "As-Siddiq"
+    ],
+    "jawaban": "Al-Amin",
+    "pembahasan": "Nabi Muhammad saw. terkenal sangat jujur dan dapat dipercaya sehingga masyarakat Makkah memberinya gelar Al-Amin."
+  },
+  {
+    "id": 38,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "<table class='table table-bordered table-sm text-center bg-white mb-2'><thead><tr><th>Tahap Usia</th><th>Pengasuh Nabi Muhammad saw.</th></tr></thead><tbody><tr><td>0 – 4 tahun (masa susuan)</td><td>Halimah As-Sa'diyah</td></tr><tr><td>4 – 6 tahun</td><td>Siti Aminah</td></tr><tr><td>6 – 8 tahun</td><td>...</td></tr><tr><td>8 tahun – dewasa</td><td>Abu Thalib</td></tr></tbody></table>",
+    "pertanyaan": "Nama tokoh yang tepat untuk mengisi bagian kosong pada tabel urutan pengasuh Nabi di atas adalah ....",
+    "pilihan": [
+      "Abdul Muthalib",
+      "Abdullah",
+      "Abu Lahab"
+    ],
+    "jawaban": "Abdul Muthalib",
+    "pembahasan": "Kakek Nabi Muhammad saw., Abdul Muthalib, mengasuh beliau sejak usia 6 tahun (sepulang dari Abwa) hingga usia 8 tahun."
+  },
+  {
+    "id": 39,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Pekerjaan menggembala kambing yang dilakukan Nabi Muhammad saw. di padang pasir Makkah bukanlah pekerjaan yang mudah karena harus menjaga hewan dari panas terik dan binatang buas.",
+    "pertanyaan": "Nilai karakter utama yang terlatih dari pekerjaan menggembala kambing pada masa kecil Nabi adalah ....",
+    "pilihan": [
+      "Kesabaran, kasih sayang, dan tanggung jawab",
+      "Keinginan untuk hidup mewah dan bersenang-senang",
+      "Sikap bergantung pada bantuan orang lain"
+    ],
+    "jawaban": "Kesabaran, kasih sayang, dan tanggung jawab",
+    "pembahasan": "Menggembala kambing melatih kesabaran, kelembutan/kasih sayang terhadap makhluk hidup, serta rasa tanggung jawab."
+  },
+  {
+    "id": 40,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "pg",
+    "level": "susah",
+    "stimulus": "Bacalah ilustrasi berikut:<br>'Meskipun tumbuh sebagai anak yatim piatu sejak usia delapan tahun, Nabi Muhammad saw. tidak pernah bermalas-malasan. Pada usia 12 tahun, beliau ikut pamannya berdagang hingga ke negeri Syam dengan penuh kejujuran.'",
+    "pertanyaan": "Analisis sikap terpuji yang dapat diteladani seorang siswa dari ilustrasi masa remaja awal Nabi tersebut adalah ....",
+    "pilihan": [
+      "Mandiri, pekerja keras, dan jujur dalam setiap tugas",
+      "Menuntut hak istimewa karena keadaan keluarga",
+      "Menghindari pekerjaan berat agar tidak kelelahan"
+    ],
+    "jawaban": "Mandiri, pekerja keras, dan jujur dalam setiap tugas",
+    "pembahasan": "Keteladanan Nabi dari kisah tersebut adalah kemandirian, etos kerja keras, dan kejujuran."
+  },
+  {
+    "id": 41,
+    "elemen": "Al-Qur'an",
+    "tipe": "isian",
+    "level": "mudah",
+    "stimulus": "Surah Al-Kausar terdiri atas tiga ayat dan menjadi surah terpendek di dalam Al-Qur'an.",
+    "pertanyaan": "Nama Surah Al-Kausar memiliki arti nikmat yang ....",
+    "pilihan": [],
+    "jawaban": "Banyak",
+    "pembahasan": "Al-Kausar artinya Nikmat yang Banyak."
+  },
+  {
+    "id": 42,
+    "elemen": "Al-Qur'an",
+    "tipe": "isian",
+    "level": "susah",
+    "stimulus": "Dalam ilmu tajwid, terdapat tiga huruf mad yaitu alif, ya' sukun, dan wawu sukun.",
+    "pertanyaan": "Panjang bacaan hukum Mad Thabi'i adalah dua ....",
+    "pilihan": [],
+    "jawaban": "Harakat",
+    "pembahasan": "Mad Thabi'i dibaca panjang 2 harakat (atau 1 alif)."
+  },
+  {
+    "id": 43,
+    "elemen": "Akidah",
+    "tipe": "isian",
+    "level": "sedang",
+    "stimulus": "Allah Swt. menciptakan langit dan bumi beserta seluruh isinya tanpa bantuan siapa pun karena Allah bersifat Qiyamuhu binafsihi.",
+    "pertanyaan": "Arti dari sifat wajib Qiyamuhu binafsihi adalah berdiri ....",
+    "pilihan": [],
+    "jawaban": "Sendiri",
+    "pembahasan": "Qiyamuhu binafsihi artinya Allah Swt. berdiri sendiri (tidak membutuhkan makhluk)."
+  },
+  {
+    "id": 44,
+    "elemen": "Akidah",
+    "tipe": "isian",
+    "level": "susah",
+    "stimulus": "Allah Swt. memiliki sifat wajib Wahdaniyah yang berarti Maha Esa atau Tunggal.",
+    "pertanyaan": "Sifat mustahil yang menjadi lawan dari sifat wajib Wahdaniyah adalah ....",
+    "pilihan": [],
+    "jawaban": "Ta'addud",
+    "pembahasan": "Lawan dari Wahdaniyah (Esa) adalah Ta'addud (berbilang/lebih dari satu)."
+  },
+  {
+    "id": 45,
+    "elemen": "Akhlak",
+    "tipe": "isian",
+    "level": "mudah",
+    "stimulus": "Ketika mendapat ujian sakit, Andi tetap sabar dan yakin bahwa Allah Swt. akan menggugurkan dosa-dosanya.",
+    "pertanyaan": "Sikap berbaik sangka kepada Allah Swt. dalam ajaran Islam disebut ....",
+    "pilihan": [],
+    "jawaban": "Husnuzan",
+    "pembahasan": "Berbaik sangka kepada Allah Swt. disebut husnuzan."
+  },
+  {
+    "id": 46,
+    "elemen": "Akhlak",
+    "tipe": "isian",
+    "level": "susah",
+    "stimulus": "Orang yang selalu berprasangka baik kepada Allah Swt. tidak akan mudah mengeluh maupun menyerah saat menghadapi kegagalan.",
+    "pertanyaan": "Kebalikan dari sifat berbaik sangka (husnuzan) adalah berburuk sangka yang disebut ....",
+    "pilihan": [],
+    "jawaban": "Suuzan",
+    "pembahasan": "Lawan dari husnuzan adalah suuzan (berburuk sangka)."
+  },
+  {
+    "id": 47,
+    "elemen": "Fikih",
+    "tipe": "isian",
+    "level": "sedang",
+    "stimulus": "Setiap kali masuk waktu salat fardu lima waktu, umat Islam dipanggil menuju masjid melalui seruan ibadah.",
+    "pertanyaan": "Seruan pemberitahuan bahwa waktu salat fardu telah tiba disebut ....",
+    "pilihan": [],
+    "jawaban": "Azan",
+    "pembahasan": "Azan adalah seruan pemberitahuan bahwa waktu salat fardu telah tiba."
+  },
+  {
+    "id": 48,
+    "elemen": "Fikih",
+    "tipe": "isian",
+    "level": "susah",
+    "stimulus": "Pada zaman Rasulullah saw., terdapat seorang sahabat berkulit hitam yang memiliki suara sangat merdu dan lantang saat memanggil kaum muslimin untuk salat.",
+    "pertanyaan": "Nama sahabat Nabi Muhammad saw. yang menjadi muazin pertama dalam Islam adalah Bilal bin ....",
+    "pilihan": [],
+    "jawaban": "Rabah",
+    "pembahasan": "Muazin pertama dalam sejarah Islam adalah Bilal bin Rabah."
+  },
+  {
+    "id": 49,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "isian",
+    "level": "sedang",
+    "stimulus": "Pasukan bergajah yang hendak menghancurkan Ka'bah pada tahun kelahiran Nabi Muhammad saw. dipimpin oleh seorang gubernur dari Yaman.",
+    "pertanyaan": "Nama pemimpin pasukan bergajah yang menyerang Ka'bah adalah Raja ....",
+    "pilihan": [],
+    "jawaban": "Abrahah",
+    "pembahasan": "Pasukan bergajah yang menyerang Ka'bah dipimpin oleh Raja Abrahah dari Yaman."
+  },
+  {
+    "id": 50,
+    "elemen": "Sejarah Peradaban Islam",
+    "tipe": "isian",
+    "level": "susah",
+    "stimulus": "Sejak usia muda, Nabi Muhammad saw. tidak pernah berdusta sedikit pun dalam berbicara maupun berdagang sehingga sangat dipercaya penduduk Makkah.",
+    "pertanyaan": "Gelar kehormatan yang diberikan masyarakat Makkah kepada Nabi Muhammad saw. karena kejujurannya adalah ....",
+    "pilihan": [],
+    "jawaban": "Al-Amin",
+    "pembahasan": "Gelar yang diberikan kepada Nabi Muhammad saw. karena sifat jujur dan dapat dipercaya adalah Al-Amin."
+  }
+]
